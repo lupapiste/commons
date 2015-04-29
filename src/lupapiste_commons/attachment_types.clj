@@ -6,7 +6,7 @@
    :paa_ja_rakennussuunnittelijan_tiedot
    :tutkintotodistus])
 
-(def R
+(def Rakennusluvat
   [:hakija [:osakeyhtion_perustamiskirja
             :ote_asunto_osakeyhtion_hallituksen_kokouksen_poytakirjasta
             :ote_kauppa_ja_yhdistysrekisterista
@@ -105,7 +105,7 @@
           :luonnos
           :muu]])
 
-(def YA
+(def YleistenAlueidenLuvat
   [:yleiset-alueet [:aiemmin-hankittu-sijoituspaatos
                     :asemapiirros
                     :liitoslausunto
@@ -122,11 +122,11 @@
    ;; This is needed for statement attachments to work.
    :muut [:muu]])
 
-(def YI
+(def Ymparistoilmoitukset
   [:kartat [:kartta-melun-ja-tarinan-leviamisesta]
    :muut [:muu]])
 
-(def YL
+(def Ymparistolupa
    [:laitoksen_tiedot [:voimassa_olevat_ymparistolupa_vesilupa
                        :muut_paatokset_sopimukset
                        :selvitys_ymparistovahinkovakuutuksesta]
@@ -183,7 +183,7 @@
            :selvitys_suuronnettomuuden_vaaran_arvioimiseksi
            :muu]])
 
-(def MAL
+(def Maa-ainesluvat
   [:hakija [:valtakirja
             :ottamisalueen_omistus_hallintaoikeus]
    :ottamisalue [:ote_alueen_peruskartasta
@@ -201,7 +201,7 @@
           :pohjavesitutkimus
           :muu]])
 
-(def KT
+(def Kiinteistotoimitus
   [:hakija [:valtakirja
             :virkatodistus
             :ote_kauppa_ja_yhdistysrekisterista]
