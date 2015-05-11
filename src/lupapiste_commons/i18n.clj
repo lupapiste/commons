@@ -1,9 +1,9 @@
 (ns lupapiste-commons.i18n
   (:require [clojure.java.io :as io]
-            [clojure.edn :as edn]))
+            [lupapiste-commons.i18n-resources :as resources]))
 
 (defn read-translations []
-  (edn/read-string (slurp (io/resource "i18n.edn"))))
+  (resources/txt->map (io/resource "translations.txt")))
 
 (defn keys-by-language [translations]
   (reduce (fn [acc [key langs]]
@@ -11,4 +11,4 @@
                     acc
                     langs))
           {}
-          (apply merge (vals translations))))
+          translations))
