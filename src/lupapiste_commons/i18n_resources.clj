@@ -79,6 +79,8 @@
     (doall (map-indexed (fn [index [key {:keys [fi sv]}]]
                           (create-row sheet [(write-key key) (nil->empty-str fi) (nil->empty-str sv)] (inc index)))
                         data))
+    (doseq [column (range 3)]
+      (.autoSizeColumn sheet column))
     (with-open [out (java.io.FileOutputStream. excel-file)]
       (.write wb out))))
 
