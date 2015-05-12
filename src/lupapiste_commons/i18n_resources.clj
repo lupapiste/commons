@@ -89,6 +89,7 @@
             (cond-> acc
               (empty? (dissoc strings :fi)) (assoc key fi)
               (empty? fi)                   (assoc key "")
-              (source-changed? key)         (assoc key fi)))
+              (source-changed? key)         (assoc key fi)
+              (some empty? (vals strings))  (assoc key fi)))
           (ordered-map)
           data))

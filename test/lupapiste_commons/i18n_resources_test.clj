@@ -16,3 +16,17 @@
         (.delete txt-file)
         (.delete excel-file)
         (is (= translations from-excel))))))
+
+(deftest find-missing-translations
+  (let [no-texts {'label {}}
+        empty-default-text {'label {:fi ""}}
+        empty-swedish-text {'label {:fi "Heippa" :sv ""}}
+        source-text-changed {'^:source-changed label {:fi "Punainen" :sv "Blå"}}]
+    (is (= (ffirst (missing-translations no-texts))
+           'label))
+    (is (= (ffirst (missing-translations empty-default-text))
+           'label))
+    (is (= (ffirst (missing-translations empty-swedish-text))
+           'label))
+    (is (= (ffirst (missing-translations source-text-changed))
+           'label))))
