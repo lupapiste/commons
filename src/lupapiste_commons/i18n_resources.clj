@@ -25,68 +25,85 @@
   (with-open [in (io/input-stream excel-file)]
     (let [workbook (xls/load-workbook in)
           sheets (seq workbook)
-          header (->> sheets
-                      ffirst
-                      xls/read-row
-                      rest
-                      (map (comp keyword s/trim)))
+          languages (->> sheets
+                         ffirst
+                         xls/read-row
+                         rest
+                         (map (comp keyword s/trim)))
           rows (->> sheets
                     (map (fn [x] (map xls/read-row x)))
                     (apply concat)
                     rest
                     (map #(map s/trim %)))]
-      (reduce (fn [acc [key & values]]
-                (assoc acc (read-key key) (zipmap header values)))
-              (ordered-map)
-              (filter #(not (empty? (first %))) rows)))))
+      {:languages (vec languages)
+       :translations (reduce (fn [acc [key & values]]
+                               (assoc acc (read-key key) (zipmap languages values)))
+                             (ordered-map)
+                             (filter #(not (empty? (first %))) rows))})))
 
-(defn map->txt [data txt-file]
-  (let [header (->> ["key" "fi" "sv"]
+(defn map->lines [{:keys [languages translations]}]
+  (let [header (->> languages
+                    (map name)
+                    (cons "key")
                     (map pr-str)
                     (s/join " "))]
-    (spit txt-file (str header "\n"))
-    (doseq [[key {:keys [fi sv]}] data]
-      (spit txt-file (str (s/join " " (map pr-str [(write-key key) fi sv])) "\n") :append :true))))
+    (list* (str header "\n")
+           (for [[key strings] translations]
+             (->> (for [lang languages]
+                    (get strings lang))
+                  (cons (write-key key))
+                  (map pr-str)
+                  (s/join " ")
+                  (#(str % "\n")))))))
 
-(defn txt->map [file]
-  (with-open [reader (io/reader file)]
+(defn write-lines [lines txt-file]
+  (spit txt-file (first lines))
+  (doseq [line (rest lines)]
+    (spit txt-file line :append :true)))
+
+(defn write-txt [data txt-file]
+  (write-lines (map->lines data) txt-file))
+
+(defn txt->map [txt-file]
+  (with-open [reader (io/reader txt-file)]
     (let [lines (line-seq reader)
-          langs (-> lines
-                    first
-                    (s/split #" ")
-                    rest
-                    (->> (map (comp keyword edn/read-string))))]
-      (reduce (fn [acc line]
-                (with-open [in (-> line StringReader. PushbackReader.)]
-                  (let [[key & translations] (take-while #(not= % :eof)
-                                                         (repeatedly #(edn/read {:eof :eof} in)))]
-                    (assoc acc (read-key key) (zipmap langs translations)))))
-              (ordered-map)
-              (line-seq reader)))))
+          languages (-> lines
+                        first
+                        (s/split #" ")
+                        rest
+                        (->> (map (comp keyword edn/read-string))))]
+      {:languages (vec languages)
+       :translations (reduce (fn [acc line]
+                               (with-open [in (-> line StringReader. PushbackReader.)]
+                                 (let [[key & translations] (take-while #(not= % :eof)
+                                                                        (repeatedly #(edn/read {:eof :eof} in)))]
+                                   (assoc acc (read-key key) (zipmap languages translations)))))
+                             (ordered-map)
+                             (rest lines))})))
 
 (defn create-row [sheet row-data row-index]
   (let [header-row (.createRow sheet row-index)]
-    (doall (map-indexed (fn [index header]
+    (doall (map-indexed (fn [index value]
                           (let [cell (.createCell header-row index)]
-                            (.setCellValue cell header)))
+                            (.setCellValue cell value)))
                         row-data))))
 
 (defn nil->empty-str [x]
   (if (nil? x) "" x))
 
-(defn write-excel [data excel-file]
+(defn write-excel [{:keys [languages translations]} excel-file]
   (let [wb (XSSFWorkbook.)
         sheet (.createSheet wb "translations")]
-    (create-row sheet ["key" "fi" "sv"] 0)
+    (create-row sheet (concat ["key"] (map name languages)) 0)
     (doall (map-indexed (fn [index [key {:keys [fi sv]}]]
                           (create-row sheet [(write-key key) (nil->empty-str fi) (nil->empty-str sv)] (inc index)))
-                        data))
+                        translations))
     (doseq [column (range 3)]
       (.autoSizeColumn sheet column))
     (with-open [out (java.io.FileOutputStream. excel-file)]
       (.write wb out))))
 
-(defn missing-translations [data]
+(defn missing-translations [{:keys [translations]}]
   (reduce (fn [acc [key {:keys [fi] :as strings}]]
             (cond-> acc
               (empty? (dissoc strings :fi)) (assoc key fi)
@@ -94,4 +111,4 @@
               (source-changed? key)         (assoc key fi)
               (some empty? (vals strings))  (assoc key fi)))
           (ordered-map)
-          data))
+          translations))
