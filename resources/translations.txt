@@ -5430,7 +5430,7 @@
 "poi.type.700" "valtakunnan rajapyykki" "riksråmärke"
 "poi.type.710" "rajapyykki" "råmärke"
 "ei" "Ei" ""
-"ikuisesti" "Ikuisesti" ""
+"ikuisesti" "Pysyvästi" ""
 "määräajan" "Määräajan" ""
 "toistaiseksi" "Toistaiseksi" ""
 "lupapäätöspäivä" "Lupapäätöspäivä" ""
