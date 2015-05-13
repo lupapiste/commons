@@ -14,10 +14,12 @@
   (cond-> (name sym)
     (source-changed? sym) (str "!")))
 
-(defn read-key [s]
-  (if (.endsWith s "!")
-    (vary-meta (symbol (s/replace s #"!$" "")) assoc :source-changed true)
-    (symbol s)))
+(defn read-key [string]
+  (if (.endsWith string "!")
+    (-> (s/replace string #"!$" "")
+        symbol
+        (with-meta {:source-changed true}))
+    (symbol string)))
 
 (defn excel->map [excel-file]
   (with-open [in (io/input-stream excel-file)]
