@@ -71,8 +71,8 @@
 (defn write-txt [data txt-file]
   (write-lines (map->lines data) txt-file))
 
-(defn txt->map [txt-file]
-  (with-open [reader (io/reader txt-file)]
+(defn txt->map [input]
+  (with-open [reader (io/reader input)]
     (let [lines (line-seq reader)
           languages (-> lines
                         first
