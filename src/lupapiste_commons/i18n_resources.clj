@@ -95,8 +95,12 @@
   (let [wb (XSSFWorkbook.)
         sheet (.createSheet wb "translations")]
     (create-row sheet (concat ["key"] (map name languages)) 0)
-    (doall (map-indexed (fn [index [key {:keys [fi sv]}]]
-                          (create-row sheet [(write-key key) (nil->empty-str fi) (nil->empty-str sv)] (inc index)))
+    (doall (map-indexed (fn [index [key strings]]
+                          (let [row (->> (for [lang languages]
+                                           (get strings lang))
+                                         (map nil->empty-str)
+                                         (cons (write-key key)))]
+                            (create-row sheet row (inc index))))
                         translations))
     (doseq [column (range 3)]
       (.autoSizeColumn sheet column))
