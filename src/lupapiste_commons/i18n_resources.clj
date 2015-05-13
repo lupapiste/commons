@@ -21,6 +21,15 @@
         (with-meta {:source-changed true}))
     (symbol string)))
 
+(defn nil->empty-str [x]
+  (if (nil? x) "" x))
+
+(defn make-row [key languages strings]
+  (->> (for [lang languages]
+         (get strings lang))
+       (map nil->empty-str)
+       (cons (write-key key))))
+
 (defn excel->map [excel-file]
   (with-open [in (io/input-stream excel-file)]
     (let [workbook (xls/load-workbook in)
@@ -49,9 +58,7 @@
                     (s/join " "))]
     (list* (str header "\n")
            (for [[key strings] translations]
-             (->> (for [lang languages]
-                    (get strings lang))
-                  (cons (write-key key))
+             (->> (make-row key languages strings)
                   (map pr-str)
                   (s/join " ")
                   (#(str % "\n")))))))
@@ -88,18 +95,12 @@
                             (.setCellValue cell value)))
                         row-data))))
 
-(defn nil->empty-str [x]
-  (if (nil? x) "" x))
-
 (defn write-excel [{:keys [languages translations]} excel-file]
   (let [wb (XSSFWorkbook.)
         sheet (.createSheet wb "translations")]
     (create-row sheet (concat ["key"] (map name languages)) 0)
     (doall (map-indexed (fn [index [key strings]]
-                          (let [row (->> (for [lang languages]
-                                           (get strings lang))
-                                         (map nil->empty-str)
-                                         (cons (write-key key)))]
+                          (let [row (make-row key languages strings)]
                             (create-row sheet row (inc index))))
                         translations))
     (doseq [column (range 3)]
