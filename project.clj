@@ -8,6 +8,7 @@
                  [ontodev/excel "0.2.3" :exclusions [xml-apis org.apache.poi/poi-ooxml]]
                  [org.apache.poi/poi-ooxml "3.11"]
                  [org.flatland/ordered "1.5.2"]]
+  :plugins [[com.jakemccrary/lein-test-refresh "0.8.0"]]
 
   ;; Offer portable source as .cljc in the jar file
   :filespecs [{:type :fn
