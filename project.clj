@@ -10,6 +10,10 @@
                  [org.flatland/ordered "1.5.2"]]
   :plugins [[com.jakemccrary/lein-test-refresh "0.8.0"]]
 
+  :profiles {:dev {:dependencies [[flare "0.2.9"]]
+                   :injections [(require 'flare.clojure-test)
+                                (flare.clojure-test/install!)]}}
+
   ;; Offer portable source as .cljc in the jar file
   :filespecs [{:type :fn
                :fn (fn [p]
