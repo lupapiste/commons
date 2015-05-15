@@ -16,18 +16,19 @@
 (defn read-translations
   ([] (read-translations (io/resource "translations.txt")))
   ([input]
-   (let [{:keys [translations languages]} (resources/txt->map input)]
-     (reduce (fn [acc [key strings]]
-               (assoc acc
-                      key
-                      (if (missing-translations? strings)
-                        (replace-with-default-lang strings)
-                        strings)))
-             (ordered-map)
-             translations))))
+   (let [{:keys [translations languages] :as original} (resources/txt->map input)]
+     (assoc original
+            :translations
+            (reduce (fn [acc [key strings]]
+                      (assoc acc
+                             key
+                             (if (missing-translations? strings)
+                               (replace-with-default-lang strings)
+                               strings)))
+                    (ordered-map)
+                    translations)))))
 
-(defn keys-by-language [{:keys [translations]} & {:keys [str-keys]
-                                           :or {str-keys true}}]
+(defn keys-by-language [{:keys [translations]} & {:keys [str-keys] :or {str-keys true}}]
   (reduce (fn [acc [key langs]]
             (reduce (fn [acc [lang string]]
                       (assoc-in acc [lang (if str-keys (str key) key)] string))
