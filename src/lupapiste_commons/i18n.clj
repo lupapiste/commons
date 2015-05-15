@@ -1,5 +1,6 @@
 (ns lupapiste-commons.i18n
   (:require [clojure.java.io :as io]
+            [clojure.set :refer [union]]
             [flatland.ordered.map :refer [ordered-map]]
             [lupapiste-commons.i18n-resources :as resources]))
 
@@ -25,6 +26,14 @@
   ([] (read-translations (io/resource "translations.txt")))
   ([input]
    (update-in (resources/txt->map input) [:translations] replace-missing-texts default-lang)))
+
+(defn combine-vec-or-map [left right]
+  (if (every? vector? [left right])
+    (vec (distinct (union left right)))
+    (conj left right)))
+
+(defn merge-translations [& translation-maps]
+  (apply merge-with combine-vec-or-map translation-maps))
 
 (defn keys-by-language [{:keys [translations]} & {:keys [str-keys] :or {str-keys true}}]
   (reduce (fn [acc [key langs]]
