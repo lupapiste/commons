@@ -24,7 +24,7 @@
 (defn nil->empty-str [x]
   (if (nil? x) "" x))
 
-(defn make-row [key languages strings]
+(defn make-row-strings [key languages strings]
   (->> (for [lang languages]
          (get strings lang))
        (map nil->empty-str)
@@ -58,7 +58,7 @@
                     (s/join " "))]
     (list* (str header "\n")
            (for [[key strings] translations]
-             (->> (make-row key languages strings)
+             (->> (make-row-strings key languages strings)
                   (map pr-str)
                   (s/join " ")
                   (#(str % "\n")))))))
@@ -88,20 +88,20 @@
                              (ordered-map)
                              (rest lines))})))
 
-(defn create-row [sheet row-data row-index]
-  (let [header-row (.createRow sheet row-index)]
+(defn create-row [sheet row-strings row-index]
+  (let [row (.createRow sheet row-index)]
     (doall (map-indexed (fn [index value]
-                          (let [cell (.createCell header-row index)]
+                          (let [cell (.createCell row index)]
                             (.setCellValue cell value)))
-                        row-data))))
+                        row-strings))))
 
 (defn write-excel [{:keys [languages translations]} excel-file]
   (let [wb (XSSFWorkbook.)
         sheet (.createSheet wb "translations")]
     (create-row sheet (concat ["key"] (map name languages)) 0)
     (doall (map-indexed (fn [index [key strings]]
-                          (let [row (make-row key languages strings)]
-                            (create-row sheet row (inc index))))
+                          (let [row-strings (make-row-strings key languages strings)]
+                            (create-row sheet row-strings (inc index))))
                         translations))
     (doseq [column (range 3)]
       (.autoSizeColumn sheet column))
