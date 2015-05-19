@@ -32,6 +32,8 @@
 "pituus" "Pituus" ""
 "laskentaperuste" "Laskentaperuste" ""
 "perustelu" "Perustelu" ""
+"tila" "Tila" ""
+"arkistointi" "Arkistointi" ""
 "attachmentType.ennakkoluvat_ja_lausunnot._group_label" "Ennakkoluvat ja lausunnot" "Förhandstillstånd och utlåtanden"
 "attachmentType.ennakkoluvat_ja_lausunnot.elyn_tai_kunnan_poikkeamapaatos" "ELY:n tai kunnan poikkeamapäätös" "ELY:s eller kommunens undantagsbeslut"
 "attachmentType.ennakkoluvat_ja_lausunnot.naapurien_suostumukset" "Naapureiden suostumus" "Grannarnas samtycke"
