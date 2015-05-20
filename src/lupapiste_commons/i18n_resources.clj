@@ -50,43 +50,25 @@
                              (ordered-map)
                              (filter #(not (empty? (first %))) rows))})))
 
-(defn map->lines [{:keys [languages translations]}]
-  (let [header (->> languages
-                    (map name)
-                    (cons "key")
-                    (map pr-str)
-                    (s/join " "))]
-    (list* (str header "\n")
-           (for [[key strings] translations]
-             (->> (make-row-strings key languages strings)
-                  (map pr-str)
-                  (s/join " ")
-                  (#(str % "\n")))))))
-
-(defn write-lines [lines txt-file]
-  (spit txt-file (first lines))
-  (doseq [line (rest lines)]
-    (spit txt-file line :append :true)))
-
-(defn write-txt [data txt-file]
-  (write-lines (map->lines data) txt-file))
+(defn write-txt [{:keys [translations]} txt-file]
+  (spit txt-file "") ;; truncate txt-file
+  (doseq [[key strings] translations]
+    (doseq [[lang text] strings]
+      (spit txt-file (str (pr-str (write-key key)) " " (pr-str (name lang)) " " (pr-str (nil->empty-str text)) "\n") :append true))))
 
 (defn txt->map [input]
   (with-open [reader (io/reader input)]
-    (let [lines (line-seq reader)
-          languages (-> lines
-                        first
-                        (s/split #" ")
-                        rest
-                        (->> (map (comp keyword edn/read-string))))]
-      {:languages (vec languages)
-       :translations (reduce (fn [acc line]
-                               (with-open [in (-> line StringReader. PushbackReader.)]
-                                 (let [[key & translations] (take-while #(not= % :eof)
-                                                                        (repeatedly #(edn/read {:eof :eof} in)))]
-                                   (assoc acc (read-key key) (zipmap languages translations)))))
-                             (ordered-map)
-                             (rest lines))})))
+    (let [translations (loop [acc (ordered-map)
+                              lines (line-seq reader)]
+                         (if-let [line (first lines)]
+                           (let [in (-> line StringReader. PushbackReader.)
+                                 key (read-key (edn/read in))
+                                 lang (edn/read in)
+                                 text (edn/read in)]
+                             (recur (assoc acc key (assoc (get acc key (ordered-map)) (keyword lang) text)) (rest lines)))
+                           acc))]
+      {:languages (-> translations first val keys vec)
+       :translations translations})))
 
 (defn create-row [sheet row-strings row-index]
   (let [row (.createRow sheet row-index)]
