@@ -5,6 +5,7 @@
             [ontodev.excel :as xls]
             [clojure.edn :as edn])
   (:import [org.apache.poi.xssf.usermodel XSSFWorkbook]
+           [org.apache.poi.ss.usermodel Font]
            [java.io PushbackReader StringReader]))
 
 (defn source-changed? [sym]
@@ -70,17 +71,27 @@
       {:languages (-> translations first val keys vec)
        :translations translations})))
 
-(defn create-row [sheet row-strings row-index]
+(defn create-row [sheet row-strings row-index & {:keys [cell-fn] :or {cell-fn nil}}]
   (let [row (.createRow sheet row-index)]
     (doall (map-indexed (fn [index value]
                           (let [cell (.createCell row index)]
+                            (when (fn? cell-fn)
+                              (cell-fn cell))
                             (.setCellValue cell value)))
                         row-strings))))
+
+(defn bold-font-cell [wb cell]
+  (let [style (.createCellStyle wb)
+        font (.createFont wb)]
+    (.setBoldweight font Font/BOLDWEIGHT_BOLD)
+    (.setFont style font)
+    (.setCellStyle cell style)))
 
 (defn write-excel [{:keys [languages translations]} excel-file]
   (let [wb (XSSFWorkbook.)
         sheet (.createSheet wb "translations")]
-    (create-row sheet (concat ["key"] (map name languages)) 0)
+    (create-row sheet (concat ["key"] (map name languages)) 0
+                :cell-fn (partial bold-font-cell wb))
     (doall (map-indexed (fn [index [key strings]]
                           (let [row-strings (make-row-strings key languages strings)]
                             (create-row sheet row-strings (inc index))))
