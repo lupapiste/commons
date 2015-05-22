@@ -27,11 +27,11 @@
                             :translations {'label {:fi "Heippa" :sv ""}}}
         source-text-changed {:languages [:fi :sv]
                              :translations {'^:source-changed label {:fi "Punainen" :sv "Blå"}}}]
-    (is (= (ffirst (missing-translations no-texts))
+    (is (= (ffirst (:translations (missing-translations no-texts)))
            'label))
-    (is (= (ffirst (missing-translations empty-default-text))
+    (is (= (ffirst (:translations (missing-translations empty-default-text)))
            'label))
-    (is (= (ffirst (missing-translations empty-swedish-text))
+    (is (= (ffirst (:translations (missing-translations empty-swedish-text)))
            'label))
-    (is (= (ffirst (missing-translations source-text-changed))
+    (is (= (ffirst (:translations (missing-translations source-text-changed)))
            'label))))
