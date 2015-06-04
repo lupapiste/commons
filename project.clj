@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.3.0"
+(defproject lupapiste/commons "0.4.0-SNAPSHOT"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "Eclipse Public License"
@@ -7,7 +7,8 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [ontodev/excel "0.2.3" :exclusions [xml-apis org.apache.poi/poi-ooxml]]
                  [org.apache.poi/poi-ooxml "3.11"]
-                 [org.flatland/ordered "1.5.3"]]
+                 [org.flatland/ordered "1.5.3"]
+                 [ring/ring-core "1.3.2"]]
   :plugins [[com.jakemccrary/lein-test-refresh "0.8.0"]]
 
   :profiles {:dev {:dependencies [[flare "0.2.9"]]
