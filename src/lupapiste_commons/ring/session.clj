@@ -14,7 +14,7 @@
 (defn rekeyable
   "Returns a SessionStore with additional method 'rekey', which will
   reload the secret key given by the 'session-key-path' argument.
-  
+
   Can be used with Compojure for example like this:
 
   (defn rekey-route [store]
