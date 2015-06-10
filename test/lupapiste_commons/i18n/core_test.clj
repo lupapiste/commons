@@ -1,8 +1,8 @@
-(ns lupapiste-commons.i18n-test
+(ns lupapiste-commons.i18n.core-test
   (:require [clojure.java.io :as io]
             [clojure.string :as s]
             [clojure.test :refer :all]
-            [lupapiste-commons.i18n :refer :all]))
+            [lupapiste-commons.i18n.core :refer :all]))
 
 (deftest use-default-lang
   (testing "String from default language used if no translation present"

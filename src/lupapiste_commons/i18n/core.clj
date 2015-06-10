@@ -1,8 +1,8 @@
-(ns lupapiste-commons.i18n
+(ns lupapiste-commons.i18n.core
   (:require [clojure.java.io :as io]
             [clojure.set :refer [union]]
             [flatland.ordered.map :refer [ordered-map]]
-            [lupapiste-commons.i18n-resources :as resources]))
+            [lupapiste-commons.i18n.resources :as resources]))
 
 (def default-lang :fi)
 

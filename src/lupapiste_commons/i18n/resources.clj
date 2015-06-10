@@ -1,4 +1,4 @@
-(ns lupapiste-commons.i18n-resources
+(ns lupapiste-commons.i18n.resources
   (:require [clojure.java.io :as io]
             [clojure.string :as s]
             [flatland.ordered.map :refer [ordered-map]]

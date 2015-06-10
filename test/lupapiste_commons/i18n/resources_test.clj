@@ -1,5 +1,5 @@
-(ns lupapiste-commons.i18n-resources-test
-  (:require [lupapiste-commons.i18n-resources :refer :all]
+(ns lupapiste-commons.i18n.resources-test
+  (:require [lupapiste-commons.i18n.resources :refer :all]
             [clojure.test :refer :all])
   (:import [java.io File]))
 
