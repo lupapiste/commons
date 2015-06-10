@@ -1,0 +1,39 @@
+(ns lupapiste-commons.i18n.extract
+  (:require [clojure.java.io :as io]
+            [clojure.set :refer [difference]]
+            [clojure.string :as s]
+            [flatland.ordered.map :refer [ordered-map]]
+            [lupapiste-commons.i18n.resources :as commons-resources])
+  (:import [java.io PushbackReader]))
+
+(defn simple-translation-call? [tr-sym form]
+  (and (list? form)
+       (= tr-sym (first form))
+       (string? (second form))))
+
+(defn strings-from [file tr-sym]
+  (binding [*read-eval* false]
+    (with-open [in (-> (io/reader file) PushbackReader.)]
+      (map second (filter (partial simple-translation-call? tr-sym)
+                          (tree-seq sequential? identity
+                                    (doall (take-while #(not= % :eof)
+                                                       (repeatedly #(read {:eof :eof :read-cond :allow} in))))))))))
+
+(defn extract-strings [qualified-translation-function-name]
+  (let [tr-sym (apply symbol (.split qualified-translation-function-name "/"))
+        translations-file "resources/translations.txt"
+        {:keys [translations languages]} (commons-resources/txt->map translations-file)
+        current-keys (map symbol (distinct (mapcat (fn [file] (strings-from file tr-sym))
+                                                   (filter #(re-find #"\.clj.$" (.getName %))
+                                                           (file-seq (io/file "src"))))))
+        missing-keys (difference (set current-keys) (set (keys translations)))]
+    (println "Adding following keys to:" translations-file)
+    (doseq [k missing-keys]
+      (println (str (pr-str k))))
+    (commons-resources/write-txt {:languages languages
+                                  :translations (loop [acc translations
+                                                       rest-keys missing-keys]
+                                                  (if-let [k (first rest-keys)]
+                                                    (recur (assoc acc k (assoc (get acc k (ordered-map)) :fi (name k) :sv "")) (rest rest-keys))
+                                                    acc))} translations-file)
+    (println "Done")))
