@@ -19,8 +19,8 @@
                                     (doall (take-while #(not= % :eof)
                                                        (repeatedly #(read {:eof :eof :read-cond :allow} in))))))))))
 
-(defn extract-strings [qualified-translation-function-name]
-  (let [tr-sym (apply symbol (.split qualified-translation-function-name "/"))
+(defn extract-strings [translation-function-name]
+  (let [tr-sym (symbol translation-function-name)
         translations-file "resources/translations.txt"
         {:keys [translations languages]} (commons-resources/txt->map translations-file)
         current-keys (map symbol (distinct (mapcat (fn [file] (strings-from file tr-sym))
