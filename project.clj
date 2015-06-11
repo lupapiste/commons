@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :scm {:url "https://deus.solita.fi/Solita/code/files/lupapiste/repositories/lupapiste-commons/"}
-  :dependencies [[org.clojure/clojure "1.6.0"]
+  :dependencies [[org.clojure/clojure "1.7.0-RC1"]
                  [ontodev/excel "0.2.3" :exclusions [xml-apis org.apache.poi/poi-ooxml]]
                  [org.apache.poi/poi-ooxml "3.11"]
                  [org.flatland/ordered "1.5.3"]
@@ -17,14 +17,6 @@
   :profiles {:dev {:dependencies [[flare "0.2.9"]]
                    :injections [(require 'flare.clojure-test)
                                 (flare.clojure-test/install!)]}}
-
-  ;; Offer portable source as .cljc in the jar file
-  :filespecs [{:type :fn
-               :fn (fn [p]
-                     (let [portable-source "src/lupapiste_commons/attachment_types.clj"]
-                       {:type :bytes
-                        :path (str (.replaceFirst portable-source "^src/" "") "c")
-                        :bytes (slurp portable-source)}))}]
 
   :deploy-repositories {"snapshots" {:url ***REMOVED***
                                      :username ***REMOVED***
