@@ -3,7 +3,8 @@
             [clojure.set :refer [difference]]
             [clojure.string :as s]
             [flatland.ordered.map :refer [ordered-map]]
-            [lupapiste-commons.i18n.resources :as commons-resources])
+            [lupapiste-commons.i18n.resources :as commons-resources]
+            [lupapiste-commons.i18n.core :as commons-core])
   (:import [java.io PushbackReader]))
 
 (defn simple-translation-call? [tr-sym form]
@@ -22,7 +23,9 @@
 (defn extract-strings [translation-function-name]
   (let [tr-sym (symbol translation-function-name)
         translations-file "resources/translations.txt"
-        {:keys [translations languages]} (commons-resources/txt->map translations-file)
+        shared-translations (io/resource "shared_translations.txt")
+        {:keys [translations languages]} (commons-core/merge-translations (commons-resources/txt->map shared-translations)
+                                                                          (commons-resources/txt->map translations-file))
         current-keys (map symbol (distinct (mapcat (fn [file] (strings-from file tr-sym))
                                                    (filter #(re-find #"\.clj.$" (.getName %))
                                                            (file-seq (io/file "src"))))))
