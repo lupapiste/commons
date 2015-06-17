@@ -23,13 +23,13 @@
 (defn extract-strings [translation-function-name]
   (let [tr-sym (symbol translation-function-name)
         translations-file "resources/translations.txt"
-        shared-translations (io/resource "shared_translations.txt")
-        {:keys [translations languages]} (commons-core/merge-translations (commons-resources/txt->map shared-translations)
-                                                                          (commons-resources/txt->map translations-file))
+        {:keys [translations languages] :as my-translations} (commons-resources/txt->map translations-file)
+        all-translations (commons-core/merge-translations (commons-resources/txt->map (io/resource "shared_translations.txt"))
+                                                          my-translations)
         current-keys (map symbol (distinct (mapcat (fn [file] (strings-from file tr-sym))
                                                    (filter #(re-find #"\.clj.$" (.getName %))
                                                            (file-seq (io/file "src"))))))
-        missing-keys (difference (set current-keys) (set (keys translations)))]
+        missing-keys (difference (set current-keys) (set (keys (:translations all-translations))))]
     (println "Adding following keys to:" translations-file)
     (doseq [k missing-keys]
       (println (str (pr-str k))))
