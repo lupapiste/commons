@@ -13,7 +13,8 @@
        (string? (second form))))
 
 (defn strings-from [file tr-sym]
-  (binding [*read-eval* false]
+  (binding [*read-eval* false
+            *data-readers* (assoc *data-readers* 'js identity)]
     (with-open [in (-> (io/reader file) PushbackReader.)]
       (map second (filter (partial simple-translation-call? tr-sym)
                           (tree-seq sequential? identity
