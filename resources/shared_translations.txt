@@ -2548,3 +2548,5 @@
 "941 talousrakennukset" "sv" "941 ekonomibyggnader"
 "999 muualla luokittelemattomat rakennukset" "fi" "999 muualla luokittelemattomat rakennukset"
 "999 muualla luokittelemattomat rakennukset" "sv" "999 byggnader som inte klassificerats annorstädes"
+"sailytysaika.pituus" "fi" "{0} vuotta"
+"sailytysaika.pituus" "sv" "{0} år"
