@@ -1,13 +1,16 @@
 (ns lupapiste-commons.tos-metadata-schema
-  (:require [schema.core :as s :include-macros true]))
+  (:require [schema.core :as s :include-macros true]
+            [clojure.string :as string]))
 
 (def Vuodet (s/both s/Int (s/pred #(>= % 0) 'equal-or-greater-than-zero)))
+
+(def NonEmptyStr (s/both s/Str (s/pred #(not (string/blank? %)) 'non-empty-string)))
 
 (def Salassapitoaika {:type :salassapitoaika
                       :schema Vuodet})
 
 (def Salassapitoperuste {:type :salassapitoperuste
-                         :schema s/Str})
+                         :schema NonEmptyStr})
 
 (def Turvallisuusluokka {:type :turvallisuusluokka
                          :values [:turvallisuusluokka1
@@ -32,7 +35,7 @@
 
 (def SailytysAika {:type :sailytysaika
                    :subfields [{:type :arkistointi :values arkistointi}
-                               {:type :perustelu :schema s/Str}
+                               {:type :perustelu :schema NonEmptyStr}
                                {:type :laskentaperuste :values laskentaperuste}
                                {:type :pituus :schema Vuodet}]})
 
@@ -41,7 +44,7 @@
    :values [:ei-sisalla :sisaltaa :sisaltaa-arkaluonteisia]})
 
 (def Tila {:type :tila
-           :schema s/Str})
+           :schema NonEmptyStr})
 
 (defn sailytysaika-schema-map []
   (->> (:subfields SailytysAika)
@@ -51,15 +54,15 @@
 
 (def MetaDataMap
   {:julkisuusluokka (apply s/enum (:values Julkisuusluokka))
-   (s/optional-key :salassapitoaika) Vuodet
-   (s/optional-key :salassapitoperuste) s/Str
+   (s/optional-key :salassapitoaika) (:schema Salassapitoaika)
+   (s/optional-key :salassapitoperuste) (:schema Salassapitoperuste)
    (s/optional-key :turvallisuusluokka) (apply s/enum (:values Turvallisuusluokka))
    (s/optional-key :suojaustaso) (apply s/enum (:values Suojaustaso))
    :sailytysaika (sailytysaika-schema-map)
    :henkilotiedot (apply s/enum (:values Henkilötiedot))})
 
 (def AsiakirjaMetaDataMap
-  (merge MetaDataMap {:tila s/Str}))
+  (merge MetaDataMap {:tila (:schema Tila)}))
 
 (def default-metadata
   {:julkisuusluokka :julkinen
