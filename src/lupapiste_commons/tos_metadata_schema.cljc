@@ -78,7 +78,7 @@
     (s/validate schema
                 (cond-> metadata
                         (not= (:arkistointi sailytysaika) :määräajan) (assoc-in [:sailytysaika :pituus] (get-in default-metadata [:sailytysaika :pituus]))
-                        (= julkisuusluokka :julkinen)                 (dissoc :salassapitoaika)))))
+                        (= julkisuusluokka :julkinen)                 (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka)))))
 
 (def common-metadata-fields
   [Julkisuusluokka Suojaustaso Henkilötiedot SailytysAika])
