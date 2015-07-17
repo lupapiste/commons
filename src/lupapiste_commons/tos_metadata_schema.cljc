@@ -34,10 +34,11 @@
                       :vakuuksien_voimassaoloaika])
 
 (def SailytysAika {:type :sailytysaika
-                   :subfields [{:type :arkistointi :values arkistointi}
-                               {:type :perustelu :schema NonEmptyStr}
-                               {:type :laskentaperuste :values laskentaperuste}
-                               {:type :pituus :schema Vuodet}]})
+                   :subfields [{:type :arkistointi
+                                :values arkistointi
+                                :dependencies {:määräajan [{:type :pituus :schema Vuodet}]
+                                               :toistaiseksi [{:type :laskentaperuste :values laskentaperuste}]}}
+                               {:type :perustelu :schema NonEmptyStr}]})
 
 (def Henkilötiedot
   {:type :henkilotiedot
@@ -46,11 +47,28 @@
 (def Tila {:type :tila
            :schema NonEmptyStr})
 
-(defn sailytysaika-schema-map []
-  (->> (:subfields SailytysAika)
-       (map (fn [dep]
-              [(:type dep) (if (:schema dep) (:schema dep) (apply s/enum (:values dep)))]))
-       (into {})))
+(defn attr-map->schema-pair [attr-map]
+  (if-let [schema (cond
+                    (:schema attr-map) (:schema attr-map)
+                    (:values attr-map) (apply s/enum (:values attr-map)))]
+    {(:type attr-map) schema}
+    attr-map))
+
+(defn ui-desc->schema-map [desc-map]
+  (cond-> desc-map
+    (:dependencies desc-map) (merge (->> (:dependencies desc-map)
+                                         (map #(->> (val %)
+                                                    (map (fn [v] (->> (ui-desc->schema-map v)
+                                                                      (map (fn [[k v]] [(s/optional-key k) v]))
+                                                                      (into {}))))
+                                                    (into {})))
+                                         (apply merge)))
+    (:subfields desc-map) (merge (->> (:subfields desc-map)
+                                      (map (fn [dep] (ui-desc->schema-map dep)))
+                                      (into {})
+                                      (hash-map (:type desc-map))))
+    (or (:schema desc-map) (:values desc-map)) (merge (attr-map->schema-pair desc-map))
+    true (dissoc :type :schema :values :subfields :dependencies)))
 
 (def MetaDataMap
   {:julkisuusluokka (apply s/enum (:values Julkisuusluokka))
@@ -58,7 +76,7 @@
    (s/optional-key :salassapitoperuste) (:schema Salassapitoperuste)
    (s/optional-key :turvallisuusluokka) (apply s/enum (:values Turvallisuusluokka))
    (s/optional-key :suojaustaso) (apply s/enum (:values Suojaustaso))
-   :sailytysaika (sailytysaika-schema-map)
+   :sailytysaika (:sailytysaika (ui-desc->schema-map SailytysAika))
    :henkilotiedot (apply s/enum (:values Henkilötiedot))})
 
 (def AsiakirjaMetaDataMap
