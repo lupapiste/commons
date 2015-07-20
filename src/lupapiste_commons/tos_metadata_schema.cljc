@@ -1,6 +1,7 @@
 (ns lupapiste-commons.tos-metadata-schema
   (:require [schema.core :as s :include-macros true]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [lupapiste-commons.shared-utils :refer [dissoc-in]]))
 
 (def Vuodet (s/both s/Int (s/pred #(>= % 0) 'equal-or-greater-than-zero)))
 
@@ -98,8 +99,9 @@
   (let [schema (if (:tila metadata) AsiakirjaMetaDataMap MetaDataMap)]
     (s/validate schema
                 (cond-> metadata
-                        (not= (:arkistointi sailytysaika) :määräajan) (assoc-in [:sailytysaika :pituus] (get-in default-metadata [:sailytysaika :pituus]))
-                        (= julkisuusluokka :julkinen)                 (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka)))))
+                  (not= (:arkistointi sailytysaika) :määräajan)    (dissoc-in [:sailytysaika :pituus])
+                  (not= (:arkistointi sailytysaika) :toistaiseksi) (dissoc-in [:sailytysaika :laskentaperuste])
+                  (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka)))))
 
 (def common-metadata-fields
   [Julkisuusluokka Suojaustaso Henkilötiedot SailytysAika])
