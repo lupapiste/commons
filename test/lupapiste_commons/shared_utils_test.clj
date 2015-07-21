@@ -1,7 +1,6 @@
 (ns lupapiste-commons.shared-utils-test
   (:require [lupapiste-commons.shared-utils :as u]
-    #?(:clj [clojure.test :refer :all]
-       :cljs [cljs.test :as test :refer-macros [deftest is]])))
+            [clojure.test :refer :all]))
 
 (deftest dissoc-in-map
   (is (= (u/dissoc-in {:a {:b [1 2 3]}} [:a :b 0])
