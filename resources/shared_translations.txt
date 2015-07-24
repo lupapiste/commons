@@ -2552,3 +2552,5 @@
 "sailytysaika.pituus" "sv" "{0} år"
 "vuotta" "fi" "vuotta"
 "vuotta" "sv" "år"
+"<Arvo puuttuu>" "fi" "<Arvo puuttuu>"
+"<Arvo puuttuu>" "sv" ""
