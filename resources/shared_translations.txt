@@ -1,4 +1,4 @@
-"ei" "fi" "Ei"
+"ei" "fi" "Ei arkistoida"
 "ei" "sv" ""
 "ikuisesti" "fi" "Pysyvästi"
 "ikuisesti" "sv" ""
