@@ -48,6 +48,12 @@
 (def Tila {:type :tila
            :schema NonEmptyStr})
 
+(def Myyntipalvelu {:type :myyntipalvelu
+                    :schema s/Bool})
+
+(def Näkyvyys {:type :näkyvyys
+               :values [:julkinen :viranomainen :asiakas-ja-viranomainen]})
+
 (defn attr-map->schema-pair [attr-map]
   (if-let [schema (cond
                     (:schema attr-map) (:schema attr-map)
@@ -81,7 +87,9 @@
    :henkilotiedot (apply s/enum (:values Henkilötiedot))})
 
 (def AsiakirjaMetaDataMap
-  (merge MetaDataMap {:tila (:schema Tila)}))
+  (merge MetaDataMap {:tila (:schema Tila)
+                      :myyntipalvelu (:schema Myyntipalvelu)
+                      :näkyvyys (apply s/enum (:values Näkyvyys))}))
 
 (def default-metadata
   {:julkisuusluokka :julkinen
@@ -93,7 +101,9 @@
    :suojaustaso :suojaustaso1})
 
 (def asiakirja-default-metadata
-  (merge default-metadata {:tila "Luonnos"}))
+  (merge default-metadata {:tila "Luonnos"
+                           :myyntipalvelu true
+                           :näkyvyys :julkinen}))
 
 (defn sanitize-metadata [{:keys [sailytysaika julkisuusluokka] :as metadata}]
   (let [schema (if (:tila metadata) AsiakirjaMetaDataMap MetaDataMap)]
@@ -105,3 +115,6 @@
 
 (def common-metadata-fields
   [Julkisuusluokka Suojaustaso Henkilötiedot SailytysAika])
+
+(def asiakirja-metadata-fields
+  [Tila Myyntipalvelu Näkyvyys])
