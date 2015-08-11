@@ -2592,3 +2592,7 @@
 "yes" "sv" "Ja"
 "no" "fi" "Ei"
 "no" "sv" "Nej"
+"edit" "fi" "Muokkaa"
+"edit" "sv" "Redigerar"
+"cancel" "fi" "Peruuta"
+"cancel" "sv" "Avbryt"
