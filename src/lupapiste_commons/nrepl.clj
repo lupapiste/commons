@@ -13,7 +13,8 @@
         component)))
   (stop [this]
     (when (:server this)
-      (nrepl-server/stop-server (:server this)))
+      (nrepl-server/stop-server (:server this))
+      (timbre/info "Stopped nrepl server"))
     (assoc this :server nil)))
 
 (defn new-nrepl-server [port]
