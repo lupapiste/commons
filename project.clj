@@ -18,11 +18,4 @@
   :profiles {:dev {:dependencies [[flare "0.2.9"]]
                    :injections [(require 'flare.clojure-test)
                                 (flare.clojure-test/install!)]}}
-
-  :deploy-repositories {"snapshots" {:url ***REMOVED***
-                                     :username ***REMOVED***
-                                     :password ***REMOVED***}
-                        "releases" {:url ***REMOVED***
-                                    :username ***REMOVED***
-                                    :password ***REMOVED***
-                                    :sign-releases false}})
+)
