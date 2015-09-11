@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.5.7"
+(defproject lupapiste/commons "0.5.8-SNAPSHOT"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "Eclipse Public License"
@@ -19,10 +19,4 @@
                    :injections [(require 'flare.clojure-test)
                                 (flare.clojure-test/install!)]}}
 
-  :deploy-repositories {"snapshots" {:url ***REMOVED***
-                                     :username ***REMOVED***
-                                     :password ***REMOVED***}
-                        "releases" {:url ***REMOVED***
-                                    :username ***REMOVED***
-                                    :password ***REMOVED***
-                                    :sign-releases false}})
+  )
