@@ -14,19 +14,19 @@
                          :schema NonEmptyStr})
 
 (def Turvallisuusluokka {:type :turvallisuusluokka
-                         :values [:turvallisuusluokka1
-                                  :turvallisuusluokka2
-                                  :turvallisuusluokka3
+                         :values [:ei-turvallisuusluokkaluokiteltu
                                   :turvallisuusluokka4
-                                  :ei-turvallisuusluokkaluokiteltu]})
+                                  :turvallisuusluokka3
+                                  :turvallisuusluokka2
+                                  :turvallisuusluokka1]})
 
 (def Suojaustaso {:type :suojaustaso
-                  :values [:suojaustaso1 :suojaustaso2 :suojaustaso3 :suojaustaso4]})
+                  :values [:ei-luokiteltu :suojaustaso4 :suojaustaso3 :suojaustaso2 :suojaustaso1]})
 
 (def Julkisuusluokka {:type :julkisuusluokka
                       :values [:julkinen :osittain-salassapidettava :salainen]
-                      :dependencies {:osittain-salassapidettava [Salassapitoaika Salassapitoperuste Turvallisuusluokka]
-                                     :salainen [Salassapitoaika Salassapitoperuste Turvallisuusluokka]}})
+                      :dependencies {:osittain-salassapidettava [Salassapitoaika Salassapitoperuste Suojaustaso Turvallisuusluokka]
+                                     :salainen [Salassapitoaika Salassapitoperuste Suojaustaso Turvallisuusluokka]}})
 
 (def arkistointi [:ei :ikuisesti :määräajan :toistaiseksi])
 (def laskentaperuste [:lupapäätöspäivä
@@ -97,8 +97,7 @@
                   :perustelu ""
                   :laskentaperuste (first laskentaperuste)
                   :pituus 0}
-   :henkilotiedot :ei-sisalla
-   :suojaustaso :suojaustaso1})
+   :henkilotiedot :ei-sisalla})
 
 (def asiakirja-default-metadata
   (merge default-metadata {:tila "Luonnos"
@@ -114,7 +113,7 @@
                   (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka)))))
 
 (def common-metadata-fields
-  [Julkisuusluokka Suojaustaso Henkilötiedot SailytysAika])
+  [Julkisuusluokka Henkilötiedot SailytysAika])
 
 (def asiakirja-metadata-fields
   [Tila Myyntipalvelu Näkyvyys])
