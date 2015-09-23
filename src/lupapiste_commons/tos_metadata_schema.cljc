@@ -102,7 +102,7 @@
 
 (def asiakirja-default-metadata
   (merge default-metadata {:tila "Luonnos"
-                           :myyntipalvelu true
+                           :myyntipalvelu false
                            :näkyvyys :julkinen}))
 
 (defn sanitize-metadata [{:keys [sailytysaika julkisuusluokka] :as metadata}]
