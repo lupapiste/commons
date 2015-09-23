@@ -12,3 +12,6 @@ pom.xml.asc
 .idea
 commons.iml
 ~$*.xlsx
+/bin/
+.classpath
+.settings/
