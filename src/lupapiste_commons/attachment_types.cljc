@@ -220,3 +220,6 @@
                           :ote_osakeyhtion_yhtiokokouksen_poytakirjasta
                           :ote_osakeyhtion_hallituksen_kokouksen_poytakirjasta]
    :muut [:muu]])
+
+(def MuutYmparistoluvat ; wip
+  [:jatteen_kerays [:vastaanottopaikan_tiedot]])
