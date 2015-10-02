@@ -2,8 +2,9 @@
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :scm {:url "https://deus.solita.fi/Solita/code/files/lupapiste/repositories/lupapiste-commons/"}
+            :url "http://www.eclipse.org/legal/epl-v10.html"
+            :distribution :repo}
+  :scm {:url "https://github.com/lupapiste/commons.git"}
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [ontodev/excel "0.2.3" :exclusions [xml-apis org.apache.poi/poi-ooxml]]
                  [org.apache.poi/poi-ooxml "3.12"]
