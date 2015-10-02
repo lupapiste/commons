@@ -222,4 +222,11 @@
    :muut [:muu]])
 
 (def MuutYmparistoluvat ; wip
-  [:jatteen_kerays [:vastaanottopaikan_tiedot]])
+  [:muistomerkin-rauhoittaminen [:kirjallinen-aineisto
+                                 :lainhuutotodistus
+                                 :kauppakirja
+                                 :kartta
+                                 :valokuva-kohteesta
+                                 :kohdekuvaus
+                                 :selvitys-omistusoikeudesta]
+   :jatteen_kerays [:vastaanottopaikan_tiedot]])
