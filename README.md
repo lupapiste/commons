@@ -2,6 +2,8 @@
 
 Common domain code and resources for lupapiste and lupapiste-toj
 
+[![Clojars Project](http://clojars.org/lupapiste/commons/latest-version.svg)](http://clojars.org/lupapiste/commons)
+
 ## License
 
 Copyright © 2015 Solita
