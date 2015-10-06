@@ -229,4 +229,8 @@
                                  :valokuva-kohteesta
                                  :kohdekuvaus
                                  :selvitys-omistusoikeudesta]
-   :jatteen_kerays [:vastaanottopaikan_tiedot]])
+   :jatteen_kerays [:vastaanottopaikan_tiedot]
+   :kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan [:karttapiirros
+                                                                      :sailion-tarkastuspoytakirja
+                                                                      :kiinteiston-omistajien-suostumus]
+   :muut [:muu]])
