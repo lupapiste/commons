@@ -237,4 +237,5 @@
                             :raaka-aineet
                             :paasto_arviot
                             :selvitys_ymparistonsuojelutoimista]
+   :ilmoitus-poikkeuksellisesta-tilanteesta [:kayttoturvallisuustiedote]
    :muut [:muu]])
