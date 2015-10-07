@@ -233,4 +233,8 @@
    :kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan [:karttapiirros
                                                                       :sailion-tarkastuspoytakirja
                                                                       :kiinteiston-omistajien-suostumus]
+   :koeluontoinen_toiminta [:kuvaus_toiminnasta
+                            :raaka-aineet
+                            :paasto_arviot
+                            :selvitys_ymparistonsuojelutoimista]
    :muut [:muu]])
