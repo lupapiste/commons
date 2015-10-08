@@ -550,6 +550,8 @@
 "attachmentType.kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan._group_label" "sv" ""
 "attachmentType.muistomerkin-rauhoittaminen.lainhuutotodistus" "fi" "Kiinteistön lainhuutotodistus"
 "attachmentType.muistomerkin-rauhoittaminen.lainhuutotodistus" "sv" ""
+"attachmentType.muistomerkin-rauhoittaminen.kartta" "fi" "Kartta"
+"attachmentType.muistomerkin-rauhoittaminen.kartta" "sv" "Karta"
 "attachmentType.muistomerkin-rauhoittaminen.kauppakirja" "fi" "Kauppakirja"
 "attachmentType.muistomerkin-rauhoittaminen.kauppakirja" "sv" ""
 "attachmentType.muistomerkin-rauhoittaminen.valokuva-kohteesta" "fi" "Valokuva kohteesta"
