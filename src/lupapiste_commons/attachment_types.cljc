@@ -225,7 +225,6 @@
   [:muistomerkin-rauhoittaminen [:kirjallinen-aineisto
                                  :lainhuutotodistus
                                  :kauppakirja
-                                 :kartta
                                  :valokuva-kohteesta
                                  :kohdekuvaus
                                  :selvitys-omistusoikeudesta]
