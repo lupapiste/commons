@@ -230,8 +230,7 @@
                                  :kohdekuvaus
                                  :selvitys-omistusoikeudesta]
    :jatteen_kerays [:vastaanottopaikan_tiedot]
-   :kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan [:karttapiirros
-                                                                      :sailion-tarkastuspoytakirja
+   :kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan [:sailion-tarkastuspoytakirja
                                                                       :kiinteiston-omistajien-suostumus]
    :koeluontoinen_toiminta [:kuvaus_toiminnasta
                             :raaka-aineet
@@ -239,5 +238,8 @@
                             :selvitys_ymparistonsuojelutoimista]
    :ilmoitus-poikkeuksellisesta-tilanteesta [:kayttoturvallisuustiedote]
    :kartat [:lantapatterin-sijainti
+            :luonnonmuistomerkin-sijainti-kartalla
+            :sailion-ja-rakenteiden-sijainti-kartalla
             :jatteen-sijainti]
+   :maastoliikennelaki-kilpailut-ja-harjoitukset [:asemapiirros-kilpailu-tai-harjoitusalueesta]
    :muut [:muu]])
