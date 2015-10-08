@@ -37,6 +37,7 @@
 (def sailytysaika-perustelu-suggestions [:custom-justification :al-11665 :kuntaliitto-14a :kuntaliitto-1-s1 :oma-tarve])
 
 (def SailytysAika {:type :sailytysaika
+                   :require-role :archivist
                    :subfields [{:type :arkistointi
                                 :values arkistointi
                                 :dependencies {:määräajan [{:type :pituus :schema Vuodet}]
@@ -77,7 +78,7 @@
                                       (into {})
                                       (hash-map (:type desc-map))))
     (or (:schema desc-map) (:values desc-map)) (merge (attr-map->schema-pair desc-map))
-    true (dissoc :type :schema :values :subfields :dependencies)))
+    true (dissoc :type :schema :values :subfields :dependencies :require-role)))
 
 (def MetaDataMap
   {:julkisuusluokka (apply s/enum (:values Julkisuusluokka))
