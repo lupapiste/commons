@@ -238,4 +238,5 @@
                             :paasto_arviot
                             :selvitys_ymparistonsuojelutoimista]
    :ilmoitus-poikkeuksellisesta-tilanteesta [:kayttoturvallisuustiedote]
+   :kartat [:lantapatterin-sijainti]
    :muut [:muu]])
