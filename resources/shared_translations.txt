@@ -546,7 +546,7 @@
 "attachmentType.kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan.sailion-tarkastuspoytakirja" "sv" ""
 "attachmentType.kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan.kiinteiston-omistajien-suostumus" "fi" "Kiinteistön omistajien suostumus"
 "attachmentType.kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan.kiinteiston-omistajien-suostumus" "sv" ""
-"attachmentType.kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan._group_label" "fi" "Käytöstpoistetun öljy- tai kemikaalisäiliön jättäminen maaperään"
+"attachmentType.kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan._group_label" "fi" "Käytöstäpoistetun öljy- tai kemikaalisäiliön jättäminen maaperään"
 "attachmentType.kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan._group_label" "sv" ""
 "attachmentType.muistomerkin-rauhoittaminen.lainhuutotodistus" "fi" "Kiinteistön lainhuutotodistus"
 "attachmentType.muistomerkin-rauhoittaminen.lainhuutotodistus" "sv" ""
