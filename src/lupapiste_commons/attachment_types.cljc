@@ -239,6 +239,7 @@
    :kartat [:lantapatterin-sijainti
             :luonnonmuistomerkin-sijainti-kartalla
             :sailion-ja-rakenteiden-sijainti-kartalla
-            :jatteen-sijainti]
+            :jatteen-sijainti
+            :ottamispaikan-sijainti]
    :maastoliikennelaki-kilpailut-ja-harjoitukset [:asemapiirros-kilpailu-tai-harjoitusalueesta]
    :muut [:muu]])
