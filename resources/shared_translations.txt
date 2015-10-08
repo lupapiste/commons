@@ -562,6 +562,10 @@
 "attachmentType.muistomerkin-rauhoittaminen.selvitys-omistusoikeudesta" "sv" ""
 "attachmentType.muistomerkin-rauhoittaminen._group_label" "fi" "Luonnonmuistomerkin rauhoittaminen"
 "attachmentType.muistomerkin-rauhoittaminen._group_label" "sv" ""
+"attachmentType.maastoliikennelaki-kilpailut-ja-harjoitukset._group_label" "fi" Kilpailut ja harjoitukset
+"attachmentType.maastoliikennelaki-kilpailut-ja-harjoitukset._group_label" "sv" ""
+"attachmentType.maastoliikennelaki-kilpailut-ja-harjoitukset.asemapiirros-kilpailu-tai-harjoitusalueesta" "fi" Asemapiirros kilpailu- tai harjoitusalueesta
+"attachmentType.maastoliikennelaki-kilpailut-ja-harjoitukset.asemapiirros-kilpailu-tai-harjoitusalueesta" "sv" ""
 "operations.add" "fi" "Lisää toimenpide"
 "operations.add" "sv" "Lägg till åtgärd"
 "operations.selected" "fi" "Valittu toimenpide:"
