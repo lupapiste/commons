@@ -2678,3 +2678,7 @@
 "extinct" "sv" "Har gått ut"
 "ei-valittu" "fi" "Ei valittu"
 "ei-valittu" "sv" ""
+"acknowledged" "fi" "Ilmoitus vastaanotettu"
+"acknowledged" "sv" "Anmälan mottagen"
+"foremanVerdictGiven" "fi" "Päätös annettu"
+"foremanVerdictGiven" "sv" "Beslut givet"
