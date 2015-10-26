@@ -38,7 +38,6 @@
                   :yhdistelmapiirros]
    :ennakkoluvat_ja_lausunnot [:elyn_tai_kunnan_poikkeamapaatos
                                :lausunto
-                               :lausunnon_liite
                                :naapurien_suostumukset
                                :selvitys_naapurien_kuulemisesta
                                :suunnittelutarveratkaisu
