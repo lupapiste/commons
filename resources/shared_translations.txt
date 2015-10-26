@@ -2699,4 +2699,4 @@
 "neuvontapyyntö" "fi" "Neuvontapyyntö"
 "neuvontapyyntö" "sv" ""
 "attachment.label.contents" "fi" "Piirustuksen sisältö"
-"attachment.label.contents" "fi" "Innehåll av ritning"
+"attachment.label.contents" "sv" "Innehåll av ritning"
