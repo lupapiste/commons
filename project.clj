@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.5.24"
+(defproject lupapiste/commons "0.5.25"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "Eclipse Public License"
@@ -19,4 +19,5 @@
   :profiles {:dev {:dependencies [[flare "0.2.9"]]
                    :injections [(require 'flare.clojure-test)
                                 (flare.clojure-test/install!)]}}
+  :cljsbuild {:builds {:dev {:source-paths ["src"]}}}
 )

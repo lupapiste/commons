@@ -49,7 +49,7 @@
    :values [:ei-sisalla :sisaltaa :sisaltaa-arkaluonteisia]})
 
 (def Tila {:type :tila
-           :schema NonEmptyStr})
+           :values [:luonnos :valmis :arkistoitu]})
 
 (def Myyntipalvelu {:type :myyntipalvelu
                     :schema s/Bool})
@@ -90,7 +90,7 @@
    :henkilotiedot (apply s/enum (:values Henkilötiedot))})
 
 (def AsiakirjaMetaDataMap
-  (merge MetaDataMap {:tila (:schema Tila)
+  (merge MetaDataMap {:tila (apply s/enum (:values Tila))
                       :myyntipalvelu (:schema Myyntipalvelu)
                       :näkyvyys (apply s/enum (:values Näkyvyys))}))
 
@@ -103,7 +103,7 @@
    :henkilotiedot :ei-sisalla})
 
 (def asiakirja-default-metadata
-  (merge default-metadata {:tila "Luonnos"
+  (merge default-metadata {:tila :luonnos
                            :myyntipalvelu false
                            :näkyvyys :julkinen}))
 
