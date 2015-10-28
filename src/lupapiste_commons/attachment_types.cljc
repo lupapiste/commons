@@ -104,7 +104,9 @@
           :turvallisuusselvitys
           :yhteistilat
           :luonnos
-          :muu]])
+          :muu
+          :paatos
+          :paatosote]])
 
 (def YleistenAlueidenLuvat
   [:yleiset-alueet [:aiemmin-hankittu-sijoituspaatos
@@ -121,11 +123,15 @@
                     :valtakirja]
    :osapuolet osapuolet
    ;; This is needed for statement attachments to work.
-   :muut [:muu]])
+   :muut [:muu
+          :paatos
+          :paatosote]])
 
 (def Ymparistoilmoitukset
   [:kartat [:kartta-melun-ja-tarinan-leviamisesta]
-   :muut [:muu]])
+   :muut [:muu
+          :paatos
+          :paatosote]])
 
 (def Ymparistolupa
    [:laitoksen_tiedot [:voimassa_olevat_ymparistolupa_vesilupa
@@ -182,7 +188,9 @@
            :ote_alueen_peruskartasta_sijainti_paastolahteet_olennaiset_kohteet
            :prosessikaavio_yksikkoprosessit_paastolahteet
            :selvitys_suuronnettomuuden_vaaran_arvioimiseksi
-           :muu]])
+           :muu
+           :paatos
+           :paatosote]])
 
 (def Maa-ainesluvat
   [:hakija [:valtakirja
@@ -200,7 +208,9 @@
    :muut [:vakuus_ottamisen_aloittamiseksi_ennen_luvan_lainvoimaa
           :selvitys_tieyhteyksista_oikeuksista
           :pohjavesitutkimus
-          :muu]])
+          :muu
+          :paatos
+          :paatosote]])
 
 (def Kiinteistotoimitus
   [:hakija [:valtakirja
@@ -220,7 +230,9 @@
                           :yhtiojarjestys
                           :ote_osakeyhtion_yhtiokokouksen_poytakirjasta
                           :ote_osakeyhtion_hallituksen_kokouksen_poytakirjasta]
-   :muut [:muu]])
+   :muut [:muu
+          :paatos
+          :paatosote]])
 
 (def MuutYmparistoluvat ; wip
   [:muistomerkin-rauhoittaminen [:kirjallinen-aineisto
@@ -243,4 +255,6 @@
             :jatteen-sijainti
             :ottamispaikan-sijainti]
    :maastoliikennelaki-kilpailut-ja-harjoitukset [:asemapiirros-kilpailu-tai-harjoitusalueesta]
-   :muut [:muu]])
+   :muut [:muu
+          :paatos
+          :paatosote]])
