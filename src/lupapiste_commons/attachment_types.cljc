@@ -258,3 +258,6 @@
    :muut [:muu
           :paatos
           :paatosote]])
+
+(def types-not-transmitted-to-backing-system
+  {:muut #{:paatos :paatosote}})
