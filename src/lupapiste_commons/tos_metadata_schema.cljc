@@ -44,7 +44,7 @@
                                                :toistaiseksi [{:type :laskentaperuste :values laskentaperuste}]}}
                                {:type :perustelu :schema NonEmptyStr}]})
 
-(def Henkilötiedot
+(def Henkilotiedot
   {:type :henkilotiedot
    :values [:ei-sisalla :sisaltaa :sisaltaa-arkaluonteisia]})
 
@@ -54,7 +54,7 @@
 (def Myyntipalvelu {:type :myyntipalvelu
                     :schema s/Bool})
 
-(def Näkyvyys {:type :näkyvyys
+(def Nakyvyys {:type :näkyvyys
                :values [:julkinen :viranomainen :asiakas-ja-viranomainen]})
 
 (defn attr-map->schema-pair [attr-map]
@@ -87,12 +87,12 @@
    (s/optional-key :turvallisuusluokka) (apply s/enum (:values Turvallisuusluokka))
    (s/optional-key :suojaustaso) (apply s/enum (:values Suojaustaso))
    :sailytysaika (:sailytysaika (ui-desc->schema-map SailytysAika))
-   :henkilotiedot (apply s/enum (:values Henkilötiedot))})
+   :henkilotiedot (apply s/enum (:values Henkilotiedot))})
 
 (def AsiakirjaMetaDataMap
   (merge MetaDataMap {:tila (apply s/enum (:values Tila))
                       :myyntipalvelu (:schema Myyntipalvelu)
-                      :näkyvyys (apply s/enum (:values Näkyvyys))}))
+                      :näkyvyys (apply s/enum (:values Nakyvyys))}))
 
 (def default-metadata
   {:julkisuusluokka :julkinen
@@ -116,7 +116,7 @@
                   (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso)))))
 
 (def common-metadata-fields
-  [Julkisuusluokka Henkilötiedot SailytysAika])
+  [Julkisuusluokka Henkilotiedot SailytysAika])
 
 (def asiakirja-metadata-fields
-  [Tila Myyntipalvelu Näkyvyys])
+  [Tila Myyntipalvelu Nakyvyys])
