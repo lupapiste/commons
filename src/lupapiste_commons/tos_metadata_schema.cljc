@@ -54,7 +54,7 @@
 (def Myyntipalvelu {:type :myyntipalvelu
                     :schema s/Bool})
 
-(def Nakyvyys {:type :näkyvyys
+(def Nakyvyys {:type :nakyvyys
                :values [:julkinen :viranomainen :asiakas-ja-viranomainen]})
 
 (defn attr-map->schema-pair [attr-map]
@@ -92,7 +92,7 @@
 (def AsiakirjaMetaDataMap
   (merge MetaDataMap {:tila (apply s/enum (:values Tila))
                       :myyntipalvelu (:schema Myyntipalvelu)
-                      :näkyvyys (apply s/enum (:values Nakyvyys))}))
+                      :nakyvyys (apply s/enum (:values Nakyvyys))}))
 
 (def default-metadata
   {:julkisuusluokka :julkinen
@@ -105,7 +105,7 @@
 (def asiakirja-default-metadata
   (merge default-metadata {:tila :luonnos
                            :myyntipalvelu false
-                           :näkyvyys :julkinen}))
+                           :nakyvyys :julkinen}))
 
 (defn sanitize-metadata [{:keys [sailytysaika julkisuusluokka] :as metadata}]
   (let [schema (if (:tila metadata) AsiakirjaMetaDataMap MetaDataMap)]
