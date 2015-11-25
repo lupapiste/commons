@@ -107,13 +107,21 @@
                            :myyntipalvelu false
                            :nakyvyys :julkinen}))
 
+(defn remove-unrecognized-keys [metadata schema]
+  (let [known-keys (->> (map #(or (:k %) %) (keys schema))
+                        (into #{}))]
+    (->> metadata
+         (filter (fn [[k _]] (known-keys k)))
+         (into {}))))
+
 (defn sanitize-metadata [{:keys [sailytysaika julkisuusluokka] :as metadata}]
   (let [schema (if (:tila metadata) AsiakirjaMetaDataMap MetaDataMap)]
     (s/validate schema
                 (cond-> metadata
                   (not= (:arkistointi sailytysaika) :määräajan)    (dissoc-in [:sailytysaika :pituus])
                   (not= (:arkistointi sailytysaika) :toistaiseksi) (dissoc-in [:sailytysaika :laskentaperuste])
-                  (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso)))))
+                  (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso)
+                  true                                             (remove-unrecognized-keys schema)))))
 
 (def common-metadata-fields
   [Julkisuusluokka Henkilotiedot SailytysAika])
