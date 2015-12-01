@@ -10,7 +10,7 @@
    :submitted  [:sent :verdictGiven :canceled]
    :sent       [:verdictGiven :complementNeeded :canceled]
    :complementNeeded   [:sent :verdictGiven :canceled]
-   :verdictGiven        [:constructionStarted :inUse :onHold :closed :extinct :canceled]
+   :verdictGiven        [:constructionStarted :inUse :onHold :closed :extinct]
    :constructionStarted [:inUse :onHold :closed :extinct]
    :inUse    [:onHold :closed :extinct]
    :onHold   [:constructionStarted :inUse :closed :extinct]
