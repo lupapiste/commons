@@ -10,10 +10,10 @@
    :submitted  [:sent :verdictGiven :canceled]
    :sent       [:verdictGiven :complementNeeded :canceled]
    :complementNeeded   [:sent :verdictGiven :canceled]
-   :verdictGiven        [:constructionStarted :inUse :onHold :closed :extinct]
+   :verdictGiven        [:constructionStarted :inUse :onHold :closed :extinct :canceled]
    :constructionStarted [:inUse :onHold :closed :extinct]
-   :inUse    [:onHold :closed :extinct]
-   :onHold   [:constructionStarted :inUse :closed :extinct]
+   :inUse    [:closed :onHold :extinct]
+   :onHold   [:closed :constructionStarted :inUse :extinct]
    :closed   []
    :canceled []
    :extinct  [] ; Rauennut
