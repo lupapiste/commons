@@ -12,9 +12,12 @@
    :complementNeeded   [:sent :verdictGiven :canceled]
    :verdictGiven        [:constructionStarted :inUse :onHold :closed :extinct :canceled]
    :constructionStarted [:inUse :onHold :closed :extinct]
-   :inUse    [:closed :onHold :extinct]
-   :onHold   [:closed :constructionStarted :inUse :extinct]
    :closed   []
    :canceled []
    :extinct  [] ; Rauennut
    })
+
+(def full-application-state-graph
+  (assoc default-application-state-graph
+         :inUse    [:closed :onHold :extinct]
+         :onHold   [:closed :constructionStarted :inUse :extinct]))
