@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.5.37"
+(defproject lupapiste/commons "0.5.38"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "Eclipse Public License"
@@ -14,10 +14,7 @@
                  [com.taoensso/timbre "4.1.1"]
                  [org.clojure/tools.nrepl "0.2.10"]
                  [prismatic/schema "0.4.3"]
-                 [itext "4.2.1" :exclusions [org.bouncycastle/bctsp-jdk14 xml-apis]]
-                 [clj-pdf "1.11.21" :exclusions [xalan org.apache.xmlgraphics/batik-js com.lowagie/itext]]
-                 [org.slf4j/slf4j-log4j12 "1.7.7"]
-                 [org.apache.pdfbox/pdfbox "1.8.9"]]
+                 [org.slf4j/slf4j-log4j12 "1.7.7"]]
   :plugins [[lein-midje "3.1.1"]
             [com.jakemccrary/lein-test-refresh "0.8.0"]]
 
