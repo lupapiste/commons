@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.5.38"
+(defproject lupapiste/commons "0.5.39"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "Eclipse Public License"
@@ -13,7 +13,7 @@
                  [com.stuartsierra/component "0.2.3"]
                  [com.taoensso/timbre "4.1.1"]
                  [org.clojure/tools.nrepl "0.2.10"]
-                 [prismatic/schema "0.4.3"]
+                 [prismatic/schema "1.0.4"]
                  [org.slf4j/slf4j-log4j12 "1.7.7"]]
   :plugins [[lein-midje "3.1.1"]
             [com.jakemccrary/lein-test-refresh "0.8.0"]]

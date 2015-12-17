@@ -5,9 +5,9 @@
        :cljs [schema.core :as s :refer [EnumSchema]]))
   #?(:clj (:import (schema.core EnumSchema))))
 
-(def Vuodet (s/both s/Int (s/pred #(>= % 0) 'equal-or-greater-than-zero)))
+(def Vuodet (s/constrained s/Int #(>= % 0) 'equal-or-greater-than-zero))
 
-(def NonEmptyStr (s/both s/Str (s/pred #(not (string/blank? %)) 'non-empty-string)))
+(def NonEmptyStr (s/constrained s/Str #(not (string/blank? %)) 'non-empty-string))
 
 (def Salassapitoaika {:type :salassapitoaika
                       :schema Vuodet})
