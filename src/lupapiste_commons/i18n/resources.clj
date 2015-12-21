@@ -31,6 +31,21 @@
        (map nil->empty-str)
        (cons (write-key key))))
 
+(defn sheet->map [^org.apache.poi.xssf.usermodel.XSSFSheet excel-sheet]
+  (let [languages (->> excel-sheet
+                       first
+                       xls/read-row
+                       rest
+                       (map (comp keyword s/trim)))
+        rows (->> (map xls/read-row excel-sheet)
+                  rest
+                  (map #(map s/trim %)))]
+    {:languages (vec languages)
+     :translations (reduce (fn [acc [key & values]]
+                             (assoc acc (read-key key) (zipmap languages values)))
+                           (ordered-map)
+                           (filter #(not (empty? (first %))) rows))}))
+
 (defn excel->map [excel-file]
   (with-open [in (io/input-stream excel-file)]
     (let [workbook (xls/load-workbook in)
