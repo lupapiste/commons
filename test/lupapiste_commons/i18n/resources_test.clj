@@ -35,3 +35,10 @@
            'label))
     (is (= (ffirst (:translations (missing-translations source-text-changed)))
            'label))))
+
+(deftest write-key-test
+  (let [loc-key (symbol "application/rtf")]
+    (is (= (write-key loc-key) "application/rtf") "'Namespace' should not be stripped off")
+    (is (= (write-key (with-meta loc-key {:source-changed true}))
+           "application/rtf!")
+        "When source is changed, '!' is added to key")))
