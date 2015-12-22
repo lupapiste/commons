@@ -12,7 +12,7 @@
   (:source-changed (meta sym)))
 
 (defn write-key [sym]
-  (cond-> (name sym)
+  (cond-> (str sym)
     (source-changed? sym) (str "!")))
 
 (defn read-key [string]
