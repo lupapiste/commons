@@ -1,8 +1,11 @@
 (ns lupapiste-commons.tos-metadata-schema
   (:require [clojure.string :as string]
             [lupapiste-commons.shared-utils :refer [dissoc-in]]
-    #?(:clj [schema.core :as s]
-       :cljs [schema.core :as s :refer [EnumSchema]]))
+            [lupapiste-commons.schema-utils :as schema-utils]
+    #?(:clj
+            [schema.core :as s]
+       :cljs [schema.core :as s :refer [EnumSchema]])
+            [lupapiste-commons.schema-utils :as schema-utils])
   #?(:clj (:import (schema.core EnumSchema))))
 
 (def Vuodet (s/constrained s/Int #(>= % 0) 'equal-or-greater-than-zero))
@@ -131,26 +134,8 @@
 (def asiakirja-metadata-fields
   [Tila Myyntipalvelu Nakyvyys])
 
-(defn- get-in-metadata-map [map ks]
-  (let [k (first ks)
-        value (get map k (get map (s/optional-key k)))]
-    (if (and (map? value) (next ks))
-      (get-in-metadata-map value (next ks))
-      value)))
-
-(defn- convert-value-to-schema-type [ks v]
-  (when-let [schema (get-in-metadata-map AsiakirjaMetaDataMap ks)]
-    (if (= EnumSchema (type schema)) (keyword v) v)))
-
 (defn coerce-metadata-to-schema
   ([m]
    (coerce-metadata-to-schema m []))
   ([m ks]
-   (->> m
-        (map (fn [[k v]] (let [new-k (keyword k)
-                               new-ks (conj ks new-k)
-                               new-v (if (map? v)
-                                       (coerce-metadata-to-schema v new-ks)
-                                       (convert-value-to-schema-type new-ks v))]
-                           [new-k new-v])))
-        (into {}))))
+   (schema-utils/coerce-metadata-to-schema AsiakirjaMetaDataMap m ks)))
