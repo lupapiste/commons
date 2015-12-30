@@ -1,12 +1,7 @@
 (ns lupapiste-commons.tos-metadata-schema
   (:require [clojure.string :as string]
             [lupapiste-commons.shared-utils :refer [dissoc-in]]
-            [lupapiste-commons.schema-utils :as schema-utils]
-    #?(:clj
-            [schema.core :as s]
-       :cljs [schema.core :as s :refer [EnumSchema]])
-            [lupapiste-commons.schema-utils :as schema-utils])
-  #?(:clj (:import (schema.core EnumSchema))))
+            [schema.core :as s]))
 
 (def Vuodet (s/constrained s/Int #(>= % 0) 'equal-or-greater-than-zero))
 
@@ -133,9 +128,3 @@
 
 (def asiakirja-metadata-fields
   [Tila Myyntipalvelu Nakyvyys])
-
-(defn coerce-metadata-to-schema
-  ([m]
-   (coerce-metadata-to-schema m []))
-  ([m ks]
-   (schema-utils/coerce-metadata-to-schema AsiakirjaMetaDataMap m ks)))

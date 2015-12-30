@@ -1,6 +1,7 @@
-(ns lupapiste-commons.tos-metadata-schema-test
+(ns lupapiste-commons.schema-utils-test
   (:require [clojure.test :refer :all]
-            [lupapiste-commons.tos-metadata-schema :as tms]))
+            [lupapiste-commons.tos-metadata-schema :as tms]
+            [lupapiste-commons.schema-utils :as schema-utils]))
 
 (def sample-metadata
   {"henkilotiedot" "ei-sisalla", "julkisuusluokka" "salainen",
@@ -9,5 +10,5 @@
    "tila" "luonnos", "myyntipalvelu" true, "nakyvyys" "julkinen"})
 
 (deftest coercion-to-schema-works
-  (let [coerced (tms/coerce-metadata-to-schema sample-metadata)]
+  (let [coerced (schema-utils/coerce-metadata-to-schema tms/AsiakirjaMetaDataMap sample-metadata)]
     (is (= :lupapäätöspäivä (get-in coerced [:sailytysaika :laskentaperuste])))))
