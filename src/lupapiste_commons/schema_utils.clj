@@ -11,7 +11,7 @@
       value)))
 
 (defn- parse-iso-8601-date [date-str]
-  (let [format (SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss.SSSZ")]
+  (let [format (SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ssXXX")]
     (.parse format date-str)))
 
 (defn- parse-string-value [schema v]
