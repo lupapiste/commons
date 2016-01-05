@@ -5,7 +5,7 @@
 (def full-document-metadata
   (merge
     ;; The keys that are shared with lupapiste are generally in English
-    {:type (s/if map? {:type-group s/Str :type-id s/Str} s/Str)
+    {:type s/Str
      (s/optional-key :contents) s/Str
      (s/optional-key :size) s/Str
      (s/optional-key :scale) s/Str
