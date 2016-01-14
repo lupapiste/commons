@@ -63,6 +63,9 @@
 (def Nakyvyys {:type :nakyvyys
                :values [:julkinen :viranomainen :asiakas-ja-viranomainen]})
 
+(def Kieli {:type :kieli
+            :values [:fi :sv :en]})
+
 (defn attr-map->schema-pair [attr-map]
   (if-let [schema (cond
                     (:schema attr-map) (:schema attr-map)
@@ -95,7 +98,8 @@
    (s/optional-key :kayttajaryhma) (apply s/enum (:values Kayttajaryhma))
    (s/optional-key :kayttajaryhmakuvaus) (apply s/enum (:values Kayttajaryhmakuvaus))
    :sailytysaika (:sailytysaika (ui-desc->schema-map SailytysAika))
-   :henkilotiedot (apply s/enum (:values Henkilotiedot))})
+   :henkilotiedot (apply s/enum (:values Henkilotiedot))
+   :kieli (apply s/enum (:values Kieli))})
 
 (def AsiakirjaMetaDataMap
   (merge MetaDataMap {:tila (apply s/enum (:values Tila))
@@ -132,7 +136,7 @@
                   true                                             (remove-unrecognized-keys schema)))))
 
 (def common-metadata-fields
-  [Julkisuusluokka Henkilotiedot SailytysAika])
+  [Julkisuusluokka Henkilotiedot Kieli SailytysAika])
 
 (def asiakirja-metadata-fields
   [Tila Myyntipalvelu Nakyvyys])
