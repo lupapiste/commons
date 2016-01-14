@@ -112,7 +112,8 @@
                   :perustelu ""
                   :laskentaperuste (first laskentaperuste)
                   :pituus 0}
-   :henkilotiedot :ei-sisalla})
+   :henkilotiedot :ei-sisalla
+   :kieli :fi})
 
 (def asiakirja-default-metadata
   (merge default-metadata {:tila :luonnos
