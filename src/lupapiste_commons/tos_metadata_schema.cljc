@@ -23,10 +23,16 @@
 (def Suojaustaso {:type :suojaustaso
                   :values [:ei-luokiteltu :suojaustaso4 :suojaustaso3 :suojaustaso2 :suojaustaso1]})
 
+(def Kayttajaryhma {:type :kayttajaryhma
+                    :values [:viranomaisryhma :lausunnonantajaryhma]})
+
+(def Kayttajaryhmakuvaus {:type :kayttajaryhmakuvaus
+                         :values [:muokkausoikeus :lukuoikeus]})
+
 (def Julkisuusluokka {:type :julkisuusluokka
                       :values [:julkinen :osittain-salassapidettava :salainen]
-                      :dependencies {:osittain-salassapidettava [Salassapitoaika Salassapitoperuste Suojaustaso Turvallisuusluokka]
-                                     :salainen [Salassapitoaika Salassapitoperuste Suojaustaso Turvallisuusluokka]}})
+                      :dependencies {:osittain-salassapidettava [Salassapitoaika Salassapitoperuste Suojaustaso Turvallisuusluokka Kayttajaryhma Kayttajaryhmakuvaus]
+                                     :salainen [Salassapitoaika Salassapitoperuste Suojaustaso Turvallisuusluokka Kayttajaryhma Kayttajaryhmakuvaus]}})
 
 (def arkistointi [:ei :ikuisesti :määräajan :toistaiseksi])
 (def laskentaperuste [:lupapäätöspäivä
@@ -86,6 +92,8 @@
    (s/optional-key :salassapitoperuste) (:schema Salassapitoperuste)
    (s/optional-key :turvallisuusluokka) (apply s/enum (:values Turvallisuusluokka))
    (s/optional-key :suojaustaso) (apply s/enum (:values Suojaustaso))
+   (s/optional-key :kayttajaryhma) (apply s/enum (:values Kayttajaryhma))
+   (s/optional-key :kayttajaryhmakuvaus) (apply s/enum (:values Kayttajaryhmakuvaus))
    :sailytysaika (:sailytysaika (ui-desc->schema-map SailytysAika))
    :henkilotiedot (apply s/enum (:values Henkilotiedot))})
 
