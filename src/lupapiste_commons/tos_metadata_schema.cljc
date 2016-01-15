@@ -133,7 +133,7 @@
                 (cond-> metadata
                   (not= (:arkistointi sailytysaika) :määräajan)    (dissoc-in [:sailytysaika :pituus])
                   (not= (:arkistointi sailytysaika) :toistaiseksi) (dissoc-in [:sailytysaika :laskentaperuste])
-                  (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso)
+                  (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso :kayttajaryhma :kayttajaryhmakuvaus)
                   true                                             (remove-unrecognized-keys schema)))))
 
 (def common-metadata-fields
