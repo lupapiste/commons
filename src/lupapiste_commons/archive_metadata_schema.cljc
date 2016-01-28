@@ -34,7 +34,5 @@
      (s/optional-key :suunnittelija) s/Str
      :kieli s/Str
      :versio s/Str
-     (s/optional-key :kylanumero) s/Str
-     (s/optional-key :retention-period-end) s/Inst
-     (s/optional-key :security-period-end) s/Inst}
+     (s/optional-key :kylanumero) s/Str}
     tms/AsiakirjaMetaDataMap))

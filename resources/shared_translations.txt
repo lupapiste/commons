@@ -2732,3 +2732,7 @@
 "sv" "sv" "Svenska"
 "en" "fi" "Englanti"
 "en" "sv" "Engelska"
+"retention-period-end" "fi" "Säilytysajan päättymisajankohta"
+"retention-period-end" "sv" ""
+"security-period-end" "fi" "Salassapidon päättymisajankohta"
+"security-period-end" "sv" ""
