@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.6.3"
+(defproject lupapiste/commons "0.6.4"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "Eclipse Public License"
@@ -14,11 +14,11 @@
                  [com.taoensso/timbre "4.2.1"]
                  [org.clojure/tools.nrepl "0.2.12"]
                  [prismatic/schema "1.0.4"]
-                 [org.slf4j/slf4j-log4j12 "1.7.14"]]
+                 [org.slf4j/slf4j-log4j12 "1.7.14"]
+                 [org.apache.pdfbox/pdfbox "1.8.11"]]
   :plugins [[com.jakemccrary/lein-test-refresh "0.8.0"]]
 
   :profiles {:dev {:dependencies [[flare "0.2.9"]]
                    :injections [(require 'flare.clojure-test)
                                 (flare.clojure-test/install!)]}}
-  :cljsbuild {:builds {:dev {:source-paths ["src"]}}}
-)
+  :cljsbuild {:builds {:dev {:source-paths ["src"]}}})
