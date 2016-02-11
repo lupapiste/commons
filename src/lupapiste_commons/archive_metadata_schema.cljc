@@ -19,7 +19,8 @@
      :address s/Str
      :organization s/Str
      :municipality s/Str
-     (s/optional-key :location) [s/Num]  ;; Coordinates
+     (s/optional-key :location-etrs-tm35fin) [s/Num]  ;; Coordinates
+     (s/optional-key :location-wgs84) [s/Num]  ;; Coordinates
      (s/optional-key :postinumero) s/Str
      :kuntalupatunnukset [s/Str]
      :lupapvm s/Inst
@@ -32,5 +33,6 @@
      :kayttotarkoitukset [s/Str]
      (s/optional-key :suunnittelija) s/Str
      :kieli s/Str
-     :versio s/Str}
+     :versio s/Str
+     (s/optional-key :kylanumero) s/Str}
     tms/AsiakirjaMetaDataMap))

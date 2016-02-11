@@ -27,12 +27,18 @@
                     :values [:viranomaisryhma :lausunnonantajaryhma]})
 
 (def Kayttajaryhmakuvaus {:type :kayttajaryhmakuvaus
-                         :values [:muokkausoikeus :lukuoikeus]})
+                          :values [:muokkausoikeus :lukuoikeus]})
+
+(def SalassapidonPaattymisajankohta {:type :security-period-end
+                                     :schema s/Inst
+                                     :calculated true})
+
+(def Salassapitotiedot [Salassapitoaika SalassapidonPaattymisajankohta Salassapitoperuste Suojaustaso Turvallisuusluokka Kayttajaryhma Kayttajaryhmakuvaus])
 
 (def Julkisuusluokka {:type :julkisuusluokka
                       :values [:julkinen :osittain-salassapidettava :salainen]
-                      :dependencies {:osittain-salassapidettava [Salassapitoaika Salassapitoperuste Suojaustaso Turvallisuusluokka Kayttajaryhma Kayttajaryhmakuvaus]
-                                     :salainen [Salassapitoaika Salassapitoperuste Suojaustaso Turvallisuusluokka Kayttajaryhma Kayttajaryhmakuvaus]}})
+                      :dependencies {:osittain-salassapidettava Salassapitotiedot
+                                     :salainen Salassapitotiedot}})
 
 (def arkistointi [:ei :ikuisesti :määräajan :toistaiseksi])
 (def laskentaperuste [:lupapäätöspäivä
@@ -46,7 +52,8 @@
                    :require-role :archivist
                    :subfields [{:type :arkistointi
                                 :values arkistointi
-                                :dependencies {:määräajan [{:type :pituus :schema Vuodet}]
+                                :dependencies {:määräajan [{:type :pituus :schema Vuodet}
+                                                           {:type :retention-period-end :schema s/Inst :calculated true}]
                                                :toistaiseksi [{:type :laskentaperuste :values laskentaperuste}]}}
                                {:type :perustelu :schema NonEmptyStr}]})
 
@@ -87,11 +94,12 @@
                                       (into {})
                                       (hash-map (:type desc-map))))
     (or (:schema desc-map) (:values desc-map)) (merge (attr-map->schema-pair desc-map))
-    true (dissoc :type :schema :values :subfields :dependencies :require-role)))
+    true (dissoc :type :schema :values :subfields :dependencies :require-role :calculated)))
 
 (def MetaDataMap
   {:julkisuusluokka (apply s/enum (:values Julkisuusluokka))
    (s/optional-key :salassapitoaika) (:schema Salassapitoaika)
+   (s/optional-key :security-period-end) (:schema SalassapidonPaattymisajankohta)
    (s/optional-key :salassapitoperuste) (:schema Salassapitoperuste)
    (s/optional-key :turvallisuusluokka) (apply s/enum (:values Turvallisuusluokka))
    (s/optional-key :suojaustaso) (apply s/enum (:values Suojaustaso))
@@ -133,7 +141,7 @@
                 (cond-> metadata
                   (not= (:arkistointi sailytysaika) :määräajan)    (dissoc-in [:sailytysaika :pituus])
                   (not= (:arkistointi sailytysaika) :toistaiseksi) (dissoc-in [:sailytysaika :laskentaperuste])
-                  (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso :kayttajaryhma :kayttajaryhmakuvaus)
+                  (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso :kayttajaryhma :kayttajaryhmakuvaus :security-period-end)
                   true                                             (remove-unrecognized-keys schema)))))
 
 (def common-metadata-fields
