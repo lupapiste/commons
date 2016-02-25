@@ -31,7 +31,7 @@
      (s/optional-key :arkistoija) {(s/optional-key :username) s/Str (s/optional-key :firstName) s/Str :lastName s/Str}
      :arkistointipvm s/Inst
      :kayttotarkoitukset [s/Str]
-     (s/optional-key :suunnittelija) s/Str
+     (s/optional-key :suunnittelijat) [s/Str]
      :kieli s/Str
      :versio s/Str
      (s/optional-key :kylanumero) s/Str}
