@@ -1,7 +1,7 @@
 (ns lupapiste-commons.schema-utils
   (:require [schema.core :as s])
   (:import (schema.core EnumSchema)
-           (java.text SimpleDateFormat)))
+           (java.text SimpleDateFormat ParseException)))
 
 (defn- get-in-metadata-map [map ks]
   (let [k (first ks)
@@ -11,8 +11,11 @@
       value)))
 
 (defn- parse-iso-8601-date [date-str]
-  (let [format (SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ssXXX")]
-    (.parse format date-str)))
+  (let [format (SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ssXXX")
+        format2 (SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")]
+    (try (.parse format date-str)
+         (catch ParseException _
+           (.parse format2 date-str)))))
 
 (defn- parse-string-value [schema v]
   (cond
