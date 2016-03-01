@@ -135,14 +135,19 @@
          (filter (fn [[k _]] (known-keys k)))
          (into {}))))
 
+(defn remove-conditional-keys [{:keys [sailytysaika julkisuusluokka] :as metadata}]
+  (cond-> metadata
+          (not= (:arkistointi sailytysaika) :määräajan)    (dissoc-in [:sailytysaika :pituus])
+          (not= (:arkistointi sailytysaika) :määräajan)    (dissoc-in [:sailytysaika :retention-period-end])
+          (not= (:arkistointi sailytysaika) :toistaiseksi) (dissoc-in [:sailytysaika :laskentaperuste])
+          (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso :kayttajaryhma :kayttajaryhmakuvaus :security-period-end)))
+
 (defn sanitize-metadata [{:keys [sailytysaika julkisuusluokka] :as metadata}]
   (let [schema (if (:tila metadata) AsiakirjaMetaDataMap MetaDataMap)]
     (s/validate schema
-                (cond-> metadata
-                  (not= (:arkistointi sailytysaika) :määräajan)    (dissoc-in [:sailytysaika :pituus])
-                  (not= (:arkistointi sailytysaika) :toistaiseksi) (dissoc-in [:sailytysaika :laskentaperuste])
-                  (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso :kayttajaryhma :kayttajaryhmakuvaus :security-period-end)
-                  true                                             (remove-unrecognized-keys schema)))))
+                (-> metadata
+                    (remove-conditional-keys)
+                    (remove-unrecognized-keys schema)))))
 
 (def common-metadata-fields
   [Julkisuusluokka Henkilotiedot Kieli SailytysAika])
