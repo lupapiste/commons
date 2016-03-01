@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.7.1"
+(defproject lupapiste/commons "0.7.2"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "Eclipse Public License"
@@ -15,10 +15,14 @@
                  [org.clojure/tools.nrepl "0.2.12"]
                  [prismatic/schema "1.0.4"]
                  [org.slf4j/slf4j-log4j12 "1.7.14"]
-                 [org.apache.pdfbox/pdfbox "1.8.11"]]
+                 [org.apache.pdfbox/pdfbox "2.0.0-RC3"]
+                 [org.apache.pdfbox/pdfbox-tools "2.0.0-RC3"]
+                 [com.levigo.jbig2/levigo-jbig2-imageio "1.6.3"]]
   :plugins [[com.jakemccrary/lein-test-refresh "0.8.0"]]
 
   :profiles {:dev {:dependencies [[flare "0.2.9"]]
                    :injections [(require 'flare.clojure-test)
                                 (flare.clojure-test/install!)]}}
+  :repositories [["com.levigo.jbig2" {:url "http://jbig2-imageio.googlecode.com/svn/maven-repository"
+                                      :snapshots false}]]
   :cljsbuild {:builds {:dev {:source-paths ["src"]}}})

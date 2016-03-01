@@ -17,6 +17,9 @@
 (deftest pdf-to-buffered-image-works
   (is (= (.getWidth (#'preview/pdf-to-buffered-image pdf-1)) 1190)))
 
+#_(deftest pdf-to-buffered-image-file
+  (is (= (io/copy (preview/create-preview pdf-1 "application/pdf") (io/file "/tmp/a.jpg")) )))
+
 (deftest scale-image-works
   (is (= (.getWidth (#'preview/scale-image image-1)) 428)))
 

@@ -1,11 +1,12 @@
 (ns lupapiste-commons.preview
-  (:require [taoensso.timbre :refer [debugf errorf]])
+  (:require [taoensso.timbre :refer [debugf warnf]])
   (:import (org.apache.pdfbox.pdmodel PDDocument)
-           (org.apache.pdfbox.util ImageIOUtil)
+           (org.apache.pdfbox.tools.imageio ImageIOUtil)
            (java.awt.image BufferedImage)
            (java.awt RenderingHints)
            (java.io ByteArrayOutputStream ByteArrayInputStream FileInputStream)
-           (javax.imageio ImageIO)))
+           (javax.imageio ImageIO)
+           (org.apache.pdfbox.rendering PDFRenderer)))
 
 (def rez 600.0)
 
@@ -13,7 +14,7 @@
   "Converts BufferedImage inputStream"
   [image]
   (let [output (ByteArrayOutputStream.)]
-    (ImageIOUtil/writeImage image "jpg" output ImageIOUtil/DEFAULT_SCREEN_RESOLUTION 0.5)
+    (ImageIOUtil/writeImage image "jpg" output 72 0.5)
     (ByteArrayInputStream. (.toByteArray output))))
 
 (defn- scale-image
@@ -40,13 +41,13 @@
 (defn- pdf-to-buffered-image
   "Converts 1. page from PDF to BufferedImage"
   [pdf-input]
-  (with-open [document (PDDocument/load pdf-input)]
-    (.. document getDocumentCatalog getAllPages iterator next convertToImage)))
+  (with-open [document (PDDocument/load (if (= (type pdf-input) String) (FileInputStream. pdf-input) pdf-input))]
+    (.renderImage (PDFRenderer. document) 0 2)))
 
 (defn- raster-to-buffered-image
   "Converts Raster image to BufferedImage"
   [input]
-  (ImageIO/read (if (= (type input) java.lang.String) (FileInputStream. input) input)))
+  (ImageIO/read (if (= (type input) String) (FileInputStream. input) input)))
 
 (defn converter [content-type]
   (cond
@@ -59,7 +60,7 @@
   (try
     (when-let [op (converter content-type)]
       (op content))
-    (catch Exception e (errorf "ERROR: preview to-buffered-image failed to read content type: %s, error: %s" content-type e))))
+    (catch Exception e (warnf "preview to-buffered-image failed to read content type: %s, error: %s" content-type e))))
 
 (defn create-preview
   "Tries to create preview image IF content type can be processed to image by JAI or apache.pdfbox. Retuns nil on fail"
