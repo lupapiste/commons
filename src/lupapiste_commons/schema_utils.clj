@@ -10,7 +10,7 @@
       (get-in-metadata-map value (next ks))
       value)))
 
-(defn- parse-iso-8601-date [date-str]
+(defn parse-iso-8601-date [date-str]
   (let [format (SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ssXXX")
         format2 (SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")]
     (try (.parse format date-str)
