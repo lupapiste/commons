@@ -212,9 +212,7 @@
                                                      :ilmoitus_vaestonsuojasta
                                                      :vaestonsuojasuunnitelma
                                                      :muu_pelastusviranomaisen_suunnitelma]
-   :paatoksenteko [:hakemus
-                   :ilmoitus
-                   :paatos
+   :paatoksenteko [:paatos
                    :paatosote
                    :valitusosoitus
                    :poytakirjaote
