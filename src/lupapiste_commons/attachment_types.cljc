@@ -108,6 +108,135 @@
           :paatos
           :paatosote]])
 
+(def Rakennusluvat-v2
+  [:ennakkoluvat_ja_lausunnot  [:elyn_tai_kunnan_poikkeamapaatos
+                                :naapurin_suostumus
+                                :naapurin_kuuleminen
+                                :naapurin_huomautus
+                                :suunnittelutarveratkaisu
+                                :ymparistolupa
+                                :lausunto
+                                :vesi_ja_viemariliitoslausunto_tai_kartta
+                                :paatos_ajoliittymasta
+                                :johtokartta
+                                :maanalaisten_johtojen_sijaintiselvitys]
+   :hakija [:osakeyhtion_perustamiskirja
+            :ote_asunto_osakeyhtion_hallituksen_kokouksen_poytakirjasta
+            :ote_kauppa_ja_yhdistysrekisterista
+            :valtakirja]
+   :osapuolet [:cv
+               :patevyystodistus
+               :tutkintotodistus
+               :suunnittelijan_tiedot]
+   :paapiirustus [:aitapiirustus
+                  :asemapiirros
+                  :julkisivupiirustus
+                  :leikkauspiirustus
+                  :pohjapiirustus
+                  :muu_paapiirustus]
+   :rakennuspaikan_hallinta [:todistus_hallintaoikeudesta
+                             :ote_yhtiokokouksen_poytakirjasta
+                             :rasitesopimus
+                             :rasitustodistus
+                             :todistus_erityisoikeuden_kirjaamisesta
+                             :kiinteiston_lohkominen
+                             :sopimusjaljennos]
+   :rakennuspaikka [:karttaaineisto
+                    :ote_alueen_peruskartasta
+                    :ote_asemakaavasta_jos_asemakaava_alueella
+                    :ote_kiinteistorekisteristerista
+                    :ote_ranta-asemakaavasta
+                    :ote_yleiskaavasta
+                    :perustamistapalausunto
+                    :pintavaaitus
+                    :rakennusoikeuslaskelma
+                    :tonttikartta_tarvittaessa
+                    :selvitys_rakennuspaikan_korkeusasemasta]
+   :selvitykset [:yhteistilat
+                 :energiataloudellinen_selvitys
+                 :energiatodistus
+                 :haittaaineselvitys
+                 :kokoontumishuoneisto
+                 :kosteudenhallintaselvitys
+                 :laadunvarmistusselvitys
+                 :liikkumis_ja_esteettomyysselvitys
+                 :lomarakennuksen_muutos_asuinrakennukseksi_selvitys_maaraysten_toteutumisesta
+                 :maalampo_porausraportti
+                 :maalampo_rakennettavuusselvitys
+                 :meluselvitys
+                 :rakennukseen_tai_sen_osaan_kohdistuva_kuntotutkimus_jos_korjaus_tai_muutostyo
+                 :selvitys_rakennusjatteen_maarasta_laadusta_ja_lajittelusta
+                 :rakennuttajan_valvojaa_koskeva_selvitys
+                 :rakenteellisen_turvallisuuden_alustava_riskiarvio
+                 :rh_tietolomake
+                 :riskianalyysi
+                 :selvitys_kiinteiston_jatehuollon_jarjestamisesta
+                 :selvitys_liittymisesta_ymparoivaan_rakennuskantaan
+                 :selvitys_rakennuksen_kunnosta
+                 :selvitys_rakennuksen_rakennustaiteellisesta_ja_kulttuurihistoriallisesta_arvosta_jos_korjaus_tai_muutostyo
+                 :selvitys_rakennuksen_terveellisyydesta
+                 :selvitys_rakennuksen_aaniteknisesta_toimivuudesta
+                 :selvitys_rakennuspaikan_perustamis_ja_pohjaolosuhteista
+                 :selvitys_rakennuspaikan_terveellisyydesta
+                 :selvitys_sisailmastotavoitteista_ja_niihin_vaikuttavista_tekijoista
+                 :selvitys_tontin_tai_rakennuspaikan_pintavesien_kasittelysta
+                 :tarinaselvitys
+                 :muu_selvitys]
+   :suunnitelmat [:hankeselvitys
+                  :julkisivujen_varityssuunnitelma
+                  :jatevesijarjestelman_suunnitelma
+                  :selvitys_rakennuksen_kosteusteknisesta_toimivuudesta
+                  :mainoslaitesuunnitelma
+                  :opastesuunnitelma
+                  :piha_tai_istutussuunnitelma
+                  :valaistussuunnitelma
+                  :muu_suunnitelma]
+   :erityissuunnitelmat [:hulevesisuunnitelma
+                         :iv_suunnitelma
+                         :ikkunadetaljit
+                         :kalliorakentamistekninen_suunnitelma
+                         :kvv_suunnitelma
+                         :lammityslaitesuunnitelma
+                         :pohjarakennesuunnitelma
+                         :pohjaveden_hallintasuunnitelma
+                         :radontekninen_suunnitelma
+                         :rakennesuunnitelma
+                         :sahkosuunnitelma]
+   :pelastusviranomaiselle_esitettavat_suunnitelmat [:merkki_ja_turvavalaistussuunnitelma
+                                                     :palotekninen_lausunto
+                                                     :paloturvallisuussuunnitelma
+                                                     :savunpoistosuunnitelma
+                                                     :sammutusautomatiikkasuunnitelma
+                                                     :suunnitelma_paloilmoitinjarjestelmista_ja_koneellisesta_savunpoistosta
+                                                     :turvallisuusselvitys
+                                                     :ilmoitus_vaestonsuojasta
+                                                     :vaestonsuojasuunnitelma
+                                                     :muu_pelastusviranomaisen_suunnitelma]
+   :paatoksenteko [:hakemus
+                   :ilmoitus
+                   :paatos
+                   :paatosote
+                   :valitusosoitus
+                   :poytakirjaote
+                   :muistio]
+   :muutoksenhaku [:huomautus
+                   :valitus
+                   :oikaisuvaatimus]
+   :katselmukset_ja_tarkastukset [:aloituskokouksen_poytakirja
+                                  :katselmuksen_tai_tarkastuksen_poytakirja
+                                  :tarkastusasiakirja
+                                  :tarkastusasiakirjan_yhteeveto]
+   :tietomallit [:rakennuksen_tietomalli_BIM
+                 :ympariston_tietomalli_BIM]
+   :muut [:erityismenettelyasiakirja
+          :luonnos
+          :piirustusluettelo
+          :sijoituslupaasiakirja
+          :suorituskyvyttomyysvakuusasiakirja
+          :tutkimus
+          :valokuva
+          :muu]])
+
 (def YleistenAlueidenLuvat
   [:yleiset-alueet [:aiemmin-hankittu-sijoituspaatos
                     :asemapiirros
