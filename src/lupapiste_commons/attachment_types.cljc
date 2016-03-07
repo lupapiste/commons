@@ -6,6 +6,12 @@
    :paa_ja_rakennussuunnittelijan_tiedot
    :tutkintotodistus])
 
+(def osapuolet-v2
+  [:cv
+   :patevyystodistus
+   :suunnittelijan_tiedot
+   :tutkintotodistus])
+
 (def Rakennusluvat
   [:hakija [:osakeyhtion_perustamiskirja
             :ote_asunto_osakeyhtion_hallituksen_kokouksen_poytakirjasta
@@ -124,10 +130,7 @@
             :ote_asunto_osakeyhtion_hallituksen_kokouksen_poytakirjasta
             :ote_kauppa_ja_yhdistysrekisterista
             :valtakirja]
-   :osapuolet [:cv
-               :patevyystodistus
-               :tutkintotodistus
-               :suunnittelijan_tiedot]
+   :osapuolet osapuolet-v2
    :paapiirustus [:aitapiirustus
                   :asemapiirros
                   :julkisivupiirustus
@@ -249,6 +252,25 @@
                     :valokuva
                     :valtakirja]
    :osapuolet osapuolet
+   ;; This is needed for statement attachments to work.
+   :muut [:muu
+          :paatos
+          :paatosote]])
+
+(def YleistenAlueidenLuvat-v2
+  [:yleiset-alueet [:aiemmin-hankittu-sijoituspaatos
+                    :asemapiirros
+                    :liitoslausunto
+                    :poikkileikkaus
+                    :rakennuspiirros
+                    :suunnitelmakartta
+                    :tieto-kaivupaikkaan-liittyvista-johtotiedoista
+                    :tilapainen-liikennejarjestelysuunnitelma
+                    :tyyppiratkaisu
+                    :tyoalueen-kuvaus
+                    :valokuva
+                    :valtakirja]
+   :osapuolet osapuolet-v2
    ;; This is needed for statement attachments to work.
    :muut [:muu
           :paatos
