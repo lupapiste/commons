@@ -114,6 +114,7 @@
 "attachmentType.paapiirustus.aitapiirustus" "fi" "Aitapiirustus"
 "attachmentType.paapiirustus.aitapiirustus" "sv" "Inhägnadsritning"
 "attachmentType.paapiirustus.asemapiirros" "fi" "Asemapiirros"
+"attachmentType.paapiirustus.asemapiirros" "sv" "Situationsplan"
 "attachmentType.paapiirustus.julkisivupiirustus" "fi" "Julkisivupiirustus"
 "attachmentType.paapiirustus.julkisivupiirustus" "sv" "Fasadritning"
 "attachmentType.paapiirustus.leikkauspiirustus" "fi" "Leikkauspiirustus"
