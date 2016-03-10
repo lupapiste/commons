@@ -5,21 +5,22 @@
           Key is the starting state, first in the value vector is the default next state and
           the rest are other possible next states."}
   default-application-state-graph
-  {:draft      [:open :submitted :canceled]
-   :open       [:submitted :canceled]
-   :submitted  [:sent :verdictGiven :canceled]
-   :sent       [:verdictGiven :complementNeeded :canceled]
-   :complementNeeded   [:sent :verdictGiven :canceled]
-   :verdictGiven        [:constructionStarted :closed :extinct :canceled]
+  {:draft               [:open :submitted :canceled]
+   :open                [:submitted :canceled]
+   :submitted           [:sent :verdictGiven :canceled]
+   :sent                [:verdictGiven :complementNeeded :canceled]
+   :complementNeeded    [:sent :verdictGiven :canceled]
+   :verdictGiven        [:constructionStarted :closed :extinct :canceled :appealed]
    :constructionStarted [:closed :extinct]
-   :closed   []
-   :canceled []
-   :extinct  [] ; Rauennut
+   :closed              []
+   :canceled            []
+   :extinct             [] ; Rauennut
+   :appealed            [:verdictGiven :canceled]
    })
 
 (def full-application-state-graph
   (assoc default-application-state-graph
-         :verdictGiven        [:constructionStarted :inUse :onHold :closed :extinct :canceled]
+         :verdictGiven        [:constructionStarted :inUse :onHold :closed :extinct :canceled :appealed]
          :constructionStarted [:inUse :onHold :closed :extinct]
-         :inUse    [:closed :onHold :extinct]
-         :onHold   [:closed :constructionStarted :inUse :extinct]))
+         :inUse               [:closed :onHold :extinct]
+         :onHold              [:closed :constructionStarted :inUse :extinct]))
