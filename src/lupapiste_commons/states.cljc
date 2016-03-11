@@ -10,7 +10,7 @@
    :submitted           [:sent :verdictGiven :canceled]
    :sent                [:verdictGiven :complementNeeded :canceled]
    :complementNeeded    [:sent :verdictGiven :canceled]
-   :verdictGiven        [:constructionStarted :closed :extinct :canceled :appealed]
+   :verdictGiven        [:constructionStarted :appealed :closed :extinct :canceled]
    :constructionStarted [:closed :extinct]
    :closed              []
    :canceled            []
@@ -20,7 +20,7 @@
 
 (def full-application-state-graph
   (assoc default-application-state-graph
-         :verdictGiven        [:constructionStarted :inUse :onHold :closed :extinct :canceled :appealed]
+         :verdictGiven        [:constructionStarted :inUse :onHold :appealed :closed :extinct :canceled]
          :constructionStarted [:inUse :onHold :closed :extinct]
          :inUse               [:closed :onHold :extinct]
          :onHold              [:closed :constructionStarted :inUse :extinct]))

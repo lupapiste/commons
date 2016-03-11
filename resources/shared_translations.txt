@@ -2844,6 +2844,8 @@
 "canceled" "sv" "Avbrutet"
 "extinct" "fi" "Rauennut"
 "extinct" "sv" "Har gått ut"
+"extinct.title" "fi" ""
+"extinct.title" "sv" ""
 "ei-valittu" "fi" "Ei valittu"
 "ei-valittu" "sv" ""
 "acknowledged" "fi" "Ilmoitus hyväksytty"
