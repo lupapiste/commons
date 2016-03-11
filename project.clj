@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.7.8"
+(defproject lupapiste/commons "0.7.9"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "Eclipse Public License"
@@ -17,7 +17,8 @@
                  [org.slf4j/slf4j-log4j12 "1.7.14"]
                  [org.apache.pdfbox/pdfbox "2.0.0-RC3"]
                  [org.apache.pdfbox/pdfbox-tools "2.0.0-RC3"]
-                 [com.levigo.jbig2/levigo-jbig2-imageio "1.6.3"]]
+                 [com.levigo.jbig2/levigo-jbig2-imageio "1.6.3"]
+                 [com.github.jai-imageio/jai-imageio-core "1.3.1"]]
   :plugins [[com.jakemccrary/lein-test-refresh "0.8.0"]]
 
   :profiles {:dev {:dependencies [[flare "0.2.9"]]
