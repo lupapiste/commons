@@ -90,6 +90,7 @@
 "attachmentType.ennakkoluvat_ja_lausunnot.ymparistolupa" "fi" "Ympäristölupapäätös"
 "attachmentType.ennakkoluvat_ja_lausunnot.ymparistolupa" "sv" "Miljötillståndsbeslut"
 "attachmentType.ennakkoluvat_ja_lausunnot.lausunto" "fi" "Lausunto"
+"attachmentType.ennakkoluvat_ja_lausunnot.ennakkoneuvottelumuistio" "fi" "Ennakkoneuvottelumuistio"
 "attachmentType.ennakkoluvat_ja_lausunnot.vesi_ja_viemariliitoslausunto_tai_kartta" "fi" "Vesi- ja viemäriliitoslausunto tai -kartta"
 "attachmentType.ennakkoluvat_ja_lausunnot.paatos_ajoliittymasta" "fi" "Päätös ajoliittymästä (ELY)"
 "attachmentType.ennakkoluvat_ja_lausunnot.johtokartta" "fi" "Johtokartta"
