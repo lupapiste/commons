@@ -154,3 +154,33 @@
 
 (def asiakirja-metadata-fields
   [Tila Myyntipalvelu Nakyvyys])
+
+(defn sailytysaika-to-s2-xml [{:keys [arkistointi] :as sailytysaika}]
+  (let [replacement-map {:pituus :RetentionPeriod
+                         :retention-period-end :RetentionPeriodEnd
+                         :perustelu :RetentionReason}]
+    (cond-> (->> (map (fn [[k v]] [(get replacement-map k k) v]) sailytysaika)
+                 (into {}))
+            (#{:ikuisesti :toistaiseksi} (keyword arkistointi)) (assoc :RetentionPeriod 999999))))
+
+(def lp-to-s2-xml-key-map
+  {:tila :Status
+   :henkilotiedot :Restriction.PersonalData
+   :julkisuusluokka :Restriction.PublicityClass
+   :salassapitoaika :Restriction.SecurityPeriod
+   :security-period-end :Restriction.SecurityPeriodEnd
+   :suojaustaso :Restriction.Protectionlevel
+   :kayttajaryhma :Restriction.AccessRight.Role
+   :kayttajaryhmakuvaus :Restriction.AccessRight.Description
+   :turvallisuusluokka :Restriction.SecurityClass
+   :salassapitoperuste :Restriction.SecurityReason
+   :tosFunction :Function
+   :kieli :Language})
+
+(defn replace-metadata-keys-with-s2-xml-keys [metadata]
+  (->> metadata
+       (map (fn [[k v]]
+              (if (= :sailytysaika k)
+                (sailytysaika-to-s2-xml v)
+                [(get lp-to-s2-xml-key-map k k) v])))
+       (into {})))

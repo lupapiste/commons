@@ -1,10 +1,11 @@
 (ns lupapiste-commons.preview
-  (:require [taoensso.timbre :refer [debugf warnf]])
+  (:require [taoensso.timbre :refer [debugf warnf]]
+            [clojure.java.io :as io])
   (:import (org.apache.pdfbox.pdmodel PDDocument)
            (org.apache.pdfbox.tools.imageio ImageIOUtil)
            (java.awt.image BufferedImage)
            (java.awt RenderingHints)
-           (java.io ByteArrayOutputStream ByteArrayInputStream FileInputStream)
+           (java.io ByteArrayOutputStream ByteArrayInputStream FileInputStream File)
            (javax.imageio ImageIO)
            (org.apache.pdfbox.rendering PDFRenderer)))
 
@@ -47,7 +48,7 @@
 (defn- raster-to-buffered-image
   "Converts Raster image to BufferedImage"
   [input]
-  (ImageIO/read (if (= (type input) String) (FileInputStream. input) input)))
+  (ImageIO/read ^File (io/as-file input)))
 
 (defn converter [content-type]
   (cond

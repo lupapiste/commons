@@ -6,7 +6,9 @@
             [clojure.edn :as edn])
   (:import [org.apache.poi.xssf.usermodel XSSFWorkbook]
            [org.apache.poi.ss.usermodel Font]
-           [java.io PushbackReader StringReader]))
+           [java.io PushbackReader StringReader]
+           [java.util Date]
+           [java.text SimpleDateFormat]))
 
 (defn source-changed? [sym]
   (:source-changed (meta sym)))
@@ -128,3 +130,18 @@
                (some empty? (vals strings))  (assoc key {:fi fi})))
            (ordered-map)
            translations)})
+
+(defn missing-localizations-excel
+  "Writes missing shared localizations to excel file.
+   If excel file is not provided, will create the file to user home dir."
+  ([]
+   (let [date-str (.format (SimpleDateFormat. "yyyyMMdd") (Date.))
+         filename (str (System/getProperty "user.home")
+                       "/lupapiste_commons_translations_"
+                       date-str
+                       ".xlsx")]
+     (missing-localizations-excel (io/file filename))))
+  ([file]
+   (write-excel
+     (missing-translations (txt->map "resources/shared_translations.txt"))
+     file)))
