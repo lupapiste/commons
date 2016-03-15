@@ -5,7 +5,7 @@
            (org.apache.pdfbox.tools.imageio ImageIOUtil)
            (java.awt.image BufferedImage)
            (java.awt RenderingHints)
-           (java.io ByteArrayOutputStream ByteArrayInputStream FileInputStream File)
+           (java.io ByteArrayOutputStream ByteArrayInputStream FileInputStream File InputStream)
            (javax.imageio ImageIO)
            (org.apache.pdfbox.rendering PDFRenderer)))
 
@@ -48,7 +48,7 @@
 (defn- raster-to-buffered-image
   "Converts Raster image to BufferedImage"
   [input]
-  (ImageIO/read ^File (io/as-file input)))
+  (ImageIO/read ^InputStream (io/input-stream input)))
 
 (defn converter [content-type]
   (cond
