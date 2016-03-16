@@ -62,7 +62,7 @@
    :values [:ei-sisalla :sisaltaa :sisaltaa-arkaluonteisia]})
 
 (def Tila {:type :tila
-           :values [:luonnos :valmis :arkistoitu]})
+           :values [:luonnos :valmis :arkistoidaan :arkistoitu]})
 
 (def Myyntipalvelu {:type :myyntipalvelu
                     :schema s/Bool})
