@@ -34,5 +34,7 @@
      (s/optional-key :suunnittelijat) [s/Str]
      :kieli s/Str
      :versio s/Str
-     (s/optional-key :kylanumero) s/Str}
+     (s/optional-key :kylanumero) s/Str
+     (s/optional-key :kylanimi) {:fi s/Str
+                                 :sv s/Str}}
     tms/AsiakirjaMetaDataMap))
