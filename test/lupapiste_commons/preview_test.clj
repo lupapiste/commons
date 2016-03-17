@@ -29,3 +29,10 @@
 
 (deftest pdf-to-buffered-image-works-with-jbig2
   (is (= (.getWidth (#'preview/pdf-to-buffered-image "dev-resources/jbig2.pdf")) 450)))
+
+;(io/copy (#'preview/create-preview "dev-resources/jbig2.pdf" "application/pdf") (io/file "target/jbig2-preview.jpg"))
+
+(deftest pdf-to-buffered-image-works-with-jpeg2000
+  (is (= (.getWidth (#'preview/pdf-to-buffered-image "dev-resources/jpeg2000.pdf")) 450)))
+
+;(io/copy (#'preview/create-preview "dev-resources/jpeg2000.pdf" "application/pdf") (io/file "target/jpeg2000-preview.jpg"))
