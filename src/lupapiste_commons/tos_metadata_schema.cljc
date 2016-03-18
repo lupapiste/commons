@@ -41,9 +41,7 @@
                                      :salainen Salassapitotiedot}})
 
 (def arkistointi [:ei :ikuisesti :määräajan :toistaiseksi])
-(def laskentaperuste [:lupapäätöspäivä
-                      :päätöksen_lainvoimaisuuspäivä
-                      :rakennuksen_purkamispäivä
+(def laskentaperuste [:rakennuksen_purkamispäivä
                       :vakuuksien_voimassaoloaika])
 
 (def sailytysaika-perustelu-suggestions [:custom-justification :al-11665 :kuntaliitto-14a :kuntaliitto-1-s1 :oma-tarve])
