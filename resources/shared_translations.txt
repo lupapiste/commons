@@ -3234,3 +3234,5 @@
 "vuotta" "sv" "år"
 "yes" "fi" "Kyllä"
 "yes" "sv" "Ja"
+"case-file" "fi" "Käsittelyprosessi"
+"case-file" "sv" "Behandlingsprocessen"
