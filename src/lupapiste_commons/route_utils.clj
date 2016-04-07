@@ -16,7 +16,7 @@
             response {:status 200
                       :body replaced-html
                       :headers {"Content-Type" "text/html"
-                                "Content-Length" (count replaced-html)
+                                "Content-Length" (str (count replaced-html))
                                 "Cache-Control" "no-cache, no-store, must-revalidate"
                                 "Pragma" "no-cache"
                                 "Expires" "0"}}]
