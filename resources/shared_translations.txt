@@ -380,6 +380,8 @@
 "attachmentType.muut.paatos" "sv" "Beslut"
 "attachmentType.muut.paatos.info" "fi" "Viranomaisen päätös"
 "attachmentType.muut.paatos.info" "sv" "Myndighetsbeslut"
+"attachmentType.muut.lupaehto" "fi" "Lupaehto"
+"attachmentType.muut.lupaehto" "sv" "Tillståndsvillkor"
 "attachmentType.muut.paatosote" "fi" "Päätösote"
 "attachmentType.muut.paatosote" "sv" "Beslutsutdrag"
 "attachmentType.muut.paatosote.info" "fi" "Ote viranomaisen päätöksestä"

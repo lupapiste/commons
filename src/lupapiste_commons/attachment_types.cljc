@@ -256,7 +256,8 @@
    ;; This is needed for statement attachments to work.
    :muut [:muu
           :paatos
-          :paatosote]])
+          :paatosote
+          :lupaehto]])
 
 (def YleistenAlueidenLuvat-v2
   [:yleiset-alueet [:aiemmin-hankittu-sijoituspaatos
@@ -275,7 +276,8 @@
    ;; This is needed for statement attachments to work.
    :muut [:muu
           :paatos
-          :paatosote]])
+          :paatosote
+          :lupaehto]])
 
 (def Ymparistoilmoitukset
   [:kartat [:kartta-melun-ja-tarinan-leviamisesta]
