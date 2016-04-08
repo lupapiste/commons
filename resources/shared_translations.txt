@@ -3240,3 +3240,5 @@
 "yes" "sv" "Ja"
 "case-file" "fi" "Käsittelyprosessi"
 "case-file" "sv" "Behandlingsprocessen"
+"appealed" "fi" "Muutoksenhaussa"
+"appealed" "sv" "I ändringssökan"
