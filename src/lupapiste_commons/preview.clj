@@ -63,10 +63,18 @@
       (op content))
     (catch Exception e (warnf "preview to-buffered-image failed to read content type: %s, error: %s" content-type e))))
 
+(defn- size-ok? [image content-type]
+  (if (and (< (.getWidth image) 45000) (< (.getHeight image) 45000))
+    true
+    (do
+      (warnf "Image type [%s] size (%d x %d) is too big for preview [byte array length exceeds MAX_INTEGER]" content-type (.getWidth image) (.getHeight image))
+      false)))
+
 (defn create-preview
   "Tries to create preview image IF content type can be processed to image by JAI or apache.pdfbox. Retuns nil on fail"
   [content content-type]
   (when-let [image (to-buffered-image content content-type)]
-    (buffered-image-to-input-stream (scale-image image))))
+    (when (size-ok? image content-type)
+      (buffered-image-to-input-stream (scale-image image)))))
 
 (defn placeholder-image [] (ByteArrayInputStream. (byte-array 0)))
