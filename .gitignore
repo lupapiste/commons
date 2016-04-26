@@ -16,3 +16,5 @@ commons.iml
 .project
 .classpath
 .settings/
+*.orig
+*.log
