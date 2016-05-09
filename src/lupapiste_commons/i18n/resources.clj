@@ -142,6 +142,8 @@
                        ".xlsx")]
      (missing-localizations-excel (io/file filename))))
   ([file]
+   (missing-localizations-excel file "resources/shared_translations.txt"))
+  ([target-file translations-file]
    (write-excel
-     (missing-translations (txt->map "resources/shared_translations.txt"))
-     file)))
+     (missing-translations (txt->map translations-file))
+     target-file)))
