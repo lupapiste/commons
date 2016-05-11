@@ -3321,4 +3321,4 @@
 "yes" "fi" "Kyllä"
 "yes" "sv" "Ja"
 "Ei käyttäjää" "fi" "Ei käyttäjää"
-"Ei käyttäjää" "sv" ""
+"Ei käyttäjää" "sv" "Ingen användare"
