@@ -118,16 +118,18 @@
     (with-open [out (java.io.FileOutputStream. excel-file)]
       (.write wb out))))
 
-(defn missing-translations [{:keys [translations languages]}]
+(defn missing-translations [{:keys [translations languages]} & [selected-lang]]
   {:languages
    languages
    :translations
    (reduce (fn [acc [key {:keys [fi] :as strings}]]
              (cond-> acc
-               (empty? (dissoc strings :fi)) (assoc key {:fi fi})
-               (empty? fi)                   (assoc key {:fi ""})
-               (source-changed? key)         (assoc key {:fi fi})
-               (some empty? (vals strings))  (assoc key {:fi fi})))
+               (empty? (dissoc strings :fi))               (assoc key {:fi fi})
+               (empty? fi)                                 (assoc key {:fi ""})
+               (source-changed? key)                       (assoc key {:fi fi})
+               (if selected-lang
+                 (s/blank?    (get strings selected-lang))
+                 (some empty? (vals strings)))             (assoc key {:fi fi})))
            (ordered-map)
            translations)})
 

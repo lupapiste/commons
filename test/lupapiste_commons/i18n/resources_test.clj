@@ -36,6 +36,19 @@
     (is (= (ffirst (:translations (missing-translations source-text-changed)))
            'label))))
 
+(deftest missing-translations-with-lang
+  (let [empty-english {:languages [:fi :sv :en]
+                       :translations {'label {:fi "Heippa" :sv "Hej" :en ""}}}
+        missing-english {:languages [:fi :sv :en]
+                         :translations {'label {:fi "Heippa" :sv "Hej"}}}]
+    (is (= (ffirst (:translations (missing-translations empty-english)))
+           'label))
+    (is (nil? (ffirst (:translations (missing-translations empty-english :sv)))) "English check is discarded")
+    (is (= (ffirst (:translations (missing-translations empty-english :en)))
+           'label))
+    (is (= (ffirst (:translations (missing-translations missing-english :en)))
+           'label))))
+
 (deftest write-key-test
   (let [loc-key (symbol "application/rtf")]
     (is (= (write-key loc-key) "application/rtf") "'Namespace' should not be stripped off")
