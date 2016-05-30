@@ -128,7 +128,7 @@
                (empty? fi)                                 (assoc key {:fi ""})
                (source-changed? key)                       (assoc key {:fi fi})
                (if selected-lang
-                 (s/blank?    (get strings selected-lang))
+                 (s/blank?    (get strings (keyword selected-lang)))
                  (some empty? (vals strings)))             (assoc key {:fi fi})))
            (ordered-map)
            translations)})
