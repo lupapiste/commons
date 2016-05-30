@@ -118,9 +118,12 @@
     (with-open [out (java.io.FileOutputStream. excel-file)]
       (.write wb out))))
 
-(defn missing-translations [{:keys [translations languages]} & [selected-lang]]
-  {:languages
-   languages
+(defn missing-translations
+  "Returns missing translations. If selected-lang is given, only that and :fi is regarded."
+  [{:keys [translations languages]} & [selected-lang]]
+  {:languages (if selected-lang
+                [:fi (keyword selected-lang)]
+                languages)
    :translations
    (reduce (fn [acc [key {:keys [fi] :as strings}]]
              (cond-> acc

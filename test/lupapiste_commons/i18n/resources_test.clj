@@ -39,7 +39,7 @@
 (deftest missing-translations-with-lang
   (let [empty-english {:languages [:fi :sv :en]
                        :translations {'label {:fi "Heippa" :sv "Hej" :en ""}}}
-        missing-english {:languages [:fi :sv :en]
+        missing-english {:languages [:fi :sv]
                          :translations {'label {:fi "Heippa" :sv "Hej"}}}]
     (is (= (ffirst (:translations (missing-translations empty-english)))
            'label))
@@ -47,7 +47,9 @@
     (is (= (ffirst (:translations (missing-translations empty-english :en)))
            'label))
     (is (= (ffirst (:translations (missing-translations missing-english :en)))
-           'label))))
+           'label))
+    (is (= (:languages (missing-translations empty-english :en))
+           [:fi :en]) "Fi and selected language returned in languages")))
 
 (deftest write-key-test
   (let [loc-key (symbol "application/rtf")]
