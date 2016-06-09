@@ -1,8 +1,8 @@
-(defproject lupapiste/commons "0.7.33"
+(defproject lupapiste/commons "0.7.34"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"
+  :license {:name "European Union Public License"
+            :url "https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11"
             :distribution :repo}
   :scm {:url "https://github.com/lupapiste/commons.git"}
   :dependencies [[org.clojure/clojure "1.8.0"]
@@ -20,10 +20,7 @@
                  [com.github.jai-imageio/jai-imageio-core "1.3.1"]
                  [com.github.jai-imageio/jai-imageio-jpeg2000 "1.3.0"]]
   :plugins [[com.jakemccrary/lein-test-refresh "0.8.0"]]
-
   :profiles {:dev {:dependencies [[flare "0.2.9"]]
                    :injections [(require 'flare.clojure-test)
                                 (flare.clojure-test/install!)]}}
-  :repositories [["com.levigo.jbig2" {:url "http://jbig2-imageio.googlecode.com/svn/maven-repository"
-                                      :snapshots false}]]
   :cljsbuild {:builds {:dev {:source-paths ["src"]}}})
