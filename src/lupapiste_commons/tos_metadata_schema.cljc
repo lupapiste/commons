@@ -112,6 +112,19 @@
                       :myyntipalvelu (:schema Myyntipalvelu)
                       :nakyvyys (apply s/enum (:values Nakyvyys))}))
 
+(defn valid-dependencies? [{{:keys [arkistointi pituus laskentaperuste]} :sailytysaika
+                            :keys [julkisuusluokka salassapitoaika salassapitoperuste turvallisuusluokka suojaustaso kayttajaryhma kayttajaryhmakuvaus]}]
+  (cond-> true
+          (= :toistaiseksi arkistointi) (and laskentaperuste)
+          (= :määräajan arkistointi) (and pituus)
+          (not= :julkinen julkisuusluokka) (and salassapitoaika salassapitoperuste turvallisuusluokka suojaustaso kayttajaryhma kayttajaryhmakuvaus)))
+
+(def ConstrainedMetadataMap
+  (s/constrained MetaDataMap valid-dependencies? "All required keys present in metadata"))
+
+(def ConstrainedAsiakirjaMetadataMap
+  (s/constrained AsiakirjaMetaDataMap valid-dependencies? "All required keys present in metadata"))
+
 (def default-metadata
   {:julkisuusluokka :julkinen
    :sailytysaika {:arkistointi :ei
@@ -126,8 +139,9 @@
                            :myyntipalvelu false
                            :nakyvyys :julkinen}))
 
-(defn remove-unrecognized-keys [metadata schema]
-  (let [known-keys (->> (map #(or (:k %) %) (keys schema))
+(defn remove-unrecognized-keys [metadata schema-or-constrained]
+  (let [schema (get schema-or-constrained :schema schema-or-constrained)
+        known-keys (->> (map #(or (:k %) %) (keys schema))
                         (into #{}))]
     (->> metadata
          (filter (fn [[k _]] (known-keys k)))
@@ -140,8 +154,8 @@
           (not= (:arkistointi sailytysaika) :toistaiseksi) (dissoc-in [:sailytysaika :laskentaperuste])
           (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso :kayttajaryhma :kayttajaryhmakuvaus :security-period-end)))
 
-(defn sanitize-metadata [{:keys [sailytysaika julkisuusluokka] :as metadata}]
-  (let [schema (if (:tila metadata) AsiakirjaMetaDataMap MetaDataMap)]
+(defn sanitize-metadata [metadata]
+  (let [schema (if (:tila metadata) ConstrainedAsiakirjaMetadataMap ConstrainedMetadataMap)]
     (s/validate schema
                 (-> metadata
                     (remove-conditional-keys)
