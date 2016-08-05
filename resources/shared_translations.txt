@@ -3332,3 +3332,7 @@
 "yes" "sv" "Ja"
 "Ei käyttäjää" "fi" "Ei käyttäjää"
 "Ei käyttäjää" "sv" "Ingen användare"
+"inUse" "fi" "Käyttöönotettu"
+"inUse" "sv" "Togs i bruk"
+"onHold" "fi" "Keskeytynyt"
+"onHold" "sv" "Har avbrutits"
