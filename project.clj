@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.7.40"
+(defproject lupapiste/commons "0.7.41"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "European Union Public License"
@@ -9,14 +9,14 @@
                  [org.clojure/tools.nrepl "0.2.12"]
                  [ontodev/excel "0.2.4" :exclusions [xml-apis org.apache.poi/poi-ooxml]]
                  [org.apache.poi/poi-ooxml "3.14"]
-                 [org.flatland/ordered "1.5.3"]
-                 [ring/ring-core "1.4.0"]
+                 [org.flatland/ordered "1.5.4"]
+                 [ring/ring-core "1.5.0"]
                  [com.stuartsierra/component "0.3.1"]
                  [com.taoensso/timbre "4.2.1"]
-                 [prismatic/schema "1.1.1"]
+                 [prismatic/schema "1.1.3"]
                  [org.slf4j/slf4j-log4j12 "1.7.21"]
-                 [org.apache.pdfbox/pdfbox "2.0.1"]
-                 [org.apache.pdfbox/pdfbox-tools "2.0.1"]
+                 [org.apache.pdfbox/pdfbox "2.0.2"]
+                 [org.apache.pdfbox/pdfbox-tools "2.0.2"]
                  [com.github.jai-imageio/jai-imageio-core "1.3.1"]
                  [com.github.jai-imageio/jai-imageio-jpeg2000 "1.3.0"]]
   :plugins [[com.jakemccrary/lein-test-refresh "0.8.0"]]
