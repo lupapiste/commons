@@ -2520,7 +2520,7 @@
 "operations.purkaminen" "sv" "Rivning av byggnad"
 "operations.purkaminen.desc" "fi" "<p>Kuvaamasi toimenpide vaatii yleensä luvan tai ilmoituksen.</p><p>Luvanvaraisuudesta kerrotaan muun muassa kunnan omassa rakennusjärjestyksessä.</p><p>Mikäli et löydä tarvitsemaasi tietoa, voit varmistaa asiointiin liittyvät ohjeet tekemällä neuvontapyynnön.</p><p>Kysymyksesi välitetään kunnan lupa-asioista vastaavalle viranomaiselle.</p><p>Lähetämme sinulle tiedon saapuneesta vastauksesta sähköpostiviestin välityksellä.</p>"
 "operations.purkaminen.desc" "sv" "<p>Åtgärden du beskriver kräver i allmänhet tillstånd eller anmälan. Tillståndsplikten behandlas bland annat i kommunens egen byggnadsordning.</p><p>Om du inte hittar information som du behöver, kan du kolla anvisningar som gäller ärendehantering  genom att göra begäran om rådgivning.</p><p>Din fråga förmedlas till myndigheten som är ansvarig om tillståndsärenden i din kommun. Vi informerar dig om svaret med e-post.</p>"
-"operations.Puun kaataminen" "fi" "Puuiden kaataminen"
+"operations.Puun kaataminen" "fi" "Puiden kaataminen"
 "operations.Puun kaataminen" "sv" "Trädfällning"
 "operations.puun-kaataminen" "fi" "Puiden kaataminen"
 "operations.puun-kaataminen" "sv" "Trädfällning"
