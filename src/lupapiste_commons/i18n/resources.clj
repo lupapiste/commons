@@ -17,7 +17,7 @@
   (cond-> (str sym)
     (source-changed? sym) (str "!")))
 
-(defn read-key [string]
+(defn read-key [^String string]
   (if (.endsWith string "!")
     (-> (s/replace string #"!$" "")
         symbol
@@ -68,23 +68,40 @@
                              (ordered-map)
                              (filter #(not (empty? (first %))) rows))})))
 
+(defn- txt-line [key lang text]
+  (str (pr-str (write-key key)) " " (pr-str (name lang)) " " (pr-str (nil->empty-str text)) "\n"))
+
 (defn write-txt [{:keys [translations]} txt-file]
   (spit txt-file "") ;; truncate txt-file
   (doseq [[key strings] translations]
     (doseq [[lang text] strings]
-      (spit txt-file (str (pr-str (write-key key)) " " (pr-str (name lang)) " " (pr-str (nil->empty-str text)) "\n") :append true))))
+      (spit txt-file (txt-line key lang text) :append true))))
+
+(defn- read-entry [line]
+  (let [in (-> line StringReader. PushbackReader.)
+        key (read-key (edn/read in))
+        lang (edn/read in)
+        text (edn/read in)]
+    {:key key :lang lang :text text}))
+
+(def ^:private empty-line? s/blank?)
 
 (defn txt->map [input]
   (with-open [reader (io/reader input)]
-    (let [translations (loop [acc (ordered-map)
-                              lines (line-seq reader)]
-                         (if-let [line (first lines)]
-                           (let [in (-> line StringReader. PushbackReader.)
-                                 key (read-key (edn/read in))
-                                 lang (edn/read in)
-                                 text (edn/read in)]
-                             (recur (assoc acc key (assoc (get acc key (ordered-map)) (keyword lang) text)) (rest lines)))
-                           acc))]
+    (let [translations
+          (loop [acc (ordered-map)
+                 lines (line-seq reader)]
+            (if-let [line (first lines)]
+              (if (empty-line? line)
+                (recur acc
+                       (rest lines))
+                (let [{:keys [key lang text]} (read-entry line)]
+                  (recur (assoc acc key
+                                (assoc (get acc key (ordered-map))
+                                       (keyword lang)
+                                       text))
+                         (rest lines))))
+              acc))]
       {:languages (-> translations first val keys vec)
        :translations translations})))
 

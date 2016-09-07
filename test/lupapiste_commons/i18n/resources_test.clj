@@ -3,14 +3,16 @@
             [clojure.test :refer :all])
   (:import [java.io File]))
 
+(def translations
+  {:languages [:fi :sv]
+   :translations {'label {:fi "Hyvää huomenta" :sv "Gud morgon"}
+                  '^:source-changed button {:fi "Ok" :sv "Jättebra"}}})
+
 (deftest roundtrip
   (testing "What is put into a pipe comes out of it staying the same, where pipe is: map -> txt -> map -> excel -> map"
     (let [txt-file (doto (File/createTempFile "translations" ".txt"))
           excel-file (doto (File/createTempFile "translations" ".xlsx"))]
-      (let [translations {:languages [:fi :sv]
-                          :translations {'label {:fi "Hyvää huomenta" :sv "Gud morgon"}
-                                         '^:source-changed button {:fi "Ok" :sv "Jättebra"}}}
-            _ (write-txt translations txt-file)
+      (let [_ (write-txt translations txt-file)
             from-txt (txt->map txt-file)
             _ (write-excel from-txt excel-file)
             from-excel (excel->map excel-file)]
@@ -57,3 +59,18 @@
     (is (= (write-key (with-meta loc-key {:source-changed true}))
            "application/rtf!")
         "When source is changed, '!' is added to key")))
+
+(deftest empty-lines-test
+  (let [file-with-empty-lines (File/createTempFile "translations" ".txt")]
+    (write-txt translations file-with-empty-lines)
+    (spit file-with-empty-lines
+          (str  "\n\n"
+                (#'lupapiste-commons.i18n.resources/txt-line "moi" "fi" "Moro!")
+                (#'lupapiste-commons.i18n.resources/txt-line "moi" "sv" "Hej!"))
+          :append true)
+    (let [from-txt (txt->map file-with-empty-lines)]
+      (is (= (:translations from-txt)
+             (merge (:translations translations)
+                    {'moi {:fi "Moro!"
+                           :sv "Hej!"}}))))
+    (.delete file-with-empty-lines)))
