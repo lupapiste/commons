@@ -8,6 +8,11 @@
    :translations {'label {:fi "Hyvää huomenta" :sv "Gud morgon"}
                   '^:source-changed button {:fi "Ok" :sv "Jättebra"}}})
 
+(defn- source-name-equals [source-name]
+  (fn [key]
+    (= (:source-name (meta key))
+       source-name)))
+
 (deftest roundtrip
   (testing "What is put into a pipe comes out of it staying the same, where pipe is: map -> txt -> map -> excel -> map"
     (let [txt-file (doto (File/createTempFile "translations" ".txt"))
@@ -16,6 +21,8 @@
             from-txt (txt->map txt-file)
             _ (write-excel from-txt excel-file)
             from-excel (excel->map excel-file)]
+        (is (= (every? (source-name-equals (.getName txt-file)) (keys from-txt))))
+        (is (= (every? (source-name-equals (.getName excel-file)) (keys from-excel))))
         (.delete txt-file)
         (.delete excel-file)
         (is (= translations from-excel))))))

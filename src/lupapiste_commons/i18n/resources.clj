@@ -86,21 +86,36 @@
 
 (def ^:private empty-line? s/blank?)
 
+(defn- filename [input]
+  (cond (string? input) input
+        (instance? java.io.File input) (.getName input)
+        :else nil))
+
+(defn- merge-entry [acc {:keys [key lang text]} source-name]
+  (let [[key current-translations] (or (find acc key)
+                                       [key (ordered-map)])]
+    (assoc acc
+           (with-meta key
+             (merge (meta key)
+                    {:source-name source-name}))
+           (assoc current-translations
+                  (keyword lang)
+                  text))))
+
 (defn txt->map [input]
   (with-open [reader (io/reader input)]
-    (let [translations
+    (let [source-name (filename input)
+          translations
           (loop [acc (ordered-map)
                  lines (line-seq reader)]
             (if-let [line (first lines)]
               (if (empty-line? line)
                 (recur acc
                        (rest lines))
-                (let [{:keys [key lang text]} (read-entry line)]
-                  (recur (assoc acc key
-                                (assoc (get acc key (ordered-map))
-                                       (keyword lang)
-                                       text))
-                         (rest lines))))
+                (recur (merge-entry acc
+                                    (read-entry line)
+                                    source-name)
+                       (rest lines)))
               acc))]
       {:languages (-> translations first val keys vec)
        :translations translations})))
