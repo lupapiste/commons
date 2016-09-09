@@ -56,7 +56,8 @@
      :versio s/Str
      (s/optional-key :kylanumero) s/Str
      (s/optional-key :kylanimi) {:fi s/Str
-                                 :sv s/Str}}
+                                 :sv s/Str}
+     (s/optional-key :foremen) s/Str}
     tms/AsiakirjaMetaDataMap))
 
 (def full-document-metadata-with-relaxed-type
