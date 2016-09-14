@@ -24,3 +24,23 @@
          :constructionStarted [:inUse :onHold :closed :extinct]
          :inUse               [:closed :onHold :extinct]
          :onHold              [:closed :constructionStarted :inUse :extinct]))
+
+(def full-tj-state-graph
+  (merge
+    (select-keys default-application-state-graph [:draft :open :canceled])
+    {:submitted             [:sent :canceled]
+     :sent                  [:foremanVerdictGiven :complementNeeded :canceled]
+     :complementNeeded      [:sent :canceled]
+     :foremanVerdictGiven   [:canceled :appealed]
+     :appealed              [:foremanVerdictGiven :canceled]}))
+
+(def tonttijako-application-state-graph
+  (merge
+    (select-keys default-application-state-graph [:draft :open :canceled])
+    {:submitted [:hearing :canceled]
+     :hearing [:proposal :canceled]
+     :proposal [:proposalApproved :canceled]
+     :proposalApproved [:final :appealed :canceled]
+     :appealed [:final :canceled] ; Oikaisuvaatimus
+     :final    [] ; Lain voimainen
+     }))
