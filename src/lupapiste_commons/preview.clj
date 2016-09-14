@@ -61,7 +61,7 @@
   (try
     (when-let [op (converter content-type)]
       (op content))
-    (catch Exception e (warnf "preview to-buffered-image failed to read content type: %s, error: %s" content-type e))))
+    (catch Exception e (warnf "preview to-buffered-image was unable to read content of a %s file: %s" content-type e))))
 
 (defn- size-ok? [image content-type]
   (if (and (< (.getWidth image) 45000) (< (.getHeight image) 45000))
