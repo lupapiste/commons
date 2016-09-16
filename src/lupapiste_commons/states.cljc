@@ -18,16 +18,32 @@
    :appealed            [:verdictGiven :canceled]
    })
 
-(def full-tj-state-graph
+(def
+  ^{:doc "See default-application-state-graph"}
+  tj-ilmoitus-state-graph
   (merge
     (select-keys default-application-state-graph [:draft :open :canceled])
-    {:submitted             [:sent :canceled]
-     :sent                  [:foremanVerdictGiven :complementNeeded :canceled]
-     :complementNeeded      [:sent :canceled]
-     :foremanVerdictGiven   [:canceled :appealed]
-     :appealed              [:foremanVerdictGiven :canceled]}))
+    {:submitted  [:acknowledged :canceled]
+     ; must be for tj-hakemus-state-graph compatibility:
+     ; if foreman application is in complementNeeded state it can be converted
+     ; to use this state graph
+     :complementNeeded [:acknowledged :canceled]
+     :acknowledged [:complementNeeded]}))
 
-(def tonttijako-application-state-graph
+(def
+  ^{:doc "See default-application-state-graph"}
+  tj-hakemus-state-graph
+  (merge
+    (select-keys default-application-state-graph [:draft :open :canceled])
+    {:submitted    [:sent :canceled]
+     :sent         [:foremanVerdictGiven :complementNeeded :canceled]
+     :complementNeeded [:sent :canceled]
+     :foremanVerdictGiven [:canceled :appealed]
+     :appealed [:foremanVerdictGiven :canceled]}))
+
+(def
+  ^{:doc "See default-application-state-graph"}
+  tonttijako-application-state-graph
   (merge
     (select-keys default-application-state-graph [:draft :open :canceled])
     {:submitted [:hearing :canceled]
@@ -38,11 +54,19 @@
      :final    [] ; Lain voimainen
      }))
 
-(def full-application-state-graph
+(def full-toj-application-state-graph
   (-> (assoc default-application-state-graph
          :verdictGiven        [:constructionStarted :inUse :onHold :appealed :closed :extinct :canceled]
          :constructionStarted [:inUse :onHold :closed :extinct]
          :inUse               [:closed :onHold :extinct]
          :onHold              [:closed :constructionStarted :inUse :extinct])
-      (merge full-tj-state-graph)
+      (merge tj-ilmoitus-state-graph)
+      (merge tj-hakemus-state-graph)
       (merge tonttijako-application-state-graph)))
+
+(def full-application-state-graph
+  (assoc default-application-state-graph
+    :verdictGiven        [:constructionStarted :inUse :onHold :appealed :closed :extinct :canceled]
+    :constructionStarted [:inUse :onHold :closed :extinct]
+    :inUse               [:closed :onHold :extinct]
+    :onHold              [:closed :constructionStarted :inUse :extinct]))
