@@ -43,8 +43,8 @@
      (s/optional-key :location-wgs84) [s/Num]  ;; Coordinates
      (s/optional-key :postinumero) s/Str
      :kuntalupatunnukset [s/Str]
-     :lupapvm s/Inst
-     :paatospvm s/Inst
+     (s/optional-key :lupapvm) s/Inst
+     (s/optional-key :paatospvm) s/Inst
      (s/optional-key :paatoksentekija) s/Str
      :tiedostonimi s/Str
      (s/optional-key :kasittelija) {(s/optional-key :username) s/Str (s/optional-key :firstName) s/Str :lastName s/Str}
