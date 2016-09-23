@@ -272,7 +272,7 @@
                     :tyoalueen-kuvaus
                     :valokuva
                     :valtakirja]
-   :osapuolet osapuolet-v2
+   :osapuolet [:patevyystodistus]
    ;; This is needed for statement attachments to work.
    :muut [:muu
           :paatos
