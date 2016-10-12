@@ -13,16 +13,15 @@
 
 (defn- buffered-image-to-input-stream
   "Converts BufferedImage inputStream"
-  [image]
+  [^BufferedImage image]
   (let [output (ByteArrayOutputStream.)]
     (ImageIOUtil/writeImage image "jpg" output 72 0.5)
     (ByteArrayInputStream. (.toByteArray output))))
 
-(defn- scale-image
+(defn- ^BufferedImage scale-image
   "Crops and scales BufferedImage to predefined resolution"
-  [image]
-  (let [
-        original-height (.getHeight image)
+  [^BufferedImage image]
+  (let [original-height (.getHeight image)
         original-width (.getWidth image)
         crop-x (if (< (/ original-height original-width) 5/7) (- original-width (/ original-height 5/7)) 0)
         crop-y (if (< (/ original-width original-height) 5/7) (- original-height (/ original-width 5/7)) 0)
@@ -39,13 +38,13 @@
       (.dispose))
     new-image))
 
-(defn- pdf-to-buffered-image
+(defn- ^BufferedImage pdf-to-buffered-image
   "Converts 1. page from PDF to BufferedImage"
   [pdf-input]
   (with-open [document (PDDocument/load (if (= (type pdf-input) String) (FileInputStream. pdf-input) pdf-input))]
     (.renderImage (PDFRenderer. document) 0 2)))
 
-(defn- raster-to-buffered-image
+(defn- ^BufferedImage raster-to-buffered-image
   "Converts Raster image to BufferedImage"
   [input]
   (ImageIO/read ^InputStream (io/input-stream input)))
@@ -55,7 +54,7 @@
     (= "application/pdf" content-type) pdf-to-buffered-image
     (re-matches (re-pattern "(image/(gif|jpeg|png|tiff))") content-type) raster-to-buffered-image))
 
-(defn- to-buffered-image
+(defn- ^BufferedImage to-buffered-image
   "Tries to read content to image by JAI or apache.pdfbox. Retuns nil on fail"
   [content content-type]
   (try
@@ -63,7 +62,7 @@
       (op content))
     (catch Exception e (warnf "preview to-buffered-image was unable to read content of a %s file: %s" content-type e))))
 
-(defn- size-ok? [image content-type]
+(defn- size-ok? [^BufferedImage image content-type]
   (if (and (< (.getWidth image) 45000) (< (.getHeight image) 45000))
     true
     (do
