@@ -2,6 +2,7 @@
   (:require [taoensso.timbre :refer [debugf warnf]]
             [clojure.java.io :as io])
   (:import (org.apache.pdfbox.pdmodel PDDocument)
+           (org.apache.pdfbox.io MemoryUsageSetting)
            (org.apache.pdfbox.tools.imageio ImageIOUtil)
            (java.awt.image BufferedImage)
            (java.awt RenderingHints)
@@ -41,8 +42,11 @@
 (defn- ^BufferedImage pdf-to-buffered-image
   "Converts 1. page from PDF to BufferedImage"
   [pdf-input]
-  (with-open [document (PDDocument/load (if (= (type pdf-input) String) (FileInputStream. pdf-input) pdf-input))]
-    (.renderImage (PDFRenderer. document) 0 2)))
+  (let [input (if (= (type pdf-input) String)
+                (FileInputStream. pdf-input)
+                pdf-input)]
+    (with-open [document (PDDocument/load input (MemoryUsageSetting/setupMixed (* 100 1024 1024)))]
+      (.renderImage (PDFRenderer. document) 0 2))))
 
 (defn- ^BufferedImage raster-to-buffered-image
   "Converts Raster image to BufferedImage"
