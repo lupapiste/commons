@@ -89,7 +89,10 @@
 (defn- filename [input]
   (cond (string? input) input
         (instance? java.io.File input) (.getName input)
-        :else nil))
+        (instance? java.net.URL input) (-> (.getFile input)
+                                           (s/split #"/")
+                                           last)
+         :else nil))
 
 (defn- merge-entry [acc {:keys [key lang text]} source-name]
   (let [[key current-translations] (or (find acc key)
