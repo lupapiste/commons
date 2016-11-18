@@ -7,7 +7,7 @@
   default-application-state-graph
   {:draft               [:open :submitted :canceled]
    :open                [:submitted :canceled]
-   :submitted           [:sent :verdictGiven :canceled]
+   :submitted           [:sent :draft :verdictGiven :canceled]
    :sent                [:verdictGiven :complementNeeded :canceled]
    :complementNeeded    [:sent :verdictGiven :canceled]
    :verdictGiven        [:constructionStarted :appealed :closed :extinct :canceled]
@@ -23,7 +23,7 @@
   tj-ilmoitus-state-graph
   (merge
     (select-keys default-application-state-graph [:draft :open :canceled])
-    {:submitted  [:acknowledged :canceled]
+    {:submitted  [:acknowledged :draft :canceled]
      ; must be for tj-hakemus-state-graph compatibility:
      ; if foreman application is in complementNeeded state it can be converted
      ; to use this state graph
@@ -35,7 +35,7 @@
   tj-hakemus-state-graph
   (merge
     (select-keys default-application-state-graph [:draft :open :canceled])
-    {:submitted    [:sent :canceled]
+    {:submitted    [:sent :draft :canceled]
      :sent         [:foremanVerdictGiven :complementNeeded :canceled]
      :complementNeeded [:sent :canceled]
      :foremanVerdictGiven [:canceled :appealed]
@@ -46,7 +46,7 @@
   tonttijako-application-state-graph
   (merge
     (select-keys default-application-state-graph [:draft :open :canceled])
-    {:submitted [:hearing :canceled]
+    {:submitted [:hearing :draft :canceled]
      :hearing [:proposal :canceled]
      :proposal [:proposalApproved :canceled]
      :proposalApproved [:final :appealed :canceled]
