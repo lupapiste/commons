@@ -20,7 +20,9 @@
     []
     (partition 2 groups)))
 
-(def document-and-attachment-types (concat document-types (groups->dotted-keywords attachment-types/Rakennusluvat-v2)))
+(def document-and-attachment-types (-> document-types
+                                       (concat (groups->dotted-keywords attachment-types/Rakennusluvat-v2))
+                                       (concat (groups->dotted-keywords attachment-types/YleistenAlueidenLuvat-v2))))
 
 (def full-document-metadata
   (merge
@@ -57,7 +59,9 @@
      (s/optional-key :kylanumero) s/Str
      (s/optional-key :kylanimi) {:fi s/Str
                                  :sv s/Str}
-     (s/optional-key :foremen) s/Str}
+     (s/optional-key :foremen) s/Str
+     (s/optional-key :tyomaasta-vastaava) s/Str
+     (s/optional-key :closed) s/Inst}
     tms/AsiakirjaMetaDataMap))
 
 (def full-document-metadata-with-relaxed-type
