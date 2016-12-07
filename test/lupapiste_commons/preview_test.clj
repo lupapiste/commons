@@ -15,10 +15,9 @@
   (is (nil? (#'preview/to-buffered-image nil "image/vnd.dwg"))))
 
 (deftest pdf-to-buffered-image-works
-  (is (= (.getWidth (#'preview/pdf-to-buffered-image pdf-1)) 1190)))
-
-#_(deftest pdf-to-buffered-image-file
-  (is (= (io/copy (preview/create-preview pdf-1 "application/pdf") (io/file "/tmp/a.jpg")) )))
+  (let [img (#'preview/pdf-to-buffered-image pdf-1)]
+    (is (= (.getHeight img) 600))
+    (is (= (.getWidth img) 428))))
 
 (deftest scale-image-works
   (is (= (.getWidth (#'preview/scale-image image-1)) 428)))
@@ -28,11 +27,7 @@
   (is (= (.available (#'preview/buffered-image-to-input-stream image-1)) 667967)))
 
 (deftest pdf-to-buffered-image-works-with-jbig2
-  (is (= (.getWidth (#'preview/pdf-to-buffered-image "dev-resources/jbig2.pdf")) 450)))
-
-;(io/copy (#'preview/create-preview "dev-resources/jbig2.pdf" "application/pdf") (io/file "target/jbig2-preview.jpg"))
+  (is (= (.getWidth (#'preview/pdf-to-buffered-image "dev-resources/jbig2.pdf")) 600)))
 
 (deftest pdf-to-buffered-image-works-with-jpeg2000
-  (is (= (.getWidth (#'preview/pdf-to-buffered-image "dev-resources/jpeg2000.pdf")) 450)))
-
-;(io/copy (#'preview/create-preview "dev-resources/jpeg2000.pdf" "application/pdf") (io/file "target/jpeg2000-preview.jpg"))
+  (is (= (.getWidth (#'preview/pdf-to-buffered-image "dev-resources/jpeg2000.pdf")) 600)))
