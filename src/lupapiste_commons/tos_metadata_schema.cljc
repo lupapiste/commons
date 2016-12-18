@@ -44,7 +44,8 @@
 (def laskentaperuste [:rakennuksen_purkamispäivä
                       :vakuuksien_voimassaoloaika])
 
-(def sailytysaika-perustelu-suggestions [:custom-justification :al-11665 :kuntaliitto-14a :kuntaliitto-1-s1 :oma-tarve])
+(def sailytysaika-perustelu-suggestions
+  [:custom-justification :al-17413 :al-11665 :kuntaliitto-14a :kuntaliitto-1-s1 :oma-tarve])
 
 (def SailytysAika {:type :sailytysaika
                    :require-role :archivist
