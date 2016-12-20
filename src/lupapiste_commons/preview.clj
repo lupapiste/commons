@@ -11,6 +11,9 @@
            (org.apache.pdfbox.rendering PDFRenderer)))
 
 (def rez 600.0)
+; The aspect ratio should be about sqrt(2) or less, i.e. A paper series aspect ratio is OK
+(def min-aspect 0.7)
+(def max-aspect 1.45)
 
 (defn- buffered-image-to-input-stream
   "Converts BufferedImage inputStream"
@@ -26,14 +29,22 @@
       (warnf "Image size (%d x %d) is too big for preview [byte array length exceeds MAX_INTEGER]" (.getWidth image) (.getHeight image))
       false)))
 
+(defn- must-crop? [width height]
+  (not (< min-aspect (/ width height) max-aspect)))
+
+(defn- crop-amount [x y]
+  (if (< (/ x y) min-aspect)
+    (int (- y (/ x min-aspect)))
+    0))
+
 (defn- ^BufferedImage scale-image
   "Crops and scales BufferedImage to predefined resolution"
   [^BufferedImage image]
   (when (size-ok? image)
     (let [original-width (.getWidth image)
           original-height (.getHeight image)
-          crop-x (if (< (/ original-height original-width) 5/7) (- original-width (/ original-height 5/7)) 0)
-          crop-y (if (< (/ original-width original-height) 5/7) (- original-height (/ original-width 5/7)) 0)
+          crop-x (crop-amount original-height original-width)
+          crop-y (crop-amount original-width original-height)
           scale (min (/ rez (- original-width crop-x)) (/ rez (- original-height crop-y)))
           width (* scale (- original-width crop-x))
           height (* scale (- original-height crop-y))
@@ -46,9 +57,6 @@
         (.drawImage image, 0, 0, width, height, crop-x, crop-y, original-width, original-height, nil)
         (.dispose))
       new-image)))
-
-(defn- must-crop? [width height]
-  (not (< 5/7 (/ width height) 7/5)))
 
 (defn- ^BufferedImage pdf-to-buffered-image
   "Converts 1. page from PDF to BufferedImage"
@@ -67,8 +75,7 @@
             target-rez (if crop? (* 2 rez) rez)
             scale (->> (max original-width original-height) (/ target-rez) float)]
         (debugf "scale for pdf preview: %s" scale)
-        (cond-> (PDFRenderer. document)
-                :always (.renderImage 0 (float scale))
+        (cond-> (-> (PDFRenderer. document) (.renderImage 0 scale))
                 crop? scale-image)))))
 
 (defn- ^BufferedImage raster-to-buffered-image
