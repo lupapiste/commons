@@ -19,7 +19,7 @@
   "Converts BufferedImage inputStream"
   [^BufferedImage image]
   (let [output (ByteArrayOutputStream.)]
-    (ImageIOUtil/writeImage image "jpg" output 72 0.5)
+    (ImageIOUtil/writeImage image "jpg" output 72 0.6)
     (ByteArrayInputStream. (.toByteArray output))))
 
 (defn- size-ok? [^BufferedImage image]
@@ -59,7 +59,7 @@
       new-image)))
 
 (defn- ^BufferedImage pdf-to-buffered-image
-  "Converts 1. page from PDF to BufferedImage"
+  "Converts first page of the PDF to BufferedImage"
   [pdf-input]
   (let [input (if (= (type pdf-input) String)
                 (FileInputStream. pdf-input)
@@ -90,7 +90,7 @@
     (re-matches (re-pattern "(image/(gif|jpeg|png|tiff))") content-type) raster-to-buffered-image))
 
 (defn- ^BufferedImage to-buffered-image
-  "Tries to read content to image by JAI or apache.pdfbox. Retuns nil on fail"
+  "Tries to read content to image by JAI or apache.pdfbox. Returns nil on fail"
   [content content-type]
   (try
     (when-let [op (converter content-type)]
@@ -98,9 +98,10 @@
     (catch Exception e (warnf "preview to-buffered-image was unable to read content of a %s file: %s" content-type e))))
 
 (defn create-preview
-  "Tries to create preview image IF content type can be processed to image by JAI or apache.pdfbox. Retuns nil on fail"
+  "Tries to create preview image IF content type can be processed to image by JAI or apache.pdfbox. Returns nil on fail"
   [content content-type]
   (some-> (to-buffered-image content content-type)
           buffered-image-to-input-stream))
 
-(defn placeholder-image [] (ByteArrayInputStream. (byte-array 0)))
+(defn placeholder-image-is []
+  (io/input-stream (io/resource "no-preview-available.jpg")))
