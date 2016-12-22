@@ -2,7 +2,8 @@
   (:require [schema.core :as s]
             [clojure.string :as str]
             [lupapiste-commons.tos-metadata-schema :as tms]
-            [lupapiste-commons.attachment-types :as attachment-types]))
+            [lupapiste-commons.attachment-types :as attachment-types]
+            [lupapiste-commons.operations :as operations]))
 
 (def document-types [:hakemus :ilmoitus :neuvontapyyntö :case-file])
 
@@ -24,6 +25,8 @@
                                        (concat (groups->dotted-keywords attachment-types/Rakennusluvat-v2))
                                        (concat (groups->dotted-keywords attachment-types/YleistenAlueidenLuvat-v2))))
 
+(def valid-operations (concat operations/r-operations operations/ya-operations))
+
 (def full-document-metadata
   (merge
     ;; The keys that are shared with lupapiste are generally in English
@@ -35,8 +38,9 @@
      (s/optional-key :buildingIds) [s/Str]
      (s/optional-key :nationalBuildingIds) [s/Str]
      (s/optional-key :propertyId) s/Str
+     (s/optional-key :projectDescription) s/Str
      :applicants [s/Str]
-     :operations [s/Str]
+     :operations [(apply s/enum valid-operations)]
      :tosFunction {:name s/Str :code s/Str}
      :address s/Str
      :organization s/Str
