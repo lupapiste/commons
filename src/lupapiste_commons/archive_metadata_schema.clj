@@ -65,7 +65,9 @@
                                  :sv s/Str}
      (s/optional-key :foremen) s/Str
      (s/optional-key :tyomaasta-vastaava) s/Str
-     (s/optional-key :closed) s/Inst}
+     (s/optional-key :closed) s/Inst
+     (s/optional-key :drawing-wgs84) [{:type s/Str
+                                       :coordinates [[s/Num]]}]}
     tms/AsiakirjaMetaDataMap))
 
 (def full-document-metadata-with-relaxed-type
