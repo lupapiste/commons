@@ -275,6 +275,7 @@
    :osapuolet [:patevyystodistus]
    ;; This is needed for statement attachments to work.
    :katselmukset_ja_tarkastukset [:katselmuksen_tai_tarkastuksen_poytakirja]
+   :ennakkoluvat_ja_lausunnot [:lausunto]
    :muut [:muu
           :paatos
           :paatosote
