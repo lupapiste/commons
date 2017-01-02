@@ -280,8 +280,7 @@
    :ennakkoluvat_ja_lausunnot [:lausunto]
    :muut [:muu
           :paatos
-          :paatosote
-          :lupaehto]])
+          :paatosote]])
 
 (def Ymparistoilmoitukset
   [:kartat [:kartta-melun-ja-tarinan-leviamisesta]
