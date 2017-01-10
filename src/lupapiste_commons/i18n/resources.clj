@@ -38,6 +38,7 @@
                        first
                        xls/read-row
                        rest
+                       (remove s/blank?)
                        (map (comp keyword s/trim)))
         rows (->> (map xls/read-row excel-sheet)
                   rest
@@ -56,6 +57,7 @@
                          ffirst
                          xls/read-row
                          rest
+                         (remove s/blank?)
                          (map (comp keyword s/trim)))
           rows (->> sheets
                     (map (fn [x] (map xls/read-row x)))
