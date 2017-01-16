@@ -17,10 +17,19 @@
          (catch ParseException _
            (.parse format2 date-str)))))
 
-(defn- parse-string-value [schema v]
+(defn- coerce-to-enum-type [schema v]
+  (let [enum-val-type (-> schema vals ffirst)]
+    (cond
+      (and (keyword? enum-val-type) (or (string? v) (keyword? v))) (keyword v)
+      (and (string? enum-val-type) (keyword? v)) (name v)
+      (string? enum-val-type) (str v)
+      :else (throw (Exception. (str "Coercion from " (type v) " to " (type enum-val-type) " is not supported."))))))
+
+(defn- parse-value [schema v]
   (cond
+    (= EnumSchema (type schema)) (coerce-to-enum-type schema v)
+    (and (= s/Str schema) (keyword? v)) (name v)
     (not (string? v)) v
-    (= EnumSchema (type schema)) (keyword v)
     (= s/Int schema) (Integer/parseInt v)
     (= s/Num schema) (Double/parseDouble v)
     (= s/Inst schema) (parse-iso-8601-date v)
@@ -29,8 +38,8 @@
 (defn- convert-value-to-schema-type [schema-map ks v]
   (if-let [schema (get-in-metadata-map schema-map ks)]
     (if (sequential? schema)
-      (map #(parse-string-value (first schema) %) v)
-      (parse-string-value schema v))
+      (map #(parse-value (first schema) %) v)
+      (parse-value schema v))
     v))
 
 (defn coerce-metadata-to-schema
