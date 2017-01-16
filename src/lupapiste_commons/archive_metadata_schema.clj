@@ -3,7 +3,8 @@
             [clojure.string :as str]
             [lupapiste-commons.tos-metadata-schema :as tms]
             [lupapiste-commons.attachment-types :as attachment-types]
-            [lupapiste-commons.operations :as operations]))
+            [lupapiste-commons.operations :as operations]
+            [lupapiste-commons.usage-types :as usages]))
 
 (def document-types [:hakemus :ilmoitus :neuvontapyyntö :case-file])
 
@@ -26,6 +27,8 @@
                                        (concat (groups->dotted-keywords attachment-types/YleistenAlueidenLuvat-v2))))
 
 (def valid-operations (concat operations/r-operations operations/ya-operations))
+
+(def valid-usage-types (map :name usages/rakennuksen-kayttotarkoitus))
 
 (def full-document-metadata
   (merge
@@ -56,7 +59,7 @@
      (s/optional-key :kasittelija) {(s/optional-key :username) s/Str (s/optional-key :firstName) s/Str :lastName s/Str}
      (s/optional-key :arkistoija) {(s/optional-key :username) s/Str (s/optional-key :firstName) s/Str :lastName s/Str}
      :arkistointipvm s/Inst
-     :kayttotarkoitukset [s/Str]
+     :kayttotarkoitukset [(apply s/enum valid-usage-types)]
      (s/optional-key :suunnittelijat) [s/Str]
      :kieli s/Str
      :versio s/Str
