@@ -23,7 +23,9 @@
       (and (keyword? enum-val-type) (or (string? v) (keyword? v))) (keyword v)
       (and (string? enum-val-type) (keyword? v)) (name v)
       (string? enum-val-type) (str v)
-      :else (throw (Exception. (str "Coercion from " (type v) " to " (type enum-val-type) " is not supported."))))))
+      (nil? v) v
+      :else
+      (do (throw (Exception. (str "Coercion from " (type v) " to " (type enum-val-type) " is not supported.")))))))
 
 (defn- parse-value [schema v]
   (cond
