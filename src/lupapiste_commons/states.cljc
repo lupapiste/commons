@@ -55,14 +55,15 @@
      }))
 
 (def full-ya-application-state-graph
-  (-> default-application-state-graph
-      (merge tj-ilmoitus-state-graph)
-      (merge tj-hakemus-state-graph)
-      (merge tonttijako-application-state-graph)))
+  default-application-state-graph)
 
 (def full-application-state-graph
-  (assoc default-application-state-graph
+  (-> default-application-state-graph
+  (assoc
     :verdictGiven        [:constructionStarted :inUse :onHold :appealed :closed :extinct :canceled]
     :constructionStarted [:inUse :onHold :closed :extinct]
     :inUse               [:closed :onHold :extinct]
-    :onHold              [:closed :constructionStarted :inUse :extinct]))
+    :onHold              [:closed :constructionStarted :inUse :extinct])
+  (merge tj-ilmoitus-state-graph)
+  (merge tj-hakemus-state-graph)
+  (merge tonttijako-application-state-graph)))
