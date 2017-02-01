@@ -1,4 +1,5 @@
-(ns lupapiste-commons.states)
+(ns lupapiste-commons.states
+  (:require [clojure.set :refer :all]))
 
 (def
   ^{:doc "Possible state transitions for applications.
@@ -57,13 +58,20 @@
 (def full-ya-application-state-graph
   default-application-state-graph)
 
-(def full-application-state-graph
+(def
+  ^{:doc "All states for (currently R and P) applications.
+  Includes new states from KRYSP reader, which currently can't be reached via UI."}
+  full-application-state-graph
   (-> default-application-state-graph
-  (assoc
-    :verdictGiven        [:constructionStarted :inUse :onHold :appealed :closed :extinct :canceled]
-    :constructionStarted [:inUse :onHold :closed :extinct]
-    :inUse               [:closed :onHold :extinct]
-    :onHold              [:closed :constructionStarted :inUse :extinct])
-  (merge tj-ilmoitus-state-graph)
-  (merge tj-hakemus-state-graph)
-  (merge tonttijako-application-state-graph)))
+      (assoc
+        :verdictGiven        [:constructionStarted :inUse :onHold :appealed :closed :extinct :canceled]
+        :constructionStarted [:inUse :onHold :closed :extinct]
+        :inUse               [:closed :onHold :extinct]
+        :onHold              [:closed :constructionStarted :inUse :extinct])))
+
+(def all-transitions-graph
+  (merge-with (comp vec distinct concat)
+              full-application-state-graph
+              tj-ilmoitus-state-graph
+              tj-hakemus-state-graph
+              tonttijako-application-state-graph))
