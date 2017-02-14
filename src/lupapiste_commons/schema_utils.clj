@@ -56,3 +56,21 @@
                                        (convert-value-to-schema-type schema-map new-ks v))]
                            [new-k new-v])))
         (into {}))))
+
+(defn- remove-empty-value [value]
+  (if (sequential? value)
+    (->> (map remove-empty-value value)
+         (remove nil?))
+    (when-not (and (or (map? value) (string? value)) (empty? value))
+      value)))
+
+(defn remove-blank-keys [metadata]
+  (reduce
+    (fn [acc [k v]]
+      (if-let [value (cond->> v
+                              (map? v) remove-blank-keys
+                              true remove-empty-value)]
+        (assoc acc k value)
+        acc))
+    {}
+    metadata))
