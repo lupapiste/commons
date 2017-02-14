@@ -67,10 +67,11 @@
 (defn remove-blank-keys [metadata]
   (reduce
     (fn [acc [k v]]
-      (if-let [value (cond->> v
-                              (map? v) remove-blank-keys
-                              true remove-empty-value)]
-        (assoc acc k value)
-        acc))
+      (let [value (cond->> v
+                           (map? v) remove-blank-keys
+                           true remove-empty-value)]
+        (if-not (nil? value)
+          (assoc acc k value)
+          acc)))
     {}
     metadata))
