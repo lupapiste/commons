@@ -34,42 +34,42 @@
   (merge
     ;; The keys that are shared with lupapiste are generally in English
     {:type (apply s/enum document-and-attachment-types)
-     (s/optional-key :contents) s/Str
-     (s/optional-key :size) s/Str
-     (s/optional-key :scale) s/Str
-     (s/optional-key :applicationId) s/Str
-     (s/optional-key :buildingIds) [s/Str]
-     (s/optional-key :nationalBuildingIds) [s/Str]
-     (s/optional-key :propertyId) s/Str
-     (s/optional-key :projectDescription) s/Str
-     :applicants [s/Str]
+     (s/optional-key :contents) tms/NonEmptyStr
+     (s/optional-key :size) tms/NonEmptyStr
+     (s/optional-key :scale) tms/NonEmptyStr
+     (s/optional-key :applicationId) tms/NonEmptyStr
+     (s/optional-key :buildingIds) [tms/NonEmptyStr]
+     (s/optional-key :nationalBuildingIds) [tms/NonEmptyStr]
+     (s/optional-key :propertyId) tms/NonEmptyStr
+     (s/optional-key :projectDescription) tms/NonEmptyStr
+     :applicants [tms/NonEmptyStr]
      :operations [(apply s/enum valid-operations)]
-     :tosFunction {:name s/Str :code s/Str}
-     :address s/Str
-     :organization s/Str
-     :municipality s/Str
+     :tosFunction {:name tms/NonEmptyStr :code tms/NonEmptyStr}
+     :address tms/NonEmptyStr
+     :organization tms/NonEmptyStr
+     :municipality tms/NonEmptyStr
      (s/optional-key :location-etrs-tm35fin) [s/Num]  ;; Coordinates
      (s/optional-key :location-wgs84) [s/Num]  ;; Coordinates
-     (s/optional-key :postinumero) s/Str
-     :kuntalupatunnukset [s/Str]
+     (s/optional-key :postinumero) tms/NonEmptyStr
+     :kuntalupatunnukset [tms/NonEmptyStr]
      (s/optional-key :lupapvm) s/Inst
      (s/optional-key :paatospvm) s/Inst
-     (s/optional-key :paatoksentekija) s/Str
-     :tiedostonimi s/Str
-     (s/optional-key :kasittelija) {(s/optional-key :username) s/Str (s/optional-key :firstName) s/Str :lastName s/Str}
-     (s/optional-key :arkistoija) {(s/optional-key :username) s/Str (s/optional-key :firstName) s/Str :lastName s/Str}
+     (s/optional-key :paatoksentekija) tms/NonEmptyStr
+     :tiedostonimi tms/NonEmptyStr
+     (s/optional-key :kasittelija) {(s/optional-key :username) tms/NonEmptyStr (s/optional-key :firstName) tms/NonEmptyStr :lastName tms/NonEmptyStr}
+     (s/optional-key :arkistoija) {(s/optional-key :username) tms/NonEmptyStr (s/optional-key :firstName) tms/NonEmptyStr :lastName tms/NonEmptyStr}
      :arkistointipvm s/Inst
      :kayttotarkoitukset [(apply s/enum valid-usage-types)]
-     (s/optional-key :suunnittelijat) [s/Str]
-     :kieli s/Str
-     :versio s/Str
-     (s/optional-key :kylanumero) s/Str
-     (s/optional-key :kylanimi) {:fi s/Str
-                                 :sv s/Str}
-     (s/optional-key :foremen) s/Str
-     (s/optional-key :tyomaasta-vastaava) s/Str
+     (s/optional-key :suunnittelijat) [tms/NonEmptyStr]
+     :kieli tms/NonEmptyStr
+     :versio tms/NonEmptyStr
+     (s/optional-key :kylanumero) tms/NonEmptyStr
+     (s/optional-key :kylanimi) {:fi tms/NonEmptyStr
+                                 :sv tms/NonEmptyStr}
+     (s/optional-key :foremen) tms/NonEmptyStr
+     (s/optional-key :tyomaasta-vastaava) tms/NonEmptyStr
      (s/optional-key :closed) s/Inst
-     (s/optional-key :drawing-wgs84) [{:type s/Str
+     (s/optional-key :drawing-wgs84) [{:type tms/NonEmptyStr
                                        :coordinates [[s/Num]]}]}
     tms/AsiakirjaMetaDataMap))
 
