@@ -56,7 +56,7 @@
      (s/optional-key :paatospvm) s/Inst
      (s/optional-key :paatoksentekija) tms/NonEmptyStr
      :tiedostonimi tms/NonEmptyStr
-     (s/optional-key :kasittelija) {(s/optional-key :username) tms/NonEmptyStr (s/optional-key :firstName) tms/NonEmptyStr :lastName tms/NonEmptyStr}
+     (s/optional-key :kasittelija) {(s/optional-key :userId) (s/optional-key :username) tms/NonEmptyStr (s/optional-key :firstName) tms/NonEmptyStr :lastName tms/NonEmptyStr}
      (s/optional-key :arkistoija) {(s/optional-key :username) tms/NonEmptyStr (s/optional-key :firstName) tms/NonEmptyStr :lastName tms/NonEmptyStr}
      :arkistointipvm s/Inst
      :kayttotarkoitukset [(apply s/enum valid-usage-types)]
