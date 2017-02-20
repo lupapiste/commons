@@ -30,6 +30,11 @@
 
 (def valid-usage-types (map :name usages/rakennuksen-kayttotarkoitus))
 
+(def UserData {(s/optional-key :userId) tms/NonEmptyStr
+               (s/optional-key :username) tms/NonEmptyStr
+               (s/optional-key :firstName) tms/NonEmptyStr
+               :lastName tms/NonEmptyStr})
+
 (def full-document-metadata
   (merge
     ;; The keys that are shared with lupapiste are generally in English
@@ -56,8 +61,8 @@
      (s/optional-key :paatospvm) s/Inst
      (s/optional-key :paatoksentekija) tms/NonEmptyStr
      :tiedostonimi tms/NonEmptyStr
-     (s/optional-key :kasittelija) {(s/optional-key :userId) (s/optional-key :username) tms/NonEmptyStr (s/optional-key :firstName) tms/NonEmptyStr :lastName tms/NonEmptyStr}
-     (s/optional-key :arkistoija) {(s/optional-key :username) tms/NonEmptyStr (s/optional-key :firstName) tms/NonEmptyStr :lastName tms/NonEmptyStr}
+     (s/optional-key :kasittelija) UserData
+     (s/optional-key :arkistoija) UserData
      :arkistointipvm s/Inst
      :kayttotarkoitukset [(apply s/enum valid-usage-types)]
      (s/optional-key :suunnittelijat) [tms/NonEmptyStr]
