@@ -75,7 +75,8 @@
      (s/optional-key :tyomaasta-vastaava) tms/NonEmptyStr
      (s/optional-key :closed) s/Inst
      (s/optional-key :drawing-wgs84) [{:type tms/NonEmptyStr
-                                       :coordinates [[s/Num]]}]}
+                                       :coordinates [[s/Num]]}]
+     (s/optional-key :ramLink) s/Str}
     tms/AsiakirjaMetaDataMap))
 
 (def full-document-metadata-with-relaxed-type
