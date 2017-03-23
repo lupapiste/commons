@@ -67,11 +67,28 @@
                   :complementNeeded :extinct :canceled])
     {:verdictGiven        [:appealed :finished :extinct :canceled]
      :finished            [:appealed :extinct :canceled]
-     :appealed            [:verdictGiven :canceled]}))
+     :appealed            [:verdictGiven]}))
 
 (def
   ^{:doc "Possible state transitions for YA sijoituslupa applications."}
-  ya-sijoittaminen-permit-state-graph
+  ya-sijoittaminen-state-graph
+  {:draft               [:open :submitted :canceled]
+   :open                [:submitted :canceled]
+   :submitted           [:sent :draft :canceled :agreementPrepared :verdictGiven]
+   :sent                [:verdictGiven :complementNeeded :agreementPrepared :canceled]
+   :complementNeeded    [:sent :canceled]
+   :verdictGiven        [:finished :appealed :extinct]
+   :agreementPrepared   [:agreementSigned :canceled]
+   :appealed            [:verdictGiven]
+   :agreementSigned     []
+   :finished            []
+   :canceled            []
+   :extinct             [] ; Rauennut
+   })
+
+(def
+  ^{:doc "Possible state transitions for YA jatkoaika applications."}
+  ya-jatkoaika-state-graph
   {:draft               [:open :submitted :canceled]
    :open                [:submitted :canceled]
    :submitted           [:sent :draft :canceled]
@@ -83,22 +100,6 @@
    :extinct             [] ; Rauennut
    })
 
-(def
-  ^{:doc "Possible state transitions for YA sijoitussopimus applications."}
-  ya-sijoittaminen-agreement-state-graph
-  {:draft               [:open :submitted :canceled]
-   :open                [:submitted :canceled]
-   :submitted           [:sent :draft :canceled]
-   :sent                [:agreementPrepared :complementNeeded :canceled]
-   :complementNeeded    [:sent :agreementPrepared :canceled]
-   :agreementPrepared   [:agreementSigned :complementNeeded :extinct :canceled]
-   :agreementSigned     [:extinct :canceled]
-   :canceled            []
-   :extinct             []})
-
-(def
-  ^{:doc "Possible state transitions for YA jatkoaika applications (initially same as ya-sijoituslupa)."}
-  ya-jatkoaika-state-graph ya-sijoittaminen-permit-state-graph)
 
 (def
   ^{:doc "All states for (currently R and P) applications.
