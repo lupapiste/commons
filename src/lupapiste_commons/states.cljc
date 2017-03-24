@@ -69,22 +69,31 @@
      :finished            [:appealed :extinct :canceled]
      :appealed            [:verdictGiven]}))
 
-(def
-  ^{:doc "Possible state transitions for YA sijoituslupa applications."}
-  ya-sijoittaminen-state-graph
+(def ya-sijoittaminen-shared-states                         ; Shared states for sijoittaminen
   {:draft               [:open :submitted :canceled]
    :open                [:submitted :canceled]
-   :submitted           [:sent :draft :canceled :agreementPrepared :verdictGiven]
-   :sent                [:verdictGiven :complementNeeded :agreementPrepared :canceled]
    :complementNeeded    [:sent :canceled]
-   :verdictGiven        [:finished :appealed :extinct]
-   :agreementPrepared   [:agreementSigned :canceled]
-   :appealed            [:verdictGiven]
-   :agreementSigned     []
-   :finished            []
-   :canceled            []
-   :extinct             [] ; Rauennut
-   })
+   :canceled            []})
+
+(def
+  ^{:doc "Possible state transitions for YA sijoituslupa subtype."}
+  ya-sijoituslupa-state-graph
+  (merge ya-sijoittaminen-shared-states
+         {:submitted           [:sent :draft :canceled :verdictGiven]
+          :sent                [:verdictGiven :complementNeeded :canceled]
+          :verdictGiven        [:finished :appealed :extinct]
+          :appealed            [:verdictGiven]
+          :finished            []
+          :extinct             []}))
+
+(def
+  ^{:doc "Possible state transitions for YA sijoitussopimus subtype."}
+  ya-sijoitussopimus-state-graph
+  (merge ya-sijoittaminen-shared-states
+         {:submitted         [:sent :draft :canceled :agreementPrepared]
+          :sent              [:agreementPrepared :complementNeeded :canceled]
+          :agreementPrepared [:agreementSigned :canceled]
+          :agreementSigned   []}))
 
 (def
   ^{:doc "Possible state transitions for YA jatkoaika applications."}
