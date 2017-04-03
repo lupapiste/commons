@@ -59,6 +59,58 @@
   default-application-state-graph)
 
 (def
+  ^{:doc "Possible state transitions for YA käyttölupa applications."}
+  ya-kayttolupa-state-graph
+  (merge
+    (select-keys default-application-state-graph
+                 [:draft :open :submitted :sent
+                  :complementNeeded :extinct :canceled])
+    {:verdictGiven        [:appealed :finished :extinct :canceled]
+     :finished            [:appealed :extinct :canceled]
+     :appealed            [:verdictGiven]}))
+
+(def ya-sijoittaminen-shared-states                         ; Shared states for sijoittaminen
+  {:draft               [:open :submitted :canceled]
+   :open                [:submitted :canceled]
+   :complementNeeded    [:sent :canceled]
+   :canceled            []})
+
+(def
+  ^{:doc "Possible state transitions for YA sijoituslupa subtype."}
+  ya-sijoituslupa-state-graph
+  (merge ya-sijoittaminen-shared-states
+         {:submitted           [:sent :draft :canceled :verdictGiven]
+          :sent                [:verdictGiven :complementNeeded :canceled]
+          :verdictGiven        [:finished :appealed :extinct]
+          :appealed            [:verdictGiven]
+          :finished            []
+          :extinct             []}))
+
+(def
+  ^{:doc "Possible state transitions for YA sijoitussopimus subtype."}
+  ya-sijoitussopimus-state-graph
+  (merge ya-sijoittaminen-shared-states
+         {:submitted         [:sent :draft :canceled :agreementPrepared]
+          :sent              [:agreementPrepared :complementNeeded :canceled]
+          :agreementPrepared [:agreementSigned :canceled]
+          :agreementSigned   []}))
+
+(def
+  ^{:doc "Possible state transitions for YA jatkoaika applications."}
+  ya-jatkoaika-state-graph
+  {:draft               [:open :submitted :canceled]
+   :open                [:submitted :canceled]
+   :submitted           [:sent :draft :canceled]
+   :sent                [:finished :complementNeeded :canceled]
+   :complementNeeded    [:sent :finished :canceled]
+   :finished            [:appealed :extinct :canceled]
+   :appealed            [:finished :canceled]
+   :canceled            []
+   :extinct             [] ; Rauennut
+   })
+
+
+(def
   ^{:doc "All states for (currently R and P) applications.
   Includes new states from KRYSP reader, which currently can't be reached via UI."}
   full-application-state-graph

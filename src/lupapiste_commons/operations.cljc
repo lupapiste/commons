@@ -85,3 +85,7 @@
    :ya-sijoituslupa-rakennuksen-pelastuspaikan-sijoittaminen
    :ya-sijoituslupa-muu-sijoituslupa
    :ya-jatkoaika])
+
+(def p-operations
+  "P operations allowed in archiving"
+  [:poikkeamis])

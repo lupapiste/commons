@@ -416,3 +416,8 @@
 
 (def types-not-transmitted-to-backing-system
   {:muut #{:paatos :paatosote}})
+
+(def types-marked-being-construction-time-attachments-by-permit-type
+  {:R (merge (-> (apply hash-map Rakennusluvat-v2)
+                 (select-keys [:erityissuunnitelmat]))
+             {:suunnitelmat [:piha_tai_istutussuunnitelma]})})
