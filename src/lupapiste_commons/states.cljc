@@ -1,5 +1,4 @@
-(ns lupapiste-commons.states
-  (:require [clojure.set :refer :all]))
+(ns lupapiste-commons.states)
 
 (def
   ^{:doc "Possible state transitions for applications.
@@ -55,9 +54,6 @@
      :final    [] ; Lain voimainen
      }))
 
-(def full-ya-application-state-graph
-  default-application-state-graph)
-
 (def
   ^{:doc "Possible state transitions for YA käyttölupa applications."}
   ya-kayttolupa-state-graph
@@ -109,6 +105,12 @@
    :extinct             [] ; Rauennut
    })
 
+(def full-ya-application-state-graph
+  (merge-with (comp vec distinct concat)
+              ya-jatkoaika-state-graph
+              ya-kayttolupa-state-graph
+              ya-sijoituslupa-state-graph
+              ya-sijoitussopimus-state-graph))
 
 (def
   ^{:doc "All states for (currently R and P) applications.
