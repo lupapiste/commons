@@ -54,6 +54,8 @@
      :final    [] ; Lain voimainen
      }))
 
+(def ya-tyolupa-state-graph default-application-state-graph)
+
 (def
   ^{:doc "Possible state transitions for YA käyttölupa applications."}
   ya-kayttolupa-state-graph
@@ -110,7 +112,8 @@
               ya-jatkoaika-state-graph
               ya-kayttolupa-state-graph
               ya-sijoituslupa-state-graph
-              ya-sijoitussopimus-state-graph))
+              ya-sijoitussopimus-state-graph
+              ya-tyolupa-state-graph))
 
 (def
   ^{:doc "All states for (currently R and P) applications.
@@ -126,6 +129,7 @@
 (def all-transitions-graph
   (merge-with (comp vec distinct concat)
               full-application-state-graph
+              full-ya-application-state-graph
               tj-ilmoitus-state-graph
               tj-hakemus-state-graph
               tonttijako-application-state-graph))
