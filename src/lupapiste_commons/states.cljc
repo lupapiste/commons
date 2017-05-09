@@ -63,8 +63,8 @@
     (select-keys default-application-state-graph
                  [:draft :open :submitted :sent
                   :complementNeeded :extinct :canceled])
-    {:verdictGiven        [:appealed :finished :extinct :canceled]
-     :finished            [:appealed :extinct :canceled]
+    {:verdictGiven        [:finished :appealed :extinct :canceled]
+     :finished            []
      :appealed            [:verdictGiven]}))
 
 (def ya-sijoittaminen-shared-states                         ; Shared states for sijoittaminen
