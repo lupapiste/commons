@@ -59,6 +59,7 @@
    :ya-katulupa-kaukolampotyot
    :ya-katulupa-kiinteiston-johto-kaapeli-ja-putkiliitynnat
    :ya-katulupa-maalampotyot
+   :ya-katulupa-muu-liikennealuetyo
    :ya-katulupa-vesi-ja-viemarityot
    :ya-kayttolupa-harrastustoiminnan-jarjestaminen
    :ya-kayttolupa-kattolumien-pudotustyot
@@ -66,7 +67,6 @@
    :ya-kayttolupa-mainostus-ja-viitoitus
    :ya-kayttolupa-metsastys
    :ya-kayttolupa-muu-kayttolupa
-   :ya-kayttolupa-muu-liikennealuetyo
    :ya-kayttolupa-muu-tyomaakaytto
    :ya-kayttolupa-nostotyot
    :ya-kayttolupa-talon-julkisivutyot
@@ -86,6 +86,10 @@
    :ya-sijoituslupa-rakennuksen-tai-sen-osan-sijoittaminen
    :ya-sijoituslupa-sahko-data-ja-muiden-kaapelien-sijoittaminen
    :ya-sijoituslupa-vesi-ja-viemarijohtojen-sijoittaminen])
+
+(def deprecated-ya-operations
+  "Add retired YA operations here to keep them valid in archiving. Leave translations available."
+  [:ya-kayttolupa-muu-liikennealuetyo])
 
 (def p-operations
   "P operations allowed in archiving"
