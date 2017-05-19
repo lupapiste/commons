@@ -19,6 +19,16 @@
    })
 
 (def
+  ^{:doc "Possible state transitions for inforequests.
+          Key is the starting state, first in the value vector is the default next state and
+          the rest are other possible next states."}
+  default-inforequest-state-graph
+  (array-map
+    :info     [:answered :canceled]
+    :answered [:info]
+    :canceled []))
+
+(def
   ^{:doc "See default-application-state-graph"}
   tj-ilmoitus-state-graph
   (merge
@@ -132,4 +142,5 @@
               full-ya-application-state-graph
               tj-ilmoitus-state-graph
               tj-hakemus-state-graph
-              tonttijako-application-state-graph))
+              tonttijako-application-state-graph
+              default-inforequest-state-graph))
