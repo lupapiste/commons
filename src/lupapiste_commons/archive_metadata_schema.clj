@@ -81,3 +81,6 @@
 
 (def full-document-metadata-with-relaxed-type
   (assoc full-document-metadata :type s/Keyword))
+
+(def full-case-file-metadata
+  (dissoc full-document-metadata :nakyvyys :myyntipalvelu))
