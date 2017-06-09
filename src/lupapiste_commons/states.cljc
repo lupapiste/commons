@@ -73,7 +73,7 @@
     (select-keys default-application-state-graph
                  [:draft :open :submitted :sent
                   :complementNeeded :extinct :canceled])
-    {:verdictGiven        [:finished :appealed :extinct :canceled]
+    {:verdictGiven        [:finished :appealed :extinct :canceled :verdictGiven]
      :finished            []
      :appealed            [:verdictGiven]}))
 
@@ -89,7 +89,7 @@
   (merge ya-sijoittaminen-shared-states
          {:submitted           [:sent :draft :canceled :verdictGiven]
           :sent                [:verdictGiven :complementNeeded :canceled]
-          :verdictGiven        [:finished :appealed :extinct]
+          :verdictGiven        [:finished :appealed :extinct :verdictGiven]
           :appealed            [:verdictGiven]
           :finished            []
           :extinct             []}))
@@ -100,7 +100,7 @@
   (merge ya-sijoittaminen-shared-states
          {:submitted         [:sent :draft :canceled :agreementPrepared]
           :sent              [:agreementPrepared :complementNeeded :canceled]
-          :agreementPrepared [:agreementSigned :canceled]
+          :agreementPrepared [:agreementSigned :canceled :agreementPrepared]
           :agreementSigned   []}))
 
 (def
@@ -111,7 +111,7 @@
    :submitted           [:sent :draft :canceled]
    :sent                [:finished :complementNeeded :canceled]
    :complementNeeded    [:sent :finished :canceled]
-   :finished            [:appealed :extinct :canceled]
+   :finished            [:appealed :extinct :canceled :sent]
    :appealed            [:finished :canceled]
    :canceled            []
    :extinct             [] ; Rauennut
