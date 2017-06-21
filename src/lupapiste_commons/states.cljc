@@ -117,6 +117,14 @@
    :extinct             [] ; Rauennut
    })
 
+(def
+  ^{:doc "State transitions for archiving / digitizing projects (ARK)"}
+  ark-state-graph
+  {:open             [:underReview :archived]
+   :underReview      [:archived :open :canceled]
+   :archived         []
+   :canceled         []})
+
 (def full-ya-application-state-graph
   (merge-with (comp vec distinct concat)
               ya-jatkoaika-state-graph
