@@ -94,3 +94,6 @@
 (def p-operations
   "P operations allowed in archiving"
   [:poikkeamis])
+
+(def archiving-project-operations
+  [:archiving-project])

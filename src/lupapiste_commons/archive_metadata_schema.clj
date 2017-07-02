@@ -26,7 +26,11 @@
                                        (concat (groups->dotted-keywords attachment-types/Rakennusluvat-v2))
                                        (concat (groups->dotted-keywords attachment-types/YleistenAlueidenLuvat-v2))))
 
-(def valid-operations (concat operations/r-operations operations/ya-operations operations/deprecated-ya-operations operations/p-operations))
+(def valid-operations (concat operations/r-operations
+                              operations/ya-operations
+                              operations/deprecated-ya-operations
+                              operations/p-operations
+                              operations/archiving-project-operations))
 
 (def valid-usage-types (map :name usages/rakennuksen-kayttotarkoitus))
 
