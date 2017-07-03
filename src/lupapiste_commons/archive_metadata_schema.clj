@@ -63,6 +63,7 @@
      :kuntalupatunnukset [tms/NonEmptyStr]
      (s/optional-key :lupapvm) s/Inst
      (s/optional-key :paatospvm) s/Inst
+     (s/optional-key :jattopvm) s/Inst
      (s/optional-key :paatoksentekija) tms/NonEmptyStr
      :tiedostonimi tms/NonEmptyStr
      (s/optional-key :kasittelija) UserData
