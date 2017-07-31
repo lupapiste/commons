@@ -63,6 +63,9 @@
 (def Tila {:type :tila
            :values [:luonnos :valmis :arkistoidaan :arkistoitu]})
 
+(def TojTila {:type :tila
+              :values [:luonnos :valmis]})
+
 (def Myyntipalvelu {:type :myyntipalvelu
                     :schema s/Bool})
 
@@ -126,6 +129,10 @@
 (def ConstrainedAsiakirjaMetadataMap
   (s/constrained AsiakirjaMetaDataMap valid-dependencies? "All required keys present in metadata"))
 
+(def TojAsiakirjaMetaDataMap
+  (-> (assoc AsiakirjaMetaDataMap :tila (apply s/enum (:values TojTila)))
+      (s/constrained valid-dependencies? "All required keys present in metadata")))
+
 (def default-metadata
   {:julkisuusluokka :julkinen
    :sailytysaika {:arkistointi :ei
@@ -167,6 +174,9 @@
 
 (def asiakirja-metadata-fields
   [Tila Myyntipalvelu Nakyvyys])
+
+(def toj-asiakirja-metadata-fields
+  [TojTila Myyntipalvelu Nakyvyys])
 
 (defn sailytysaika-to-s2-xml [{:keys [arkistointi] :as sailytysaika}]
   (let [replacement-map {:pituus :RetentionPeriod
