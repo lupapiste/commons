@@ -36,9 +36,12 @@
 
 (def Coordinates (s/pair s/Num "x" s/Num "y"))
 
-(defn- some-location-exists? [{:keys [location-etrs-tm35fin location-wgs84]}]
-  (or (seq location-etrs-tm35fin)
-      (seq location-wgs84)))
+(defn- some-location-and-permit-id-exist?
+  [{:keys [location-etrs-tm35fin location-wgs84 applicationId kuntalupatunnukset]}]
+  (and (or (seq location-etrs-tm35fin)
+           (seq location-wgs84))
+       (or applicationId
+           (seq kuntalupatunnukset))))
 
 (def UserData {(s/optional-key :userId) tms/NonEmptyStr
                (s/optional-key :username) tms/NonEmptyStr
@@ -97,4 +100,4 @@
   (dissoc full-document-metadata :nakyvyys :myyntipalvelu))
 
 (def full-document-metadata-location-required
-  (s/constrained full-document-metadata some-location-exists?))
+  (s/constrained full-document-metadata some-location-and-permit-id-exist?))
