@@ -34,6 +34,12 @@
 
 (def valid-usage-types (map :name usages/rakennuksen-kayttotarkoitus))
 
+(def Coordinates (s/pair s/Num "x" s/Num "y"))
+
+(defn- some-location-exists? [{:keys [location-etrs-tm35fin location-wgs84]}]
+  (or (seq location-etrs-tm35fin)
+      (seq location-wgs84)))
+
 (def UserData {(s/optional-key :userId) tms/NonEmptyStr
                (s/optional-key :username) tms/NonEmptyStr
                (s/optional-key :firstName) tms/NonEmptyStr
@@ -57,8 +63,8 @@
      :address tms/NonEmptyStr
      :organization tms/NonEmptyStr
      :municipality tms/NonEmptyStr
-     (s/optional-key :location-etrs-tm35fin) [s/Num]  ;; Coordinates
-     (s/optional-key :location-wgs84) [s/Num]  ;; Coordinates
+     (s/optional-key :location-etrs-tm35fin) Coordinates
+     (s/optional-key :location-wgs84) Coordinates
      (s/optional-key :postinumero) tms/NonEmptyStr
      :kuntalupatunnukset [tms/NonEmptyStr]
      (s/optional-key :lupapvm) s/Inst
@@ -89,3 +95,6 @@
 
 (def full-case-file-metadata
   (dissoc full-document-metadata :nakyvyys :myyntipalvelu))
+
+(def full-document-metadata-location-required
+  (s/constrained full-document-metadata some-location-exists?))

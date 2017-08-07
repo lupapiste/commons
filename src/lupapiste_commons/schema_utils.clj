@@ -29,6 +29,7 @@
 
 (defn- parse-value [schema v]
   (cond
+    (= schema.core.One (type schema)) (parse-value (:schema schema) v)
     (= EnumSchema (type schema)) (coerce-to-enum-type schema v)
     (and (= s/Str schema) (keyword? v)) (name v)
     (not (string? v)) v
@@ -47,15 +48,18 @@
 (defn coerce-metadata-to-schema
   ([schema-map m]
    (coerce-metadata-to-schema schema-map m []))
-  ([schema-map m ks]
-   (->> m
-        (map (fn [[k v]] (let [new-k (keyword k)
-                               new-ks (conj ks new-k)
-                               new-v (if (map? v)
-                                       (coerce-metadata-to-schema schema-map v new-ks)
-                                       (convert-value-to-schema-type schema-map new-ks v))]
-                           [new-k new-v])))
-        (into {}))))
+  ([schema-map-or-constrained m ks]
+   (let [schema-map (if (= schema.core.Constrained (type schema-map-or-constrained))
+                      (second (first schema-map-or-constrained))
+                      schema-map-or-constrained)]
+     (->> m
+          (map (fn [[k v]] (let [new-k (keyword k)
+                                 new-ks (conj ks new-k)
+                                 new-v (if (map? v)
+                                         (coerce-metadata-to-schema schema-map v new-ks)
+                                         (convert-value-to-schema-type schema-map new-ks v))]
+                             [new-k new-v])))
+          (into {})))))
 
 (defn- remove-empty-value [value]
   (if (sequential? value)
