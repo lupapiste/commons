@@ -152,3 +152,9 @@
               tj-hakemus-state-graph
               tonttijako-application-state-graph
               default-inforequest-state-graph))
+
+(def r-and-tj-transitions
+  (merge-with (comp vec distinct concat)
+              full-application-state-graph
+              tj-ilmoitus-state-graph
+              tj-hakemus-state-graph))
