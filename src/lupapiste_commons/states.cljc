@@ -120,7 +120,7 @@
 (def
   ^{:doc "State transitions for archiving / digitizing projects (ARK)"}
   ark-state-graph
-  {:open             [:underReview :archived]
+  {:open             [:underReview :archived :canceled]
    :underReview      [:archived :open :canceled]
    :archived         []
    :canceled         []})
