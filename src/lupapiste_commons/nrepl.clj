@@ -3,12 +3,12 @@
             [com.stuartsierra.component :as component]
             [taoensso.timbre :as timbre]))
 
-(defrecord NreplServer [port]
+(defrecord NreplServer [port bind]
   component/Lifecycle
   (start [this]
     (if (:server this)
       this
-      (let [component (assoc this :server (nrepl-server/start-server :port port))]
+      (let [component (assoc this :server (nrepl-server/start-server :port port :bind bind))]
         (timbre/info (str "Started nrepl server in port: " port))
         component)))
   (stop [this]
@@ -18,4 +18,4 @@
     (assoc this :server nil)))
 
 (defn new-nrepl-server [port]
-  (map->NreplServer {:port port}))
+  (map->NreplServer {:port port :bind "localhost"}))

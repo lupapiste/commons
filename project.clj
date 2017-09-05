@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.7.120"
+(defproject lupapiste/commons "0.7.121"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "European Union Public License"
@@ -6,7 +6,7 @@
             :distribution :repo}
   :scm {:url "https://github.com/lupapiste/commons.git"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/tools.nrepl "0.2.12"]
+                 [org.clojure/tools.nrepl "0.2.13"]
                  [ontodev/excel "0.2.4" :exclusions [xml-apis org.apache.poi/poi-ooxml]]
                  [org.apache.poi/poi-ooxml "3.15"]
                  [org.flatland/ordered "1.5.4"]

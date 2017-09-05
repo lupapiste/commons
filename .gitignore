@@ -18,3 +18,5 @@ commons.iml
 .settings/
 *.orig
 *.log
+.DS_Store
+
