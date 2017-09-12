@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.8.0"
+(defproject lupapiste/commons "0.8.1"
   :description "Common domain code and resources for lupapiste and lupapiste-toj"
   :url "http://www.solita.fi"
   :license {:name "European Union Public License"
