@@ -36,6 +36,7 @@
    :pientalo-laaj
    :purkaminen
    :puun-kaataminen
+   :rakennustietojen-korjaus
    :rak-valm-tyo
    :raktyo-aloit-loppuunsaat
    :sisatila-muutos
