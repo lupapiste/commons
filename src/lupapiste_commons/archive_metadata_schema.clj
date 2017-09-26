@@ -93,8 +93,9 @@
      (s/optional-key :ramLink) s/Str}
     tms/AsiakirjaMetaDataMap))
 
-(def full-document-metadata-with-relaxed-type
-  (assoc full-document-metadata :type s/Keyword))
+(def validation-schema-for-onkalo-update-metadata
+  (assoc full-document-metadata :type s/Keyword
+                                (s/optional-key :history) s/Any))
 
 (def full-case-file-metadata
   (dissoc full-document-metadata :nakyvyys :myyntipalvelu))
