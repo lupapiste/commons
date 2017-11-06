@@ -89,7 +89,7 @@
      (s/optional-key :tyomaasta-vastaava) tms/NonEmptyStr
      (s/optional-key :closed) s/Inst
      (s/optional-key :drawing-wgs84) [{:type tms/NonEmptyStr
-                                       :coordinates [[s/Num]]}]
+                                       :coordinates [s/Any]}]
      (s/optional-key :ramLink) s/Str}
     tms/AsiakirjaMetaDataMap))
 
