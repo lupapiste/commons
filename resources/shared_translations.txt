@@ -4187,7 +4187,7 @@
 "operations.tree.Vapaa-ajan asuinrakennus" "sv" "Byggande av fritidsbostad eller bastubyggnad"
 "operations.tree.Varasto, sauna, autotalli tai muu talousrakennus" "en" "Construction of a Warehouse, garage or other outbuilding"
 "operations.tree.Varasto, sauna, autotalli tai muu talousrakennus" "fi" "Varaston, autotallin tai muun talousrakennuksen rakentaminen"
-"operations.tree.Varasto, sauna, autotalli tai muu talousrakennus" "sv" "Byggande av fritidsbostadshus, bastubyggnad eller gästhus"
+"operations.tree.Varasto, sauna, autotalli tai muu talousrakennus" "sv" "Byggande av ekonomibyggnad, garage eller annan ekonomibyggnad"
 "operations.tree.Ympäristöluvat" "en" "Activities that affect the environment"
 "operations.tree.Ympäristöluvat" "fi" "Ympäristöön vaikuttava toiminta"
 "operations.tree.Ympäristöluvat" "sv" "Verksamhet som har miljökonsekvenser"
