@@ -32,6 +32,7 @@
     (= schema.core.One (type schema)) (parse-value (:schema schema) v)
     (= EnumSchema (type schema)) (coerce-to-enum-type schema v)
     (and (= s/Str schema) (keyword? v)) (name v)
+    (and (= s/Keyword schema) (string? v)) (keyword v)
     (not (string? v)) v
     (= s/Int schema) (Integer/parseInt v)
     (= s/Num schema) (Double/parseDouble v)

@@ -94,8 +94,11 @@
     tms/AsiakirjaMetaDataMap))
 
 (def validation-schema-for-onkalo-update-metadata
-  (assoc full-document-metadata :type s/Keyword
-                                (s/optional-key :history) s/Any))
+  (-> (dissoc full-document-metadata (s/optional-key :location-wgs84))
+      (assoc :type s/Keyword
+             (s/optional-key :history) s/Any
+             :location-wgs84 [{:type tms/NonEmptyStr
+                               :coordinates [s/Any]}])))
 
 (def full-case-file-metadata
   (dissoc full-document-metadata :nakyvyys :myyntipalvelu))
