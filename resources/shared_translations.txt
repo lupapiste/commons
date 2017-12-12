@@ -1437,7 +1437,7 @@
 "footer.current-issues.href" "fi" "/asiakastuki/ajankohtaisimmat-kysymykset"
 "footer.current-issues.href" "sv" "link not available in Swedish"
 "footer.current-issues.text" "en" "irrelevant"
-"footer.current-issues.text" "fi" "Yleisimmät ongelmatilanteet"
+"footer.current-issues.text" "fi" "Tukipalvelu (maksuton)"
 "footer.current-issues.text" "sv" "irrelevant"
 "footer.email.authority.href" "en" "mailto:tuki@lupapiste.fi"
 "footer.email.authority.href" "fi" "mailto:tuki@lupapiste.fi"
