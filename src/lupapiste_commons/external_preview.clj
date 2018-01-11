@@ -7,7 +7,7 @@
 
 (def pdf-preview-path "/pdf/pdf-preview")
 
-(defn- placeholder-image-is []
+(defn placeholder-image-is []
   (io/input-stream (io/resource "no-preview-available.jpg")))
 
 (defn- fetch-jpeg-thumbnail [muuntaja-url ^InputStream pdf-file]
