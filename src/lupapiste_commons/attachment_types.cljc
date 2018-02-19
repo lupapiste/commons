@@ -122,6 +122,7 @@
                                 :suunnittelutarveratkaisu
                                 :ymparistolupa
                                 :lausunto
+                                :lausunnon_liite
                                 :ennakkoneuvottelumuistio
                                 :vesi_ja_viemariliitoslausunto_tai_kartta
                                 :paatos_ajoliittymasta
