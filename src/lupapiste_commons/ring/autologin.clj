@@ -1,6 +1,7 @@
 (ns lupapiste-commons.ring.autologin
   (:require [clojure.core.memoize :as memo]
-            [clj-http.client :as http]))
+            [clj-http.client :as http]
+            [taoensso.timbre :as timbre]))
 
 (defn- keyword-authz [org-authz]
   (reduce (fn [acc [k vs]]
@@ -27,7 +28,12 @@
           (-> (assoc request :autologin-user user)
               (handler))
           (handler request))
-        (catch Throwable t
-          (let [{:keys [status body]} (ex-data t)]
-            {:status (or status 500)
-             :body (or body "Unknown authentication error")}))))))
+        (catch Exception e
+          (let [{:keys [status body]} (ex-data e)]
+            (if status
+              (do
+                (timbre/warn e)
+                {:status status
+                 :body   (or body "Unknown authentication error")})
+              ; Probably an exception from the handler chain
+              (throw e))))))))
