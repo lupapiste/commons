@@ -92,7 +92,7 @@
                                        :coordinates [s/Any]}]
      (s/optional-key :ramLink) s/Str
      (s/optional-key :deleted) s/Inst
-     (s/optional-key :explanation) s/Str}
+     (s/optional-key :deletion-explanation) s/Str}
     tms/AsiakirjaMetaDataMap))
 
 (def validation-schema-for-onkalo-update-metadata
