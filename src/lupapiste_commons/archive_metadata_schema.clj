@@ -90,7 +90,9 @@
      (s/optional-key :closed) s/Inst
      (s/optional-key :drawing-wgs84) [{:type tms/NonEmptyStr
                                        :coordinates [s/Any]}]
-     (s/optional-key :ramLink) s/Str}
+     (s/optional-key :ramLink) s/Str
+     (s/optional-key :deleted) s/Inst
+     (s/optional-key :explanation) s/Str}
     tms/AsiakirjaMetaDataMap))
 
 (def validation-schema-for-onkalo-update-metadata
