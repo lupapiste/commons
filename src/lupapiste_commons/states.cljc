@@ -125,6 +125,22 @@
    :archived         []
    :canceled         []})
 
+(def
+  ^{:doc "Possible state transitions for R jatkoaika operations."}
+  r-jatkoaika-state-graph
+  (merge
+    (select-keys default-application-state-graph
+                 [:draft :open :submitted :extinct :canceled])
+    {:sent                [:ready :complementNeeded :canceled]
+     :complementNeeded    [:sent :ready :canceled]
+     :ready               [:appealed :extinct :canceled :sent]
+     :appealed            [:ready :canceled]}))
+
+(def
+  ^{:doc "Possible state transitions for muutoslupa operations."}
+  r-muutoslupa-state-graph
+  r-jatkoaika-state-graph)
+
 (def full-ya-application-state-graph
   (merge-with (comp vec distinct concat)
               ya-jatkoaika-state-graph
