@@ -1,8 +1,8 @@
-(defproject lupapiste/commons "0.9.11"
-  :description "Common domain code and resources for lupapiste and lupapiste-toj"
+(defproject lupapiste/commons "0.9.12"
+  :description "Common domain code and resources for lupapiste applications"
   :url "https://www.evolta.fi"
-  :license {:name "European Union Public License"
-            :url "https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"
             :distribution :repo}
   :scm {:url "https://github.com/lupapiste/commons.git"}
   :dependencies [[org.clojure/clojure "1.8.0"]
