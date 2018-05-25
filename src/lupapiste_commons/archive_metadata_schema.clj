@@ -43,10 +43,17 @@
        (or applicationId
            (seq kuntalupatunnukset))))
 
-(def UserData {(s/optional-key :userId) tms/NonEmptyStr
-               (s/optional-key :username) tms/NonEmptyStr
-               (s/optional-key :firstName) tms/NonEmptyStr
-               :lastName tms/NonEmptyStr})
+
+(defn some-user-data-exists? [{:keys [userId username firstName lastName]}]
+  (or userId username firstName lastName))
+
+(def UserData
+  (s/constrained
+    {(s/optional-key :userId) tms/NonEmptyStr
+     (s/optional-key :username) tms/NonEmptyStr
+     (s/optional-key :firstName) tms/NonEmptyStr
+     (s/optional-key :lastName) tms/NonEmptyStr}
+    some-user-data-exists?))
 
 (def full-document-metadata
   (merge
