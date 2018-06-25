@@ -147,6 +147,7 @@
                              :kiinteiston_lohkominen
                              :sopimusjaljennos]
    :rakennuspaikka [:karttaaineisto
+                    :karttaote
                     :ote_alueen_peruskartasta
                     :ote_asemakaavasta_jos_asemakaava_alueella
                     :ote_kiinteistorekisteristerista
@@ -163,6 +164,7 @@
                  :haittaaineselvitys
                  :kokoontumishuoneisto
                  :kosteudenhallintaselvitys
+                 :kuntotarkastusselvitys
                  :laadunvarmistusselvitys
                  :liikkumis_ja_esteettomyysselvitys
                  :lomarakennuksen_muutos_asuinrakennukseksi_selvitys_maaraysten_toteutumisesta
@@ -202,11 +204,13 @@
                          :kalliorakentamistekninen_suunnitelma
                          :kvv_suunnitelma
                          :lammityslaitesuunnitelma
+                         :pintatasaussuunnitelma
                          :pohjarakennesuunnitelma
                          :pohjaveden_hallintasuunnitelma
                          :radontekninen_suunnitelma
                          :rakennesuunnitelma
-                         :sahkosuunnitelma]
+                         :sahkosuunnitelma
+                         :tulisija_ja_hormisuunnitelma]
    :pelastusviranomaiselle_esitettavat_suunnitelmat [:merkki_ja_turvavalaistussuunnitelma
                                                      :palotekninen_lausunto
                                                      :paloturvallisuussuunnitelma
@@ -223,12 +227,16 @@
                    :paatosote
                    :valitusosoitus
                    :poytakirjaote
-                   :muistio]
+                   :muistio
+                   :paatoksen_liite]
    :muutoksenhaku [:huomautus
                    :valitus
                    :oikaisuvaatimus]
    :katselmukset_ja_tarkastukset [:aloituskokouksen_poytakirja
+                                  :katselmuksen_liite
                                   :katselmuksen_tai_tarkastuksen_poytakirja
+                                  :kayttoonottokatselmuksen_poytakirja
+                                  :loppukatselmuksen_poytakirja
                                   :tarkastusasiakirja
                                   :tarkastusasiakirjan_yhteeveto]
    :tietomallit [:rakennuksen_tietomalli_BIM
@@ -239,6 +247,7 @@
           :sijoituslupaasiakirja
           :suorituskyvyttomyysvakuusasiakirja
           :tutkimus
+          :vakuusasiakirja
           :valokuva
           :muu]])
 
@@ -281,7 +290,8 @@
    :ennakkoluvat_ja_lausunnot [:lausunto]
    :muut [:muu
           :paatos
-          :paatosote]])
+          :paatosote
+          :sopimus]])
 
 (def Ymparistoilmoitukset
   [:kartat [:kartta-melun-ja-tarinan-leviamisesta]
@@ -416,7 +426,8 @@
           :paatosote]])
 
 (def types-not-transmitted-to-backing-system
-  {:muut #{:paatos :paatosote}})
+  {:muut #{:paatos :paatosote :sopimus}
+   :paatoksenteko #{:paatoksen_liite}})
 
 (def types-marked-being-construction-time-attachments-by-permit-type
   {:R (merge (-> (apply hash-map Rakennusluvat-v2)
