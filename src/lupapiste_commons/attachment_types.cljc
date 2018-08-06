@@ -61,6 +61,7 @@
           :kalliorakentamistekninen_suunnitelma
           :katselmuksen_tai_tarkastuksen_poytakirja
           :kerrosalaselvitys
+          :keskustelu
           :liikkumis_ja_esteettomyysselvitys
           :lomarakennuksen_muutos_asuinrakennukseksi_selvitys_maaraysten_toteutumisesta
           :lammityslaitesuunnitelma
@@ -242,6 +243,7 @@
    :tietomallit [:rakennuksen_tietomalli_BIM
                  :ympariston_tietomalli_BIM]
    :muut [:erityismenettelyasiakirja
+          :keskustelu
           :luonnos
           :piirustusluettelo
           :sijoituslupaasiakirja
@@ -269,7 +271,8 @@
    :muut [:muu
           :paatos
           :paatosote
-          :lupaehto]])
+          :lupaehto
+          :keskustelu]])
 
 (def YleistenAlueidenLuvat-v2
   [:yleiset-alueet [:aiemmin-hankittu-sijoituspaatos
@@ -291,13 +294,15 @@
    :muut [:muu
           :paatos
           :paatosote
-          :sopimus]])
+          :sopimus
+          :keskustelu]])
 
 (def Ymparistoilmoitukset
   [:kartat [:kartta-melun-ja-tarinan-leviamisesta]
    :muut [:muu
           :paatos
-          :paatosote]])
+          :paatosote
+          :keskustelu]])
 
 (def Ymparistolupa
    [:laitoksen_tiedot [:voimassa_olevat_ymparistolupa_vesilupa
@@ -356,7 +361,8 @@
            :selvitys_suuronnettomuuden_vaaran_arvioimiseksi
            :muu
            :paatos
-           :paatosote]])
+           :paatosote
+           :keskustelu]])
 
 (def Maa-ainesluvat
   [:hakija [:valtakirja
@@ -376,7 +382,8 @@
           :pohjavesitutkimus
           :muu
           :paatos
-          :paatosote]])
+          :paatosote
+          :keskustelu]])
 
 (def Kiinteistotoimitus
   [:hakija [:valtakirja
@@ -398,7 +405,8 @@
                           :ote_osakeyhtion_hallituksen_kokouksen_poytakirjasta]
    :muut [:muu
           :paatos
-          :paatosote]])
+          :paatosote
+          :keskustelu]])
 
 (def MuutYmparistoluvat ; wip
   [:muistomerkin-rauhoittaminen [:kirjallinen-aineisto
@@ -423,10 +431,11 @@
    :maastoliikennelaki-kilpailut-ja-harjoitukset [:asemapiirros-kilpailu-tai-harjoitusalueesta]
    :muut [:muu
           :paatos
-          :paatosote]])
+          :paatosote
+          :keskustelu]])
 
 (def types-not-transmitted-to-backing-system
-  {:muut #{:paatos :paatosote :sopimus}
+  {:muut #{:paatos :paatosote :sopimus :keskustelu}
    :paatoksenteko #{:paatoksen_liite}})
 
 (def types-marked-being-construction-time-attachments-by-permit-type
