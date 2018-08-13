@@ -928,7 +928,7 @@
 "attachmentType.paapiirustus.aitapiirustus" "en" "Fence drawing"
 "attachmentType.paapiirustus.aitapiirustus" "fi" "Aitapiirustus"
 "attachmentType.paapiirustus.aitapiirustus" "sv" "Inhägnadsritning"
-"attachmentType.paapiirustus.asemapiirros" "en" "Station drawing"
+"attachmentType.paapiirustus.asemapiirros" "en" "Site plan"
 "attachmentType.paapiirustus.asemapiirros" "fi" "Asemapiirros"
 "attachmentType.paapiirustus.asemapiirros" "sv" "Situationsplan"
 "attachmentType.paapiirustus.julkisivupiirros" "en" "Facade drawing"
