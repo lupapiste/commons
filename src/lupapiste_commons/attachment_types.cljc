@@ -229,7 +229,8 @@
                    :valitusosoitus
                    :poytakirjaote
                    :muistio
-                   :paatoksen_liite]
+                   :paatoksen_liite
+                   :paatosehdotus]
    :muutoksenhaku [:huomautus
                    :valitus
                    :oikaisuvaatimus]
