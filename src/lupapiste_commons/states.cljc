@@ -126,6 +126,17 @@
    :canceled         []})
 
 (def
+  ^{:doc "Possible state transitions for Allu operations."}
+  allu-state-graph
+  {:draft               [:open :submitted :canceled]
+   :open                [:submitted :canceled]
+   :submitted           [:sent :draft :canceled]
+   :sent                [:verdictGiven :complementNeeded :canceled]
+   :complementNeeded    [:sent :canceled]
+   :verdictGiven        [:canceled]
+   :canceled            []})
+
+(def
   ^{:doc "Possible state transitions for R jatkoaika operations."}
   r-jatkoaika-state-graph
   (merge
@@ -167,7 +178,8 @@
               tj-ilmoitus-state-graph
               tj-hakemus-state-graph
               tonttijako-application-state-graph
-              default-inforequest-state-graph))
+              default-inforequest-state-graph
+              allu-state-graph))
 
 (def r-and-tj-transitions
   (merge-with (comp vec distinct concat)
