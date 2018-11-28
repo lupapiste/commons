@@ -5163,3 +5163,4 @@
 "operations.tree.promootio" "fi" "Promootio"
 "operations.tree.promootio" "en" "Promotion"
 "operations.tree.lyhytaikainen-maanvuokraus" "fi" "Lyhytaikainen maanvuokraus"
+"attachmentType.allu._group_label" "fi" "Allu-hakemukset"

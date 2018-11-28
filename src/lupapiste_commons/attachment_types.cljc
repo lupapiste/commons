@@ -298,6 +298,22 @@
           :sopimus
           :keskustelu]])
 
+(def Allu
+  [:allu [ :suunnitelmakartta
+          :tilapainen-liikennejarjestelysuunnitelma
+          :tyoalueen-kuvaus
+          :valokuva
+          :valtakirja]
+   :osapuolet [:patevyystodistus]
+   ;; This is needed for statement attachments to work.
+   :katselmukset_ja_tarkastukset [:katselmuksen_tai_tarkastuksen_poytakirja]
+   :ennakkoluvat_ja_lausunnot [:lausunto]
+   :muut [:muu
+          :paatos
+          :paatosote
+          :sopimus
+          :keskustelu]])
+
 (def Ymparistoilmoitukset
   [:kartat [:kartta-melun-ja-tarinan-leviamisesta]
    :muut [:muu
