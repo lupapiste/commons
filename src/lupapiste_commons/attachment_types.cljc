@@ -299,11 +299,11 @@
           :keskustelu]])
 
 (def Allu
-  [:allu [ :suunnitelmakartta
-          :tilapainen-liikennejarjestelysuunnitelma
-          :tyoalueen-kuvaus
-          :valokuva
-          :valtakirja]
+  [:yleiset-alueet [ :suunnitelmakartta
+                    :tilapainen-liikennejarjestelysuunnitelma
+                    :tyoalueen-kuvaus
+                    :valokuva
+                    :valtakirja]
    :osapuolet [:patevyystodistus]
    ;; This is needed for statement attachments to work.
    :katselmukset_ja_tarkastukset [:katselmuksen_tai_tarkastuksen_poytakirja]
