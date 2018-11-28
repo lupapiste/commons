@@ -435,6 +435,16 @@
           :paatosote
           :keskustelu]])
 
+(def VesihuoltoVapautushakemukset  ; VVVL - Vesihuoltolain mukaiset vapautushakemukset
+  [:vapautushakemukset [:analyysitulos-kaivovedesta
+                        :asemapiirros
+                        :varallisuusselvitys
+                        :jatevesiselvitys]
+   :muut [:muu
+          :paatos
+          :paatosote
+          :keskustelu]])
+
 (def types-not-transmitted-to-backing-system
   {:muut #{:paatos :paatosote :sopimus :keskustelu}
    :paatoksenteko #{:paatoksen_liite}})
