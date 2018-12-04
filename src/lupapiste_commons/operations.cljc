@@ -16,6 +16,7 @@
    :kayttotark-muutos
    :kerrostalo-rivitalo
    :kerrostalo-rt-laaj
+   :konversio
    :kortteli-yht-alue-muutos
    :laajentaminen
    :linjasaneeraus
