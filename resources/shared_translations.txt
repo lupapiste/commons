@@ -5087,6 +5087,7 @@
 "rakennuspaikka-kuntagml.kiinteisto.rekisterointipvm" "fi" "Rekisteröintipäivä"
 "rakennuspaikka-kuntagml.kiinteisto.tilanNimi" "fi" "Tilan nimi"
 "rakennuspaikka-kuntagml.kiinteisto.vesipintaala" "fi" "Vesipinta-ala"
+"rakennuspaikka-kuntagml.kiinteisto.maaraalaTunnus" "fi" "Määräalatunnus"
 "rakennuspaikka-kuntagml.osoite._group_label" "fi" "Osoite"
 "rakennuspaikka-kuntagml.osoite.kunta" "fi" "Kunta"
 "rakennuspaikka-kuntagml.osoite.osoitenimi" "fi" "Osoitenimi"
