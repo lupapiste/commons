@@ -5093,6 +5093,7 @@
 "rakennuspaikka-kuntagml.osoite.osoitenimi" "fi" "Osoitenimi"
 "rakennuspaikka-kuntagml.osoite.osoitenumero" "fi" "Osoitenumero"
 "rakennuspaikka-kuntagml.osoite.postinumero" "fi" "Postinumero"
+"rakennuspaikka-kuntagml.osoite.kaupunginosanumero" "fi" "Kaupunginosanumero"
 "rakennuspaikka-kuntagml.osoite.postitoimipaikannimi" "fi" "Postitoimipaikan nimi"
 "ready" "en" "Case is processed"
 "ready" "fi" "Asia käsitelty"
