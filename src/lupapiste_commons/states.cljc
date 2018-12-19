@@ -111,7 +111,7 @@
    :submitted           [:sent :draft :canceled]
    :sent                [:finished :complementNeeded :canceled]
    :complementNeeded    [:sent :finished :canceled]
-   :finished            [:appealed :extinct :canceled :sent]
+   :finished            [:appealed :extinct :canceled]
    :appealed            [:finished :canceled]
    :canceled            []
    :extinct             [] ; Rauennut
@@ -144,7 +144,7 @@
                  [:draft :open :submitted :extinct :canceled])
     {:sent                [:ready :complementNeeded :canceled]
      :complementNeeded    [:sent :ready :canceled]
-     :ready               [:appealed :extinct :canceled :sent]
+     :ready               [:appealed :extinct :canceled]
      :appealed            [:ready :canceled]}))
 
 (def
