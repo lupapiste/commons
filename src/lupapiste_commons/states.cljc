@@ -184,5 +184,6 @@
 (def r-and-tj-transitions
   (merge-with (comp vec distinct concat)
               full-application-state-graph
+              default-inforequest-state-graph
               tj-ilmoitus-state-graph
               tj-hakemus-state-graph))
