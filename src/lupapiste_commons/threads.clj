@@ -1,7 +1,8 @@
 (ns lupapiste-commons.threads
-  (:import  [java.util.concurrent Executors ThreadFactory Future]))
+  (:import [java.util.concurrent Executors ThreadFactory Future ExecutorService]
+           [clojure.lang IPending]))
 
-(defn thread-factory [worker-name]
+(defn thread-factory ^ThreadFactory [worker-name]
   (let [security-manager (System/getSecurityManager)
         thread-group (if security-manager
                        (.getThreadGroup security-manager)
@@ -13,13 +14,13 @@
           (.setDaemon true)
           (.setPriority Thread/NORM_PRIORITY))))))
 
-(defn threadpool [pool-size worker-name]
+(defn threadpool ^ExecutorService [pool-size worker-name]
   (Executors/newFixedThreadPool pool-size (thread-factory worker-name)))
 
-(defn submit-thread [pool f]
-  (let [fut (.submit pool (bound-fn* f))]
+(defn submit-thread [^ExecutorService pool f]
+  (let [fut (.submit pool ^Runnable (bound-fn* f))]
     (reify
-      clojure.lang.IPending
+      IPending
       (isRealized [_] (.isDone fut))
       Future
       (get [_] (.get fut))
@@ -34,4 +35,4 @@
   `(submit-thread ~pool (^:once fn* [] ~@body)))
 
 (defn wait-for-threads [threads]
-  (run! #(.get %) threads))
+  (run! #(.get ^Future %) threads))

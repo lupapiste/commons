@@ -27,6 +27,6 @@
 (defn wrap-no-ajax-cache [handler]
   (fn [request]
     (let [response (handler request)]
-      (if (-> request :headers (get "x-requested-with" "") (.contains "XMLHttpRequest"))
+      (if (-> request :headers ^String (get "x-requested-with" "") (.contains "XMLHttpRequest"))
         (assoc-in response [:headers "Expires"] "0")
         response))))

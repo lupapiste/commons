@@ -1,9 +1,10 @@
 (ns lupapiste-commons.ring.session
   (:require [ring.middleware.session.cookie :refer [cookie-store]]
-            [ring.middleware.session.store :as st]))
+            [ring.middleware.session.store :as st])
+  (:import [java.io FileInputStream]))
 
-(defn read-key [session-key-path]
-  (with-open [is (java.io.FileInputStream. session-key-path)]
+(defn read-key [^String session-key-path]
+  (with-open [is (FileInputStream. session-key-path)]
     (let [bytes (byte-array 16)]
       (.read is bytes)
       bytes)))

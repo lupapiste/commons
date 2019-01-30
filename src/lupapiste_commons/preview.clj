@@ -6,7 +6,7 @@
            (org.apache.pdfbox.tools.imageio ImageIOUtil)
            (java.awt.image BufferedImage)
            (java.awt RenderingHints)
-           (java.io ByteArrayOutputStream ByteArrayInputStream FileInputStream File InputStream)
+           (java.io ByteArrayOutputStream ByteArrayInputStream FileInputStream InputStream)
            (javax.imageio ImageIO)
            (org.apache.pdfbox.rendering PDFRenderer)))
 
@@ -63,9 +63,9 @@
 (defn- ^BufferedImage pdf-to-buffered-image
   "Converts first page of the PDF to BufferedImage"
   [pdf-input]
-  (let [input (if (= (type pdf-input) String)
-                (FileInputStream. pdf-input)
-                pdf-input)]
+  (let [^InputStream input (if (string? pdf-input)
+                             (FileInputStream. ^String pdf-input)
+                             pdf-input)]
     (with-open [document (PDDocument/load input (MemoryUsageSetting/setupMixed (* 100 1024 1024)))]
       (let [crop-box (-> (.getPage document 0) (.getCropBox))
             original-width (.getWidth crop-box)
@@ -78,7 +78,7 @@
             scale (->> (max original-width original-height) (/ target-rez) float)]
         (debugf "scale for pdf preview: %s" scale)
         (cond-> (-> (PDFRenderer. document) (.renderImage 0 scale))
-                crop? scale-image)))))
+          crop? scale-image)))))
 
 (defn- ^BufferedImage raster-to-buffered-image
   "Converts Raster image to BufferedImage"

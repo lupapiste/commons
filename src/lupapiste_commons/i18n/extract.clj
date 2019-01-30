@@ -1,11 +1,10 @@
 (ns lupapiste-commons.i18n.extract
   (:require [clojure.java.io :as io]
             [clojure.set :refer [difference]]
-            [clojure.string :as s]
             [flatland.ordered.map :refer [ordered-map]]
             [lupapiste-commons.i18n.resources :as commons-resources]
             [lupapiste-commons.i18n.core :as commons-core])
-  (:import [java.io PushbackReader]))
+  (:import [java.io PushbackReader File]))
 
 (defn simple-translation-call? [tr-sym form]
   (and (list? form)
@@ -28,7 +27,7 @@
         all-translations (commons-core/merge-translations (commons-resources/txt->map (io/resource "shared_translations.txt"))
                                                           my-translations)
         current-keys (map symbol (distinct (mapcat (fn [file] (strings-from file tr-sym))
-                                                   (filter #(re-find #"\.clj.$" (.getName %))
+                                                   (filter #(re-find #"\.clj.$" (.getName ^File %))
                                                            (file-seq (io/file "src"))))))
         missing-keys (difference (set current-keys) (set (keys (:translations all-translations))))]
     (println "Adding following keys to:" translations-file)
