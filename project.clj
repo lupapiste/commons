@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.9.46"
+(defproject lupapiste/commons "0.9.47"
   :description "Common domain code and resources for lupapiste applications"
   :url "https://www.evolta.fi"
   :license {:name "Eclipse Public License"
