@@ -1,11 +1,14 @@
-(ns lupapiste-commons.utils)
+(ns lupapiste-commons.utils
+  (:import [java.util.jar JarFile Manifest]
+           [java.net URL]
+           [java.io InputStream]))
 
 (defn get-build-info [jar-name]
-  (or (when-first [url (filter #(.contains (.toExternalForm %) jar-name)
-                               (enumeration-seq (.. (Thread/currentThread)
-                                                    getContextClassLoader
-                                                    (getResources java.util.jar.JarFile/MANIFEST_NAME))))]
-        (with-open [in (.openStream url)]
-          (into {} (for [[attr value] (.getAttributes (java.util.jar.Manifest. in) "build-info")]
+  (or (when-first [^URL url (filter #(.contains (.toExternalForm ^URL %) jar-name)
+                                    (enumeration-seq (.. (Thread/currentThread)
+                                                         getContextClassLoader
+                                                         (getResources JarFile/MANIFEST_NAME))))]
+        (with-open [^InputStream in (.openStream url)]
+          (into {} (for [[attr value] (.getAttributes (Manifest. in) "build-info")]
                      [(.toString attr) value]))))
       {}))

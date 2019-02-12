@@ -4,11 +4,12 @@
             [flatland.ordered.map :refer [ordered-map]]
             [ontodev.excel :as xls]
             [clojure.edn :as edn])
-  (:import [org.apache.poi.xssf.usermodel XSSFWorkbook]
+  (:import [org.apache.poi.xssf.usermodel XSSFWorkbook XSSFSheet XSSFCell]
            [org.apache.poi.ss.usermodel Font]
-           [java.io PushbackReader StringReader]
+           [java.io PushbackReader StringReader File FileOutputStream]
            [java.util Date]
-           [java.text SimpleDateFormat]))
+           [java.text SimpleDateFormat]
+           [java.net URL]))
 
 (defn source-changed? [sym]
   (:source-changed (meta sym)))
@@ -33,7 +34,7 @@
        (map nil->empty-str)
        (cons (write-key key))))
 
-(defn sheet->map [^org.apache.poi.xssf.usermodel.XSSFSheet excel-sheet]
+(defn sheet->map [^XSSFSheet excel-sheet]
   (let [languages (->> excel-sheet
                        first
                        xls/read-row
@@ -90,11 +91,11 @@
 
 (defn- filename [input]
   (cond (string? input) input
-        (instance? java.io.File input) (.getName input)
-        (instance? java.net.URL input) (-> (.getFile input)
-                                           (s/split #"/")
-                                           last)
-         :else nil))
+        (instance? File input) (.getName ^File input)
+        (instance? URL input) (-> (.getFile ^URL input)
+                                  (s/split #"/")
+                                  last)
+        :else nil))
 
 (defn- merge-entry [acc {:keys [key lang text]} source-name]
   (let [[key current-translations] (or (find acc key)
@@ -125,16 +126,16 @@
       {:languages (-> translations first val keys vec)
        :translations translations})))
 
-(defn create-row [sheet row-strings row-index & {:keys [cell-fn] :or {cell-fn nil}}]
-  (let [row (.createRow sheet row-index)]
-    (doall (map-indexed (fn [index value]
+(defn create-row [^XSSFSheet sheet row-strings row-index & {:keys [cell-fn] :or {cell-fn nil}}]
+  (let [row (.createRow sheet ^long row-index)]
+    (doall (map-indexed (fn [^long index ^String value]
                           (let [cell (.createCell row index)]
                             (when (fn? cell-fn)
                               (cell-fn cell))
                             (.setCellValue cell value)))
                         row-strings))))
 
-(defn bold-font-cell [wb cell]
+(defn bold-font-cell [^XSSFWorkbook wb ^XSSFCell cell]
   (let [style (.createCellStyle wb)
         font (.createFont wb)]
     (.setBoldweight font Font/BOLDWEIGHT_BOLD)
@@ -152,7 +153,7 @@
                         translations))
     (doseq [column (range 3)]
       (.autoSizeColumn sheet column))
-    (with-open [out (java.io.FileOutputStream. excel-file)]
+    (with-open [out (FileOutputStream. (io/file excel-file))]
       (.write wb out))))
 
 (defn missing-translations
