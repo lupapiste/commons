@@ -98,7 +98,9 @@
   ^{:doc "Possible state transitions for YA sijoitussopimus subtype."}
   ya-sijoitussopimus-state-graph
   (merge ya-sijoittaminen-shared-states
-         {:submitted         [:sent :draft :canceled :agreementPrepared]
+         ;;Transition from submitted to AgreementSigned is allowed because sometimes decisions are made outside of ALLU
+         ;;process. In these cases the agreementPrepared state needs to be skipped.
+         {:submitted         [:sent :draft :canceled :agreementPrepared :agreementSigned]
           :sent              [:agreementPrepared :complementNeeded :canceled]
           :agreementPrepared [:agreementSigned :canceled :agreementPrepared]
           :agreementSigned   []}))
