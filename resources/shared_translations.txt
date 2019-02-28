@@ -1572,6 +1572,7 @@
 "invoices.operations.add-operation" "fi" "Lisää toimenpide"
 "invoices.rows.VAT" "fi" "ALV (€)"
 "invoices.rows.amount" "fi" "Määrä"
+"invoices.rows.comment" "fi" "Alennuksen perustelu"
 "invoices.rows.customrow" "fi" "Vapaarivi"
 "invoices.rows.discount-percent" "fi" "Ale (%)"
 "invoices.rows.total" "fi" "Yhteensä (€)"
