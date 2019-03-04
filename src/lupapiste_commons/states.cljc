@@ -100,8 +100,8 @@
   (merge ya-sijoittaminen-shared-states
          ;;Transition from submitted to AgreementSigned is allowed because sometimes decisions are made outside of ALLU
          ;;process. In these cases the agreementPrepared state needs to be skipped.
-         {:submitted         [:sent :draft :canceled :agreementPrepared :agreementSigned]
-          :sent              [:agreementPrepared :complementNeeded :canceled]
+         {:submitted         [:sent :draft :canceled :agreementPrepared]
+          :sent              [:agreementPrepared :complementNeeded :canceled :agreementSigned]
           :agreementPrepared [:agreementSigned :canceled :agreementPrepared]
           :agreementSigned   []}))
 
