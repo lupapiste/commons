@@ -49,64 +49,67 @@
 
 (def UserData
   (s/constrained
-    {(s/optional-key :userId) tms/NonEmptyStr
-     (s/optional-key :username) tms/NonEmptyStr
+    {(s/optional-key :userId)    tms/NonEmptyStr
+     (s/optional-key :username)  tms/NonEmptyStr
      (s/optional-key :firstName) tms/NonEmptyStr
-     (s/optional-key :lastName) tms/NonEmptyStr}
+     (s/optional-key :lastName)  tms/NonEmptyStr}
     some-user-data-exists?))
+
+(def db-property-id-pattern #"^([0-9]{1,3})([0-9]{1,3})([0-9]{1,4})([0-9]{1,4})$")
+(def PropertyId (s/constrained s/Str #(re-matches db-property-id-pattern %)))
 
 (def full-document-metadata
   (merge
     ;; The keys that are shared with lupapiste are generally in English
-    {:type (apply s/enum document-and-attachment-types)
-     (s/optional-key :contents) tms/NonEmptyStr
-     (s/optional-key :size) tms/NonEmptyStr
-     (s/optional-key :scale) tms/NonEmptyStr
-     (s/optional-key :applicationId) tms/NonEmptyStr
-     (s/optional-key :buildingIds) [tms/NonEmptyStr]
-     (s/optional-key :nationalBuildingIds) [tms/NonEmptyStr]
-     (s/optional-key :propertyId) tms/NonEmptyStr
-     (s/optional-key :projectDescription) tms/NonEmptyStr
-     :applicants [tms/NonEmptyStr]
-     :operations [(apply s/enum valid-operations)]
-     :tosFunction {:name tms/NonEmptyStr :code tms/NonEmptyStr}
-     :address tms/NonEmptyStr
-     :organization tms/NonEmptyStr
-     :municipality tms/NonEmptyStr
+    {:type                                   (apply s/enum document-and-attachment-types)
+     (s/optional-key :contents)              tms/NonEmptyStr
+     (s/optional-key :size)                  tms/NonEmptyStr
+     (s/optional-key :scale)                 tms/NonEmptyStr
+     (s/optional-key :applicationId)         tms/NonEmptyStr
+     (s/optional-key :buildingIds)           [tms/NonEmptyStr]
+     (s/optional-key :nationalBuildingIds)   [tms/NonEmptyStr]
+     (s/optional-key :propertyId)            PropertyId
+     (s/optional-key :projectDescription)    tms/NonEmptyStr
+     :applicants                             [tms/NonEmptyStr]
+     :operations                             [(apply s/enum valid-operations)]
+     :tosFunction                            {:name tms/NonEmptyStr :code tms/NonEmptyStr}
+     :address                                tms/NonEmptyStr
+     :organization                           tms/NonEmptyStr
+     :municipality                           tms/NonEmptyStr
      (s/optional-key :location-etrs-tm35fin) Coordinates
-     (s/optional-key :location-wgs84) Coordinates
-     (s/optional-key :postinumero) tms/NonEmptyStr
-     :kuntalupatunnukset [tms/NonEmptyStr]
-     (s/optional-key :lupapvm) s/Inst
-     (s/optional-key :paatospvm) s/Inst
-     (s/optional-key :jattopvm) s/Inst
-     (s/optional-key :paatoksentekija) tms/NonEmptyStr
-     :tiedostonimi tms/NonEmptyStr
-     (s/optional-key :kasittelija) UserData
-     (s/optional-key :arkistoija) UserData
-     :arkistointipvm s/Inst
-     :kayttotarkoitukset [(apply s/enum valid-usage-types)]
-     (s/optional-key :suunnittelijat) [tms/NonEmptyStr]
-     :kieli tms/NonEmptyStr
-     :versio tms/NonEmptyStr
-     (s/optional-key :kylanumero) tms/NonEmptyStr
-     (s/optional-key :kylanimi) {:fi tms/NonEmptyStr
-                                 :sv tms/NonEmptyStr}
-     (s/optional-key :foremen) tms/NonEmptyStr
-     (s/optional-key :tyomaasta-vastaava) tms/NonEmptyStr
-     (s/optional-key :closed) s/Inst
-     (s/optional-key :drawing-wgs84) [{:type tms/NonEmptyStr
-                                       :coordinates [s/Any]}]
-     (s/optional-key :ramLink) s/Str
-     (s/optional-key :deleted) s/Inst
-     (s/optional-key :deletion-explanation) s/Str}
+     (s/optional-key :location-wgs84)        Coordinates
+     (s/optional-key :postinumero)           tms/NonEmptyStr
+     :kuntalupatunnukset                     [tms/NonEmptyStr]
+     (s/optional-key :lupapvm)               s/Inst
+     (s/optional-key :paatospvm)             s/Inst
+     (s/optional-key :jattopvm)              s/Inst
+     (s/optional-key :paatoksentekija)       tms/NonEmptyStr
+     :tiedostonimi                           tms/NonEmptyStr
+     (s/optional-key :kasittelija)           UserData
+     (s/optional-key :arkistoija)            UserData
+     :arkistointipvm                         s/Inst
+     :kayttotarkoitukset                     [(apply s/enum valid-usage-types)]
+     (s/optional-key :suunnittelijat)        [tms/NonEmptyStr]
+     :kieli                                  tms/NonEmptyStr
+     :versio                                 tms/NonEmptyStr
+     (s/optional-key :kylanumero)            tms/NonEmptyStr
+     (s/optional-key :kylanimi)              {:fi tms/NonEmptyStr
+                                              :sv tms/NonEmptyStr}
+     (s/optional-key :foremen)               tms/NonEmptyStr
+     (s/optional-key :tyomaasta-vastaava)    tms/NonEmptyStr
+     (s/optional-key :closed)                s/Inst
+     (s/optional-key :drawing-wgs84)         [{:type        tms/NonEmptyStr
+                                               :coordinates [s/Any]}]
+     (s/optional-key :ramLink)               s/Str
+     (s/optional-key :deleted)               s/Inst
+     (s/optional-key :deletion-explanation)  s/Str}
     tms/AsiakirjaMetaDataMap))
 
 (def validation-schema-for-onkalo-update-metadata
   (-> (dissoc full-document-metadata (s/optional-key :location-wgs84))
       (assoc :type s/Keyword
              (s/optional-key :history) s/Any
-             :location-wgs84 [{:type tms/NonEmptyStr
+             :location-wgs84 [{:type        tms/NonEmptyStr
                                :coordinates [s/Any]}])))
 
 (def full-case-file-metadata
