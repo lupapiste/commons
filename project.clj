@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.9.57"
+(defproject lupapiste/commons "0.9.58"
   :description "Common domain code and resources for lupapiste applications"
   :url "https://www.evolta.fi"
   :license {:name "Eclipse Public License"
@@ -10,7 +10,7 @@
                  [org.clojure/core.memoize "0.7.1"]
                  [ontodev/excel "0.2.4" :exclusions [xml-apis org.apache.poi/poi-ooxml]]
                  [org.apache.poi/poi-ooxml "3.16"]
-                 [org.flatland/ordered "1.5.6"]
+                 [org.flatland/ordered "1.5.7"]
                  [com.stuartsierra/component "0.3.2"]
                  [com.taoensso/timbre "4.10.0"]
                  [prismatic/schema "1.1.7"]
