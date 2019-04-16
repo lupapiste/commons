@@ -461,6 +461,8 @@
           :paatosote
           :keskustelu]])
 
+;; NOTE: These are duplicated in Lupapiste attachment-multi-select.js,
+;;       so if you edit these also edit that. Or refactor the duplication away!
 (def types-not-transmitted-to-backing-system
   {:muut #{:paatos :paatosote :sopimus :keskustelu}
    :paatoksenteko #{:paatoksen_liite}})
