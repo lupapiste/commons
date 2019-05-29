@@ -1606,6 +1606,8 @@
 "invoices.batch.load-excel" "en" "Download Excel"
 "invoices.batch.load-excel" "fi" "Lataa excel"
 "invoices.batch.load-excel" "sv" "Ladda Excel"
+"invoices.batch.send-idoc-xml" "fi" "Läheta SAPiin"
+"invoices.batch.send-idoc-xml" "en" "Send to SAP"
 "invoices.batch.load-more" "en" "Retrieve older batches"
 "invoices.batch.load-more" "fi" "Nouda vanhempia siirtoeriä"
 "invoices.batch.load-more" "sv" "Hämta äldre överföringsposter"
