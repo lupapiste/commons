@@ -55,7 +55,7 @@
      (s/optional-key :lastName)  tms/NonEmptyStr}
     some-user-data-exists?))
 
-(def db-property-id-pattern #"^([0-9]{1,3})([0-9]{1,3})([0-9]{1,4})([0-9]{1,4})$")
+(def db-property-id-pattern #"^\d{14}$")
 (def PropertyId (s/constrained s/Str #(re-matches db-property-id-pattern %)))
 
 (def full-document-metadata
