@@ -1790,6 +1790,7 @@
 "invoices.wo-taxes" "sv" "Momsfri"
 "invoices.ya.days" "fi" "päivää"
 "invoices.ya.billable-work-time" "fi" "Laskutettava kesto"
+"invoices.ya.non-billable-days" "fi" "Laskutusvapaat päivät"
 "invoices.ya.real-work-time" "fi" "Toteutunut työaika"
 "julkinen" "en" "Public"
 "julkinen" "fi" "Julkinen"
