@@ -1736,6 +1736,7 @@
 "invoices.rows.unit-price" "en" "Unit price (€)"
 "invoices.rows.unit-price" "fi" "A-Hinta (€)"
 "invoices.rows.unit-price" "sv" "A-pris (€)"
+"invoices.rows.product-constants" "fi" "Tuotekohtaiset tiliöintitiedot"
 "invoices.state-of-invoice" "en" "Status of invoice:"
 "invoices.state-of-invoice" "fi" "Laskun tila:"
 "invoices.state-of-invoice" "sv" "Fakturans status:"
