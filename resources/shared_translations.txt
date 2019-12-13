@@ -4877,7 +4877,7 @@
 "operations.tree.yleiskaava.desc" "sv" "Ansökan om uppgörande och ändring av generalplan"
 "operations.tree.yleisten-alueiden-luvat" "en" "Public areas (placement agreement, street permit, intended use of areas)"
 "operations.tree.yleisten-alueiden-luvat" "fi" "Yleiset alueet (Sijoittamissopimus, katulupa, alueiden käyttö)"
-"operations.tree.yleisten-alueiden-luvat" "sv" "Användning av allmänna områden (avtal om placring, gatutillstånd, användning av område)"
+"operations.tree.yleisten-alueiden-luvat" "sv" "Användning av allmänna områden (avtal om placering, gatutillstånd, användning av område)"
 "operations.tree.ympariston-pilaantumisen-vaara" "en" "Pollution hazardous activity (environmental permit)"
 "operations.tree.ympariston-pilaantumisen-vaara" "fi" "Ympäristön pilaantumisen vaaraa aiheuttava toiminta (Ympäristölupa)"
 "operations.tree.ympariston-pilaantumisen-vaara" "sv" "Verksamhet som medför risk för skada på miljön (Miljötillstånd)"
