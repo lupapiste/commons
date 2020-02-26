@@ -3,6 +3,7 @@
             [clojure.string :as str]
             [lupapiste-commons.tos-metadata-schema :as tms]
             [lupapiste-commons.attachment-types :as attachment-types]
+            [lupapiste-commons.building-classifications :as building-classifications]
             [lupapiste-commons.operations :as operations]
             [lupapiste-commons.usage-types :as usages]))
 
@@ -33,6 +34,8 @@
                               operations/archiving-project-operations))
 
 (def valid-usage-types (map :name usages/rakennuksen-kayttotarkoitus))
+
+(def valid-building-classfications (map :name building-classifications/rakennuksen-rakennusluokka))
 
 (def Coordinates (s/pair s/Num "x" s/Num "y"))
 
@@ -88,7 +91,8 @@
      (s/optional-key :kasittelija)           UserData
      (s/optional-key :arkistoija)            UserData
      :arkistointipvm                         s/Inst
-     :kayttotarkoitukset                     [(apply s/enum valid-usage-types)]
+     (s/optional-key :kayttotarkoitukset)    [(apply s/enum valid-usage-types)]
+     (s/optional-key :rakennusluokat)        [(apply s/enum valid-building-classfications)]
      (s/optional-key :suunnittelijat)        [tms/NonEmptyStr]
      :kieli                                  tms/NonEmptyStr
      :versio                                 tms/NonEmptyStr
