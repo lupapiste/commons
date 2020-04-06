@@ -146,7 +146,7 @@
                  [:draft :open :submitted :extinct :canceled])
     {:sent                [:ready :complementNeeded :canceled]
      :complementNeeded    [:sent :ready :canceled]
-     :ready               [:appealed :extinct :canceled]
+     :ready               []
      :appealed            [:ready :canceled]}))
 
 (def
