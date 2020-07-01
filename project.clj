@@ -1,6 +1,6 @@
-(defproject lupapiste/commons "0.10.19"
+(defproject lupapiste/commons "0.10.20"
   :description "Common domain code and resources for lupapiste applications"
-  :url "https://www.evolta.fi"
+  :url "https://www.lupapiste.fi"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"
             :distribution :repo}
