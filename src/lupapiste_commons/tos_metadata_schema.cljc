@@ -160,8 +160,8 @@
           (not= (:arkistointi sailytysaika) :määräajan)    (dissoc-in [:sailytysaika :pituus])
           (not= (:arkistointi sailytysaika) :määräajan)    (dissoc-in [:sailytysaika :retention-period-end])
           (not= (:arkistointi sailytysaika) :toistaiseksi) (dissoc-in [:sailytysaika :laskentaperuste])
-          (false? permit-expired)                          (dissoc-in [:permit-expired-date])
-          (false? demolished)                              (dissoc-in [:demolished-date])
+          (false? permit-expired)                          (dissoc :permit-expired-date)
+          (false? demolished)                              (dissoc :demolished-date)
           (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso :kayttajaryhma :kayttajaryhmakuvaus :security-period-end)))
 
 (defn sanitize-metadata [metadata]
