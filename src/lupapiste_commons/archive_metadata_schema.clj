@@ -106,7 +106,12 @@
                                                :coordinates [s/Any]}]
      (s/optional-key :ramLink)               s/Str
      (s/optional-key :deleted)               s/Inst
-     (s/optional-key :deletion-explanation)  s/Str}
+     (s/optional-key :deletion-explanation)  s/Str
+
+     (s/optional-key :permit-expired)        s/Bool
+     (s/optional-key :permit-expired-date)   s/Inst
+     (s/optional-key :demolished)            s/Bool
+     (s/optional-key :demolished-date)       s/Inst}
     tms/AsiakirjaMetaDataMap))
 
 (def validation-schema-for-onkalo-update-metadata
