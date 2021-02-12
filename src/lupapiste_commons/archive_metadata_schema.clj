@@ -64,54 +64,55 @@
 (def full-document-metadata
   (merge
     ;; The keys that are shared with lupapiste are generally in English
-    {:type                                   (apply s/enum document-and-attachment-types)
-     (s/optional-key :contents)              tms/NonEmptyStr
-     (s/optional-key :size)                  tms/NonEmptyStr
-     (s/optional-key :scale)                 tms/NonEmptyStr
-     (s/optional-key :applicationId)         tms/NonEmptyStr
-     (s/optional-key :buildingIds)           [tms/NonEmptyStr]
-     (s/optional-key :nationalBuildingIds)   [tms/NonEmptyStr]
-     (s/optional-key :propertyId)            PropertyId
-     (s/optional-key :projectDescription)    tms/NonEmptyStr
-     :applicants                             [tms/NonEmptyStr]
-     :operations                             [(apply s/enum valid-operations)]
-     :tosFunction                            {:name tms/NonEmptyStr :code tms/NonEmptyStr}
-     :address                                tms/NonEmptyStr
-     :organization                           tms/NonEmptyStr
-     :municipality                           tms/NonEmptyStr
-     (s/optional-key :location-etrs-tm35fin) Coordinates
-     (s/optional-key :location-wgs84)        Coordinates
-     (s/optional-key :postinumero)           tms/NonEmptyStr
-     :kuntalupatunnukset                     [tms/NonEmptyStr]
-     (s/optional-key :lupapvm)               s/Inst
-     (s/optional-key :paatospvm)             s/Inst
-     (s/optional-key :jattopvm)              s/Inst
-     (s/optional-key :paatoksentekija)       tms/NonEmptyStr
-     :tiedostonimi                           tms/NonEmptyStr
-     (s/optional-key :kasittelija)           UserData
-     (s/optional-key :arkistoija)            UserData
-     :arkistointipvm                         s/Inst
-     (s/optional-key :kayttotarkoitukset)    [(apply s/enum valid-usage-types)]
-     (s/optional-key :rakennusluokat)        [(apply s/enum valid-building-classfications)]
-     (s/optional-key :suunnittelijat)        [tms/NonEmptyStr]
-     :kieli                                  tms/NonEmptyStr
-     :versio                                 tms/NonEmptyStr
-     (s/optional-key :kylanumero)            tms/NonEmptyStr
-     (s/optional-key :kylanimi)              {:fi tms/NonEmptyStr
-                                              :sv tms/NonEmptyStr}
-     (s/optional-key :foremen)               tms/NonEmptyStr
-     (s/optional-key :tyomaasta-vastaava)    tms/NonEmptyStr
-     (s/optional-key :closed)                s/Inst
-     (s/optional-key :drawing-wgs84)         [{:type        tms/NonEmptyStr
-                                               :coordinates [s/Any]}]
-     (s/optional-key :ramLink)               s/Str
-     (s/optional-key :deleted)               s/Inst
-     (s/optional-key :deletion-explanation)  s/Str
+    {:type                                          (apply s/enum document-and-attachment-types)
+     (s/optional-key :contents)                     tms/NonEmptyStr
+     (s/optional-key :size)                         tms/NonEmptyStr
+     (s/optional-key :scale)                        tms/NonEmptyStr
+     (s/optional-key :applicationId)                tms/NonEmptyStr
+     (s/optional-key :buildingIds)                  [tms/NonEmptyStr]
+     (s/optional-key :nationalBuildingIds)          [tms/NonEmptyStr]
+     (s/optional-key :propertyId)                   PropertyId
+     (s/optional-key :projectDescription)           tms/NonEmptyStr
+     :applicants                                    [tms/NonEmptyStr]
+     :operations                                    [(apply s/enum valid-operations)]
+     :tosFunction                                   {:name tms/NonEmptyStr :code tms/NonEmptyStr}
+     :address                                       tms/NonEmptyStr
+     :organization                                  tms/NonEmptyStr
+     :municipality                                  tms/NonEmptyStr
+     (s/optional-key :location-etrs-tm35fin)        Coordinates
+     (s/optional-key :location-wgs84)               Coordinates
+     (s/optional-key :postinumero)                  tms/NonEmptyStr
+     :kuntalupatunnukset                            [tms/NonEmptyStr]
+     (s/optional-key :kuntalupatunnukset-muutossyy) tms/NonEmptyStr
+     (s/optional-key :lupapvm)                      s/Inst
+     (s/optional-key :paatospvm)                    s/Inst
+     (s/optional-key :jattopvm)                     s/Inst
+     (s/optional-key :paatoksentekija)              tms/NonEmptyStr
+     :tiedostonimi                                  tms/NonEmptyStr
+     (s/optional-key :kasittelija)                  UserData
+     (s/optional-key :arkistoija)                   UserData
+     :arkistointipvm                                s/Inst
+     (s/optional-key :kayttotarkoitukset)           [(apply s/enum valid-usage-types)]
+     (s/optional-key :rakennusluokat)               [(apply s/enum valid-building-classfications)]
+     (s/optional-key :suunnittelijat)               [tms/NonEmptyStr]
+     :kieli                                         tms/NonEmptyStr
+     :versio                                        tms/NonEmptyStr
+     (s/optional-key :kylanumero)                   tms/NonEmptyStr
+     (s/optional-key :kylanimi)                     {:fi tms/NonEmptyStr
+                                                     :sv tms/NonEmptyStr}
+     (s/optional-key :foremen)                      tms/NonEmptyStr
+     (s/optional-key :tyomaasta-vastaava)           tms/NonEmptyStr
+     (s/optional-key :closed)                       s/Inst
+     (s/optional-key :drawing-wgs84)                [{:type        tms/NonEmptyStr
+                                                      :coordinates [s/Any]}]
+     (s/optional-key :ramLink)                      s/Str
+     (s/optional-key :deleted)                      s/Inst
+     (s/optional-key :deletion-explanation)         s/Str
 
-     (s/optional-key :permit-expired)        s/Bool
-     (s/optional-key :permit-expired-date)   s/Inst
-     (s/optional-key :demolished)            s/Bool
-     (s/optional-key :demolished-date)       s/Inst}
+     (s/optional-key :permit-expired)               s/Bool
+     (s/optional-key :permit-expired-date)          s/Inst
+     (s/optional-key :demolished)                   s/Bool
+     (s/optional-key :demolished-date)              s/Inst}
     tms/AsiakirjaMetaDataMap))
 
 (def validation-schema-for-onkalo-update-metadata
