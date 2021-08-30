@@ -99,22 +99,23 @@
     true (dissoc :type :schema :values :subfields :dependencies :require-role :calculated)))
 
 (def MetaDataMap
-  {:julkisuusluokka (apply s/enum (:values Julkisuusluokka))
-   (s/optional-key :salassapitoaika) (:schema Salassapitoaika)
+  {:julkisuusluokka                      (apply s/enum (:values Julkisuusluokka))
+   (s/optional-key :salassapitoaika)     (:schema Salassapitoaika)
    (s/optional-key :security-period-end) (:schema SalassapidonPaattymisajankohta)
-   (s/optional-key :salassapitoperuste) (:schema Salassapitoperuste)
-   (s/optional-key :turvallisuusluokka) (apply s/enum (:values Turvallisuusluokka))
-   (s/optional-key :suojaustaso) (apply s/enum (:values Suojaustaso))
-   (s/optional-key :kayttajaryhma) (apply s/enum (:values Kayttajaryhma))
+   (s/optional-key :salassapitoperuste)  (:schema Salassapitoperuste)
+   (s/optional-key :turvallisuusluokka)  (apply s/enum (:values Turvallisuusluokka))
+   (s/optional-key :suojaustaso)         (apply s/enum (:values Suojaustaso))
+   (s/optional-key :kayttajaryhma)       (apply s/enum (:values Kayttajaryhma))
    (s/optional-key :kayttajaryhmakuvaus) (apply s/enum (:values Kayttajaryhmakuvaus))
-   :sailytysaika (:sailytysaika (ui-desc->schema-map SailytysAika))
-   :henkilotiedot (apply s/enum (:values Henkilotiedot))
-   :kieli (apply s/enum (:values Kieli))})
+   :sailytysaika                         (:sailytysaika (ui-desc->schema-map SailytysAika))
+   :henkilotiedot                        (apply s/enum (:values Henkilotiedot))
+   :kieli                                (apply s/enum (:values Kieli))})
 
 (def AsiakirjaMetaDataMap
-  (merge MetaDataMap {:tila (apply s/enum (:values Tila))
-                      :myyntipalvelu (:schema Myyntipalvelu)
-                      :nakyvyys (apply s/enum (:values Nakyvyys))}))
+  (merge MetaDataMap {:tila                      (apply s/enum (:values Tila))
+                      :myyntipalvelu             (:schema Myyntipalvelu)
+                      :nakyvyys                  (apply s/enum (:values Nakyvyys))
+                      (s/optional-key :rauennut) s/Bool}))
 
 (defn valid-dependencies? [{{:keys [arkistointi pituus laskentaperuste]} :sailytysaika
                             :keys [julkisuusluokka salassapitoaika salassapitoperuste turvallisuusluokka suojaustaso kayttajaryhma kayttajaryhmakuvaus]}]
