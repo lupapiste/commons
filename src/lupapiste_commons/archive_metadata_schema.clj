@@ -83,7 +83,6 @@
      (s/optional-key :location-wgs84)               Coordinates
      (s/optional-key :postinumero)                  tms/NonEmptyStr
      :kuntalupatunnukset                            [tms/NonEmptyStr]
-     (s/optional-key :kuntalupatunnukset-muutossyy) tms/NonEmptyStr
      (s/optional-key :lupapvm)                      s/Inst
      (s/optional-key :paatospvm)                    s/Inst
      (s/optional-key :jattopvm)                     s/Inst
@@ -119,6 +118,7 @@
   (-> (dissoc full-document-metadata (s/optional-key :location-wgs84))
       (assoc :type s/Keyword
              (s/optional-key :history) s/Any
+             (s/optional-key :kuntalupatunnukset-muutossyy) tms/NonEmptyStr
              :location-wgs84 [{:type        tms/NonEmptyStr
                                :coordinates [s/Any]}])))
 
