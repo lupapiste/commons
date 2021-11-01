@@ -40,6 +40,7 @@
    :rakennustietojen-korjaus
    :rak-valm-tyo
    :raktyo-aloit-loppuunsaat
+   :rasite-tai-yhteisjarjestely
    :sisatila-muutos
    :suunnittelijan-nimeaminen
    :takka-tai-hormi
