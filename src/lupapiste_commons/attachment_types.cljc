@@ -62,6 +62,7 @@
           :katselmuksen_tai_tarkastuksen_poytakirja
           :kerrosalaselvitys
           :keskustelu
+          :kuvaus
           :liikkumis_ja_esteettomyysselvitys
           :lomarakennuksen_muutos_asuinrakennukseksi_selvitys_maaraysten_toteutumisesta
           :lammityslaitesuunnitelma
@@ -245,6 +246,7 @@
                  :ympariston_tietomalli_BIM]
    :muut [:erityismenettelyasiakirja
           :keskustelu
+          :kuvaus
           :luonnos
           :piirustusluettelo
           :sijoituslupaasiakirja
