@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.11.02"
+(defproject lupapiste/commons "0.11.03"
   :description "Common domain code and resources for lupapiste applications"
   :url "https://www.lupapiste.fi"
   :license {:name "Eclipse Public License"
