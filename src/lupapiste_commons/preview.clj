@@ -1,25 +1,32 @@
 (ns lupapiste-commons.preview
   (:require [taoensso.timbre :refer [debugf warnf]]
             [clojure.java.io :as io])
-  (:import (org.apache.pdfbox.pdmodel PDDocument)
-           (org.apache.pdfbox.io MemoryUsageSetting)
-           (org.apache.pdfbox.tools.imageio ImageIOUtil)
-           (java.awt.image BufferedImage)
+  (:import (java.awt.image BufferedImage)
            (java.awt RenderingHints)
-           (java.io ByteArrayOutputStream ByteArrayInputStream FileInputStream InputStream)
-           (javax.imageio ImageIO)
-           (org.apache.pdfbox.rendering PDFRenderer)))
+           (java.io ByteArrayOutputStream ByteArrayInputStream InputStream)
+           (javax.imageio ImageIO ImageWriter ImageWriteParam IIOImage)
+           [javax.imageio.stream ImageOutputStream]))
 
 (def rez 600.0)
 ; The aspect ratio should be about sqrt(2) or less, i.e. A paper series aspect ratio is OK
 (def min-aspect 0.7)
 (def max-aspect 1.45)
 
+(defn- write-jpeg [^BufferedImage image output]
+  (let [^ImageWriter writer    (.next (ImageIO/getImageWritersByFormatName "jpeg"))
+        ^ImageWriteParam param (doto (.getDefaultWriteParam writer)
+                                 (.setCompressionMode ImageWriteParam/MODE_EXPLICIT)
+                                 (.setCompressionQuality (float 0.6)))]
+    (with-open [^ImageOutputStream ios (ImageIO/createImageOutputStream output)]
+      (.setOutput writer ios)
+      (.write writer nil (IIOImage. image nil nil) param)
+      (.dispose writer))))
+
 (defn- buffered-image-to-input-stream
   "Converts BufferedImage inputStream"
   [^BufferedImage image]
   (let [output (ByteArrayOutputStream.)]
-    (ImageIOUtil/writeImage image "jpg" output 72 0.6)
+    (write-jpeg image output)
     (ByteArrayInputStream. (.toByteArray output))))
 
 (defn- size-ok? [^BufferedImage image]
@@ -60,26 +67,6 @@
         (.dispose))
       new-image)))
 
-(defn- ^BufferedImage pdf-to-buffered-image
-  "Converts first page of the PDF to BufferedImage"
-  [pdf-input]
-  (let [^InputStream input (if (string? pdf-input)
-                             (FileInputStream. ^String pdf-input)
-                             pdf-input)]
-    (with-open [document (PDDocument/load input (MemoryUsageSetting/setupMixed (* 100 1024 1024)))]
-      (let [crop-box (-> (.getPage document 0) (.getCropBox))
-            original-width (.getWidth crop-box)
-            original-height (.getHeight crop-box)
-            ; If the image is too wide / high, we have to crop it to a more manageable aspect ratio
-            ; and because the PDFRenderer does not directly support this, we first render in 2 x target resolution
-            ; and then scale the image down to the final target size (with cropping)
-            crop? (must-crop? original-width original-height)
-            target-rez (if crop? (* 2 rez) rez)
-            scale (->> (max original-width original-height) (/ target-rez) float)]
-        (debugf "scale for pdf preview: %s" scale)
-        (cond-> (-> (PDFRenderer. document) (.renderImage 0 scale))
-          crop? scale-image)))))
-
 (defn- ^BufferedImage raster-to-buffered-image
   "Converts Raster image to BufferedImage"
   [input]
@@ -87,12 +74,11 @@
       scale-image))
 
 (defn converter [content-type]
-  (cond
-    (= "application/pdf" content-type) pdf-to-buffered-image
-    (re-matches (re-pattern "(image/(gif|jpeg|png|tiff))") content-type) raster-to-buffered-image))
+  (when (re-matches (re-pattern "(image/(gif|jpeg|png|tiff))") content-type)
+    raster-to-buffered-image))
 
 (defn- ^BufferedImage to-buffered-image
-  "Tries to read content to image by JAI or apache.pdfbox. Returns nil on fail"
+  "Tries to read content to image by JAI. Returns nil on fail"
   [content content-type]
   (try
     (when-let [op (converter content-type)]
@@ -100,7 +86,7 @@
     (catch Exception e (warnf "preview to-buffered-image was unable to read content of a %s file: %s" content-type e))))
 
 (defn create-preview
-  "Tries to create preview image IF content type can be processed to image by JAI or apache.pdfbox. Returns nil on fail"
+  "Tries to create preview image IF content type can be processed to image by JAI. Returns nil on fail"
   [content content-type]
   (some-> (to-buffered-image content content-type)
           buffered-image-to-input-stream))

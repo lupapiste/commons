@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.11.6"
+(defproject lupapiste/commons "0.12.0"
   :description "Common domain code and resources for lupapiste applications"
   :url "https://www.lupapiste.fi"
   :license {:name "Eclipse Public License"
@@ -14,9 +14,6 @@
                  [com.stuartsierra/component "0.3.2"]
                  [com.taoensso/timbre "4.10.0"]
                  [prismatic/schema "1.1.7"]
-                 [org.slf4j/slf4j-log4j12 "1.7.25"]
-                 [org.apache.pdfbox/pdfbox "2.0.8"]
-                 [org.apache.pdfbox/pdfbox-tools "2.0.8"]
                  [com.github.jai-imageio/jai-imageio-core "1.3.1"]
                  [com.github.jai-imageio/jai-imageio-jpeg2000 "1.3.0"]
                  [clj-http "3.8.0"]]
