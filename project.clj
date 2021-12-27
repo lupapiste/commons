@@ -11,7 +11,6 @@
                  [ontodev/excel "0.2.4" :exclusions [xml-apis org.apache.poi/poi-ooxml]]
                  [org.apache.poi/poi-ooxml "3.16"]
                  [org.flatland/ordered "1.5.7"]
-                 [com.stuartsierra/component "0.3.2"]
                  [com.taoensso/timbre "4.10.0"]
                  [prismatic/schema "1.1.7"]
                  [com.github.jai-imageio/jai-imageio-core "1.3.1"]
