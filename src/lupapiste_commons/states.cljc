@@ -60,6 +60,13 @@
 
 (def
   ^{:doc "See default-application-state-graph"}
+  selventaminen-application-state-graph
+  (-> default-application-state-graph
+      (dissoc :verdictGiven :constructionStarted :sent :complementNeeded :extinct :appealed)
+      (assoc :submitted [:draft :canceled :closed])))
+
+(def
+  ^{:doc "See default-application-state-graph"}
   tonttijako-application-state-graph
   (merge
     (select-keys default-application-state-graph [:draft :open :canceled])
@@ -187,6 +194,7 @@
               tj-ilmoitus-state-graph
               tj-hakemus-state-graph
               rakennusrasite-application-state-graph
+              selventaminen-application-state-graph
               tonttijako-application-state-graph
               default-inforequest-state-graph
               allu-state-graph))
