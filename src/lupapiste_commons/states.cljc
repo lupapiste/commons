@@ -61,11 +61,11 @@
 (def
   ^{:doc "See default-application-state-graph"}
   selventaminen-application-state-graph
-  (-> default-application-state-graph
-      (dissoc :verdictGiven :constructionStarted :extinct :appealed)
-      (merge {:submitted        [:sent :draft :canceled]
-              :sent             [:complementNeeded :closed :canceled]
-              :complementNeeded [:sent :canceled]})))
+  (merge
+    (select-keys default-application-state-graph [:draft :open :canceled])
+    {:submitted        [:acknowledged :draft :canceled]
+     :complementNeeded [:acknowledged :canceled]
+     :acknowledged     [:complementNeeded]}))
 
 (def
   ^{:doc "See default-application-state-graph"}
