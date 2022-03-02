@@ -317,7 +317,8 @@
           :keskustelu]])
 
 (def Ymparistoilmoitukset
-  [:kartat [:kartta-melun-ja-tarinan-leviamisesta]
+  [:ilmoituslomakkeet [:ilmoituslomake]
+   :kartat [:kartta-melun-ja-tarinan-leviamisesta]
    :muut [:muu
           :paatos
           :paatosote
