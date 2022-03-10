@@ -398,6 +398,7 @@
                          :ottamissuunnitelma
                          :kaivannaisjatteen_jatehuoltosuunnitelma]
    :muut [:vakuus_ottamisen_aloittamiseksi_ennen_luvan_lainvoimaa
+          :vakuusasiakirja
           :selvitys_tieyhteyksista_oikeuksista
           :pohjavesitutkimus
           :muu
