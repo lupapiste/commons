@@ -357,7 +357,7 @@
 "attachmentType.erityissuunnitelmat.kivenmurskaamo" "sv" "Preliminär plan över stenkrossens placering och verksamhet på området"
 "attachmentType.erityissuunnitelmat.kvv_suunnitelma" "en" "Water and sewage plan"
 "attachmentType.erityissuunnitelmat.kvv_suunnitelma" "fi" "KVV-suunnitelma"
-"attachmentType.erityissuunnitelmat.kvv_suunnitelma" "sv" "VVS-plan"
+"attachmentType.erityissuunnitelmat.kvv_suunnitelma" "sv" "FVA-plan"
 "attachmentType.erityissuunnitelmat.lammityslaitesuunnitelma" "en" "Heater plan"
 "attachmentType.erityissuunnitelmat.lammityslaitesuunnitelma" "fi" "Lämmityslaitesuunnitelma"
 "attachmentType.erityissuunnitelmat.lammityslaitesuunnitelma" "sv" "Plan för värmeanläggning"
