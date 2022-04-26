@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "0.13.0"
+(defproject lupapiste/commons "1.0.0"
   :description "Common domain code and resources for lupapiste applications"
   :url "https://www.lupapiste.fi"
   :license {:name "Eclipse Public License"
@@ -13,8 +13,6 @@
                  [org.flatland/ordered "1.15.10"]
                  [com.taoensso/timbre "5.1.2"]
                  [prismatic/schema "1.2.0"]
-                 [com.github.jai-imageio/jai-imageio-core "1.4.0"]
-                 [com.github.jai-imageio/jai-imageio-jpeg2000 "1.4.0"]
                  [clj-http "3.12.3"]]
   :plugins [[com.jakemccrary/lein-test-refresh "0.8.0"]]
   :profiles {:dev {:dependencies [[flare "0.2.9"]]
