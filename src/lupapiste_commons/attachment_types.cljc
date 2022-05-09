@@ -319,10 +319,14 @@
 (def Ymparistoilmoitukset
   [:ilmoituslomakkeet [:ilmoituslomake]
    :kartat [:kartta-melun-ja-tarinan-leviamisesta]
+   :rakennuspaikka [:karttaote]
+   :hakija [:valtakirja]
+   :paapiirustus [:asemapiirros]
    :muut [:muu
           :paatos
           :paatosote
-          :keskustelu]])
+          :keskustelu
+          :rakennekuva]])
 
 (def Ymparistolupa
    [:laitoksen_tiedot [:voimassa_olevat_ymparistolupa_vesilupa
