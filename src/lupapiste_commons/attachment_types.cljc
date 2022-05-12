@@ -326,7 +326,8 @@
           :paatos
           :paatosote
           :keskustelu
-          :rakennekuva]])
+          :rakennekuva
+          :selvitys-jatteen-haitta-ainepitoisuuksista]])
 
 (def Ymparistolupa
    [:laitoksen_tiedot [:voimassa_olevat_ymparistolupa_vesilupa

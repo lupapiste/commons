@@ -868,6 +868,8 @@
 "attachmentType.muut.selvitys_tontin_tai_rakennuspaikan_pintavesien_kasittelysta" "en" "Report on the treatment of surface waters on the plot or construction site"
 "attachmentType.muut.selvitys_tontin_tai_rakennuspaikan_pintavesien_kasittelysta" "fi" "Selvitys tontin tai rakennuspaikan pintavesien käsittelystä"
 "attachmentType.muut.selvitys_tontin_tai_rakennuspaikan_pintavesien_kasittelysta" "sv" "Utredning över behandlingen av tomtens eller byggplatssens ytvatten"
+"attachmentType.muut.selvitys-jatteen-haitta-ainepitoisuuksista" "en" "Raport on the concentration of hazardous substance"
+"attachmentType.muut.selvitys-jatteen-haitta-ainepitoisuuksista" "fi" "Selvitys jäätteen haitta-ainepitoisuuksista"
 "attachmentType.muut.sijoituslupaasiakirja" "en" "Investment authorisation document"
 "attachmentType.muut.sijoituslupaasiakirja" "fi" "Sijoituslupa-asiakirja"
 "attachmentType.muut.sijoituslupaasiakirja" "sv" "Dokument gällande placeringstillstånd"
