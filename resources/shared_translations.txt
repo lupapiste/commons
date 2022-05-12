@@ -804,6 +804,7 @@
 "attachmentType.muut.radontekninen_suunnitelma" "sv" "Plan för eliminering av radon"
 "attachmentType.muut.rakennekuva" "en" "Structural image"
 "attachmentType.muut.rakennekuva" "fi" "Rakennekuva"
+"attachmentType.muut.rakennekuva" "sv" "Strukturbild"
 "attachmentType.muut.rakennesuunnitelma" "en" "Structural plan"
 "attachmentType.muut.rakennesuunnitelma" "fi" "Rakennesuunnitelma"
 "attachmentType.muut.rakennesuunnitelma" "sv" "Plan över konstruktioner"
