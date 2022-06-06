@@ -1,5 +1,14 @@
 (ns lupapiste-commons.attachment-types)
 
+(defn merge-attachment-listings
+  "Merge two or more attachment listing and removes possible dublicates."
+  [& listings]
+  (letfn [(merge-with-acc [acc listing]
+              (merge-with (comp vec distinct into)
+                          acc
+                          (apply hash-map listing)))]
+    (into [] cat (reduce merge-with-acc {} listings))))
+
 (def osapuolet
   [:cv
    :patevyystodistus
@@ -434,8 +443,8 @@
           :paatosote
           :keskustelu]])
 
-(def MuutYmparistoluvat ; wip
-  [:muistomerkin-rauhoittaminen [:kirjallinen-aineisto
+(def MuutYmparistoluvat-extra
+   [:muistomerkin-rauhoittaminen [:kirjallinen-aineisto
                                  :lainhuutotodistus
                                  :kauppakirja
                                  :valokuva-kohteesta
@@ -444,23 +453,45 @@
    :jatteen_kerays [:vastaanottopaikan_tiedot]
    :kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan [:sailion-tarkastuspoytakirja
                                                                       :kiinteiston-omistajien-suostumus]
+   :ottamisalue [:luettelo-naapureista-ja-asianosaisista]
    :koeluontoinen_toiminta [:kuvaus_toiminnasta
                             :raaka-aineet
                             :paasto_arviot
                             :selvitys_ymparistonsuojelutoimista]
+   :laitosalue_sen_ymparisto [:kaavamaaraysote]
    :ilmoitus-poikkeuksellisesta-tilanteesta [:kayttoturvallisuustiedote]
-   :kartat [:lantapatterin-sijainti
+   :yleiset-alueet [:suunnitelmakartta]
+   :rakennuspaikka [:ote_kiinteistorekisteristerista]
+   :paapiirustus [:leikkauspiirros]
+   :kartat [:yleiskartta
+            :lantapatterin-sijainti
             :luonnonmuistomerkin-sijainti-kartalla
             :sailion-ja-rakenteiden-sijainti-kartalla
             :jatteen-sijainti
-            :ottamispaikan-sijainti]
+            :ottamispaikan-sijainti
+            :sijaintikartta]
    :maastoliikennelaki-kilpailut-ja-harjoitukset [:asemapiirros-kilpailu-tai-harjoitusalueesta]
-   :muut [:muu
+   :muut [:natura-arvioinnin-tarveharkinta
+          :vakuus_ottamisen_aloittamiseksi_ennen_luvan_lainvoimaa
+          :vakuusasiakirja
+          :selvitys_tieyhteyksista_oikeuksista
+          :pohjavesitutkimus
+          :asemapiirros_prosessien_paastolahteiden_sijainti
+          :kiinteiston-omistajan-suostumus-luvan-hakemiseen
+          :muu
           :paatos
           :paatosote
           :keskustelu]])
 
-(def VesihuoltoVapautushakemukset  ; VVVL - Vesihuoltolain mukaiset vapautushakemukset
+;; MuuYmpäristö luvat contains yhteiskäsittely-maa-aines-ja-ymparistoluvalle operation that should have the all
+;; attachemet types from maa-aines and ympärstolupa and some extra types
+(def MuutYmparistoluvat
+  (merge-attachment-listings
+    MuutYmparistoluvat-extra
+    Ymparistolupa
+    Maa-ainesluvat))
+
+(def VesihuoltoVapautushakemukset                           ; VVVL - Vesihuoltolain mukaiset vapautushakemukset
   [:vapautushakemukset [:analyysitulos-kaivovedesta
                         :asemapiirros
                         :varallisuusselvitys
