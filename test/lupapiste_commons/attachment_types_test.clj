@@ -24,5 +24,5 @@
                     :group3 [:doc-id-6]])
           expected-as-map {:group1 [:doc-id-1 :doc-id-3 :doc-id-7]
                            :group2 [:doc-id-2]
-                           :group3 [:doc-id-3 :doc-id-6]}]
+                           :group3 [:doc-id-5 :doc-id-6]}]
       (is (= (apply hash-map merged) expected-as-map)))))
