@@ -768,7 +768,7 @@
 "attachmentType.muut.muu" "en" "Other attachments"
 "attachmentType.muut.muu" "fi" "Muu liite"
 "attachmentType.muut.muu" "sv" "Annan bilaga"
-"attachmentType.muut.natura-arvioinnin-tarveharkinta" "en" "Needs assessment of Natura assessment in accordance with section 65 of the Nature Conservation Act"
+"attachmentType.muut.natura-arvioinnin-tarveharkinta" "en" "Needs Natura assessment in accordance with section 65 of the Nature Conservation Act"
 "attachmentType.muut.natura-arvioinnin-tarveharkinta" "fi" "Luonnonsuojelulain 65 §:n mukainen Natura-arvioinnin tarveharkinta"
 "attachmentType.muut.ote_alueen_peruskartasta_sijainti_paastolahteet_olennaiset_kohteet" "en" "Excerpt from the basic map of the site (location, emission sources, essential items)"
 "attachmentType.muut.ote_alueen_peruskartasta_sijainti_paastolahteet_olennaiset_kohteet" "fi" "Ote alueen peruskartasta (sijainti, päästölähteet, olennaiset kohteet)"
