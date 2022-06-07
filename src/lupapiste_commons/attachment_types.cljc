@@ -1,7 +1,7 @@
 (ns lupapiste-commons.attachment-types)
 
 (defn merge-attachment-listings
-  "Merge two or more attachment listing and removes possible dublicates."
+  "Merge two or more attachment listings and remove possible duplicates."
   [& listings]
   (letfn [(merge-with-acc [acc listing]
               (merge-with (comp vec distinct into)
