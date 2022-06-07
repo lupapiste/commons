@@ -718,7 +718,7 @@
 "attachmentType.muut.kerrosalaselvitys" "en" "Statement of floor area"
 "attachmentType.muut.kerrosalaselvitys" "fi" "Kerrosalaselvitys"
 "attachmentType.muut.kerrosalaselvitys" "sv" "Utredning över våningsyta"
-"attachmentType.muut.kiinteiston-omistajan-suostumus-luvan-hakemiseen" "en" "Property owner's concent for applying permit"
+"attachmentType.muut.kiinteiston-omistajan-suostumus-luvan-hakemiseen" "en" "Property owner's consent for applying permit"
 "attachmentType.muut.kiinteiston-omistajan-suostumus-luvan-hakemiseen" "fi" "Kiinteistön omistajan suostumus luvan hakemiseen"
 "attachmentType.muut.keskustelu" "en" "Discussion"
 "attachmentType.muut.keskustelu" "fi" "Keskustelu"
