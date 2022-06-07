@@ -12,7 +12,6 @@
           expected-as-map {:group1 [:doc-id-1 :doc-id-3]
                            :group2 [:doc-id-2]
                            :group3 [:doc-id-4]}]
-      (println merged)
       (is (vector? merged))
       (is (= (apply hash-map merged) expected-as-map))))
   (testing "merge correctly tree listings"
