@@ -444,7 +444,7 @@
           :keskustelu]])
 
 (def MuutYmparistoluvat-extra
-   [:muistomerkin-rauhoittaminen [:kirjallinen-aineisto
+  [:muistomerkin-rauhoittaminen [:kirjallinen-aineisto
                                  :lainhuutotodistus
                                  :kauppakirja
                                  :valokuva-kohteesta
@@ -461,7 +461,7 @@
    :laitosalue_sen_ymparisto [:kaavamaaraysote]
    :ilmoitus-poikkeuksellisesta-tilanteesta [:kayttoturvallisuustiedote]
    :yleiset-alueet [:suunnitelmakartta]
-   :rakennuspaikka [:ote_kiinteistorekisteristerista]
+   :rakennuspaikka [:karttaote :ote_kiinteistorekisteristerista]
    :paapiirustus [:leikkauspiirros]
    :kartat [:yleiskartta
             :lantapatterin-sijainti
