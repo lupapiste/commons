@@ -330,8 +330,13 @@
    :kartat [:kartta-melun-ja-tarinan-leviamisesta]
    :rakennuspaikka [:karttaote]
    :hakija [:valtakirja]
+   :osapuolet [:yhdistyksen-johtoryhman-paytakirja
+               :yhdistyksen-saannot]
    :paapiirustus [:asemapiirros]
    :muut [:muu
+          :sopimus
+          :haittapaivakirja
+          :valokuva
           :paatos
           :paatosote
           :keskustelu
