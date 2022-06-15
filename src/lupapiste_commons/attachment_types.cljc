@@ -341,7 +341,9 @@
           :paatosote
           :keskustelu
           :rakennekuva
-          :selvitys-jatteen-haitta-ainepitoisuuksista]])
+          :selvitys-jatteen-haitta-ainepitoisuuksista
+          :selvitys-poikkeuksillisista-saaoloista
+          :tiedot-levitettavasta-lannastasta]])
 
 (def Ymparistolupa
    [:laitoksen_tiedot [:voimassa_olevat_ymparistolupa_vesilupa
