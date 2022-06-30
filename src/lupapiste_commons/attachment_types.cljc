@@ -514,6 +514,19 @@
   {:muut #{:paatos :paatosote :sopimus}
    :paatoksenteko #{:paatoksen_liite}})
 
+;; At some point all types should replace permit type specifie listing
+(def all-attachment-types
+  (merge-attachment-listings
+    Allu
+    Kiinteistotoimitus
+    Maa-ainesluvat
+    MuutYmparistoluvat-extra
+    Rakennusluvat-v2
+    YleistenAlueidenLuvat-v2
+    Ymparistoilmoitukset
+    Ymparistolupa
+    VesihuoltoVapautushakemukset))
+
 (def types-marked-being-construction-time-attachments-by-permit-type
   {:R (merge (-> (apply hash-map Rakennusluvat-v2)
                  (select-keys [:erityissuunnitelmat]))
