@@ -4,7 +4,7 @@
             [clojure.test :refer :all]
             [lupapiste-commons.i18n.core :refer :all]))
 
-(deftest read-translations
+(deftest read-translations-test
   (testing ":fallback-to-default-lang flag treats empty strings as missing value
             and replaces them with default language resouces value"
     (let [input [["label" "fi" "moi"]
