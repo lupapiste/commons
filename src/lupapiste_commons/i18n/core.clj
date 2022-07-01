@@ -16,16 +16,16 @@
 
 (defn replace-missing-texts [translations default-lang]
   (reduce (fn [acc [key strings]]
-            (assoc acc key (if (missing-translations? strings default-lang)
-                             (replace-missing strings default-lang)
-                             strings)))
+            (assoc acc key (replace-missing strings default-lang)))
           (ordered-map)
           translations))
 
 (defn read-translations
   ([] (read-translations (io/resource "translations.txt")))
-  ([input]
-   (update-in (resources/txt->map input) [:translations] replace-missing-texts default-lang)))
+  ([input & {:keys [fallback-to-default-lang]}]
+   (if fallback-to-default-lang
+     (update-in (resources/txt->map input) [:translations] replace-missing-texts default-lang)
+     (resources/txt->map input))))
 
 (defn combine-vec-or-map [left right]
   (if (every? vector? [left right])
