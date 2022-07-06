@@ -330,7 +330,7 @@
    :kartat [:kartta-melun-ja-tarinan-leviamisesta]
    :rakennuspaikka [:karttaote]
    :hakija [:valtakirja]
-   :osapuolet [:yhdistyksen-johtoryhman-paytakirja
+   :osapuolet [:yhdistyksen-johtoryhman-poytakirja
                :yhdistyksen-saannot]
    :paapiirustus [:asemapiirros]
    :muut [:muu
@@ -342,8 +342,8 @@
           :keskustelu
           :rakennekuva
           :selvitys-jatteen-haitta-ainepitoisuuksista
-          :selvitys-poikkeuksillisista-saaoloista
-          :tiedot-levitettavasta-lannastasta]])
+          :selvitys-poikkeuksellisista-saaoloista
+          :tiedot-levitettavasta-lannasta]])
 
 (def Ymparistolupa
    [:laitoksen_tiedot [:voimassa_olevat_ymparistolupa_vesilupa
