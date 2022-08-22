@@ -90,6 +90,40 @@
    :ya-sijoituslupa-sahko-data-ja-muiden-kaapelien-sijoittaminen
    :ya-sijoituslupa-vesi-ja-viemarijohtojen-sijoittaminen])
 
+(def ymp-operations
+  "YI, YM, YL, MAL and VVVL operations allowed in archiving"
+  [:meluilmoitus
+   :yleinen-ilmoitus
+   :koeluontoinen-toiminta
+   :ilmoitus-poikkeuksellisesta-tilanteesta
+   :ylijaamamaiden-hyodyntaminen
+   :jatteiden-hyodyntaminen-maarakentamisessa
+   :rekisterointi-ilmoitus
+   :lannan-varastointi
+   :lannan-levittamisesta-poikkeustilanteessa
+   :pima
+   :kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan
+   :talousjatevesien-kasittelysta-poikkeaminen
+   :maa-aineslupa
+   :maa-aineslupa-jatkoaika
+   :maa-ainesten-kotitarveotto
+   :yhteiskasittely-maa-aines-ja-ymparistoluvalle
+   :yl-uusi-toiminta
+   :yl-olemassa-oleva-toiminta
+   :yl-toiminnan-muutos
+   :vvvl-vesijohdosta
+   :vvvl-viemarista
+   :vvvl-vesijohdosta-ja-viemarista
+   :vvvl-hulevesiviemarista
+   :jatteen-keraystoiminta
+   :muistomerkin-rauhoittaminen
+   :maastoliikennelaki-kilpailut-ja-harjoitukset
+   :vesiliikennelaki-kilpailut-ja-harjoitukset
+   :yl-puiden-kaataminen
+   :ymparistoluvan-selventaminen
+   :leirintaalueilmoitus
+   :kirjallinen-vireillepano])
+
 (def deprecated-ya-operations
   "Add retired YA operations here to keep them valid in archiving. Leave translations available."
   [:ya-kayttolupa-muu-liikennealuetyo])

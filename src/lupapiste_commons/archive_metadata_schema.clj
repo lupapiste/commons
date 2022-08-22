@@ -23,15 +23,19 @@
     []
     (partition 2 groups)))
 
-(def document-and-attachment-types (-> document-types
-                                       (concat (groups->dotted-keywords attachment-types/Rakennusluvat-v2))
-                                       (concat (groups->dotted-keywords attachment-types/YleistenAlueidenLuvat-v2))))
+(def document-and-attachment-types (->> [attachment-types/Rakennusluvat-v2
+                                         attachment-types/YleistenAlueidenLuvat-v2
+                                         attachment-types/Ymparisto-types]
+                                        (mapcat groups->dotted-keywords)
+                                        (distinct)
+                                        (concat document-types)))
 
 (def valid-operations (concat operations/r-operations
                               operations/ya-operations
                               operations/deprecated-ya-operations
                               operations/p-operations
-                              operations/archiving-project-operations))
+                              operations/archiving-project-operations
+                              operations/ymp-operations))
 
 (def valid-usage-types (map :name usages/rakennuksen-kayttotarkoitus))
 
