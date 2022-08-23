@@ -481,3 +481,11 @@
   {:R (merge (-> (apply hash-map Rakennusluvat-v2)
                  (select-keys [:erityissuunnitelmat]))
              {:suunnitelmat [:piha_tai_istutussuunnitelma]})})
+
+(def all-attachment-types
+  (merge-attachment-listings
+    Allu
+    Kiinteistotoimitus
+    Rakennusluvat-v2
+    YleistenAlueidenLuvat-v2
+    Ymparisto-types))
