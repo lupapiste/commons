@@ -325,99 +325,97 @@
           :sopimus
           :keskustelu]])
 
-(def Ymparistoilmoitukset
-  [:ilmoituslomakkeet [:ilmoituslomake]
-   :kartat [:kartta-melun-ja-tarinan-leviamisesta]
-   :rakennuspaikka [:karttaote]
-   :hakija [:valtakirja]
-   :osapuolet [:yhdistyksen-johtoryhman-poytakirja
-               :yhdistyksen-saannot]
-   :paapiirustus [:asemapiirros]
-   :muut [:muu
-          :sopimus
-          :haittapaivakirja
-          :valokuva
-          :paatos
-          :paatosote
-          :keskustelu
-          :rakennekuva
-          :selvitys-jatteen-haitta-ainepitoisuuksista
-          :selvitys-poikkeuksellisista-saaoloista
-          :tiedot-levitettavasta-lannasta]])
-
-(def Ymparistolupa
-   [:laitoksen_tiedot [:voimassa_olevat_ymparistolupa_vesilupa
-                       :muut_paatokset_sopimukset
-                       :selvitys_ymparistovahinkovakuutuksesta]
-    :laitosalue_sen_ymparisto [:tiedot_kiinteistoista
-                               :tiedot_toiminnan_sijaintipaikasta
-                               :kaavaote
-                               :selvitys_pohjavesialueesta
-                               :selvitys_rajanaapureista
-                               :ote_asemakaavasta
-                               :ote_yleiskaavasta]
-    :laitoksen_toiminta [:yleiskuvaus_toiminnasta
-                         :yleisolle_tarkoitettu_tiivistelma
-                         :selvitys_tuotannosta
-                         :tiedot_toiminnan_suunnitellusta
-                         :tiedot_raaka-aineista
-                         :tiedot_energian
-                         :energiansaastosopimus
-                         :vedenhankinta_viemarointi
-                         :arvio_ymparistoriskeista
-                         :liikenne_liikennejarjestelyt
-                         :selvitys_ymparistoasioiden_hallintajarjestelmasta]
-    :ymparistokuormitus [:paastot_vesistoon_viemariin
-                         :paastot_ilmaan
-                         :paastot_maaperaan_pohjaveteen
-                         :tiedot_pilaantuneesta_maaperasta
-                         :melupaastot_tarina
-                         :selvitys_paastojen_vahentamisesta_puhdistamisesta
-                         :syntyvat_jatteet
-                         :selvitys_jatteiden_maaran_haitallisuuden_vahentamiseksi
-                         :kaatopaikkaa_koskevan_lupahakemuksen_lisatiedot
-                         :selvitys_vakavaraisuudesta_vakuudesta
-                         :jatteen_hyodyntamista_kasittelya_koskevan_toiminnan_lisatiedot]
-    :paras_tekniikka_kaytanto [:arvio_tekniikan_soveltamisesta
-                               :arvio_paastojen_vahentamistoimien_ristikkaisvaikutuksista
-                               :arvio_kaytannon_soveltamisesta]
-    :vaikutukset_ymparistoon [:arvio_vaikutuksista_yleiseen_viihtyvyyteen_ihmisten_terveyteen
-                              :arvio_vaikutuksista_luontoon_luonnonsuojeluarvoihin_rakennettuun_ymparistoon
-                              :arvio_vaikutuksista_vesistoon_sen_kayttoon
-                              :arvio_ilmaan_joutuvien_paastojen_vaikutuksista
-                              :arvio_vaikutuksista_maaperaan_pohjaveteen
-                              :arvio_melun_tarinan_vaikutuksista
-                              :arvio_ymparistovaikutuksista]
-    :tarkkailu_raportointi [:kayttotarkkailu
-                            :paastotarkkailu
-                            :vaikutustarkkailu
-                            :mittausmenetelmat_laitteet_laskentamenetelmat_laadunvarmistus
-                            :raportointi_tarkkailuohjelmat]
-    :vahinkoarvio_estavat_toimenpiteet [:toimenpiteet_vesistoon_kohdistuvien_vahinkojen_ehkaisemiseksi
-                                        :korvausestiys_vesistoon_kohdistuvista_vahingoista
-                                        :toimenpiteet_muiden_kuin_vesistovahinkojen_ehkaisemiseksi]
-    :muut [:asemapiirros_prosessien_paastolahteiden_sijainti
-           :ote_alueen_peruskartasta_sijainti_paastolahteet_olennaiset_kohteet
-           :prosessikaavio_yksikkoprosessit_paastolahteet
-           :selvitys_suuronnettomuuden_vaaran_arvioimiseksi
-           :muu
-           :paatos
-           :paatosote
-           :keskustelu]])
-
-(def Maa-ainesluvat
-  [:hakija [:valtakirja
-            :ottamisalueen_omistus_hallintaoikeus]
-   :ottamisalue [:ote_alueen_peruskartasta
-                 :ote_yleiskaavasta
-                 :ote_asemakaavasta
-                 :naapurit]
+(def Ymparisto-types
+  "Attachment types for YM, YI, YL, VVVL and MAL"
+  [:ilmoitus-poikkeuksellisesta-tilanteesta [:kayttoturvallisuustiedote]
+   :jatteen_kerays [:vastaanottopaikan_tiedot]
+   :maastoliikennelaki-kilpailut-ja-harjoitukset [:asemapiirros-kilpailu-tai-harjoitusalueesta]
+   :paapiirustus [:leikkauspiirros
+                  :asemapiirros]
+   :ilmoituslomakkeet [:ilmoituslomake]
    :erityissuunnitelmat [:yvalain_mukainen_arviointiselostus
                          :luonnonsuojelulain_arviointi
                          :kivenmurskaamo
                          :selvitys_jalkihoitotoimenpiteista
                          :ottamissuunnitelma
                          :kaivannaisjatteen_jatehuoltosuunnitelma]
+   :tarkkailu_raportointi [:kayttotarkkailu
+                           :paastotarkkailu
+                           :vaikutustarkkailu
+                           :mittausmenetelmat_laitteet_laskentamenetelmat_laadunvarmistus
+                           :raportointi_tarkkailuohjelmat]
+   :vahinkoarvio_estavat_toimenpiteet [:toimenpiteet_vesistoon_kohdistuvien_vahinkojen_ehkaisemiseksi
+                                       :korvausestiys_vesistoon_kohdistuvista_vahingoista
+                                       :toimenpiteet_muiden_kuin_vesistovahinkojen_ehkaisemiseksi]
+   :kartat [:yleiskartta
+            :lantapatterin-sijainti
+            :luonnonmuistomerkin-sijainti-kartalla
+            :sailion-ja-rakenteiden-sijainti-kartalla
+            :jatteen-sijainti
+            :ottamispaikan-sijainti
+            :sijaintikartta
+            :kartta-melun-ja-tarinan-leviamisesta]
+   :laitoksen_tiedot [:voimassa_olevat_ymparistolupa_vesilupa
+                      :muut_paatokset_sopimukset
+                      :selvitys_ymparistovahinkovakuutuksesta]
+   :vapautushakemukset [:analyysitulos-kaivovedesta
+                        :asemapiirros
+                        :varallisuusselvitys
+                        :jatevesiselvitys]
+   :osapuolet [:yhdistyksen-johtoryhman-poytakirja
+               :yhdistyksen-saannot]
+   :yleiset-alueet [:suunnitelmakartta]
+   :rakennuspaikka [:karttaote
+                    :ote_kiinteistorekisteristerista]
+   :kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan [:sailion-tarkastuspoytakirja
+                                                                      :kiinteiston-omistajien-suostumus]
+   :ymparistokuormitus [:paastot_vesistoon_viemariin
+                        :paastot_ilmaan
+                        :paastot_maaperaan_pohjaveteen
+                        :tiedot_pilaantuneesta_maaperasta
+                        :melupaastot_tarina
+                        :selvitys_paastojen_vahentamisesta_puhdistamisesta
+                        :syntyvat_jatteet
+                        :selvitys_jatteiden_maaran_haitallisuuden_vahentamiseksi
+                        :kaatopaikkaa_koskevan_lupahakemuksen_lisatiedot
+                        :selvitys_vakavaraisuudesta_vakuudesta
+                        :jatteen_hyodyntamista_kasittelya_koskevan_toiminnan_lisatiedot]
+   :vaikutukset_ymparistoon [:arvio_vaikutuksista_yleiseen_viihtyvyyteen_ihmisten_terveyteen
+                             :arvio_vaikutuksista_luontoon_luonnonsuojeluarvoihin_rakennettuun_ymparistoon
+                             :arvio_vaikutuksista_vesistoon_sen_kayttoon
+                             :arvio_ilmaan_joutuvien_paastojen_vaikutuksista
+                             :arvio_vaikutuksista_maaperaan_pohjaveteen
+                             :arvio_melun_tarinan_vaikutuksista
+                             :arvio_ymparistovaikutuksista]
+   :koeluontoinen_toiminta [:kuvaus_toiminnasta
+                            :raaka-aineet
+                            :paasto_arviot
+                            :selvitys_ymparistonsuojelutoimista]
+   :paras_tekniikka_kaytanto [:arvio_tekniikan_soveltamisesta
+                              :arvio_paastojen_vahentamistoimien_ristikkaisvaikutuksista
+                              :arvio_kaytannon_soveltamisesta]
+   :muistomerkin-rauhoittaminen [:kirjallinen-aineisto
+                                 :lainhuutotodistus
+                                 :kauppakirja
+                                 :valokuva-kohteesta
+                                 :kohdekuvaus
+                                 :selvitys-omistusoikeudesta]
+   :ottamisalue [:ote_alueen_peruskartasta
+                 :ote_yleiskaavasta
+                 :ote_asemakaavasta
+                 :naapurit
+                 :luettelo-naapureista-ja-asianosaisista]
+   :laitoksen_toiminta [:yleiskuvaus_toiminnasta
+                        :yleisolle_tarkoitettu_tiivistelma
+                        :selvitys_tuotannosta
+                        :tiedot_toiminnan_suunnitellusta
+                        :tiedot_raaka-aineista
+                        :tiedot_energian
+                        :energiansaastosopimus
+                        :vedenhankinta_viemarointi
+                        :arvio_ymparistoriskeista
+                        :liikenne_liikennejarjestelyt
+                        :selvitys_ymparistoasioiden_hallintajarjestelmasta]
    :muut [:vakuus_ottamisen_aloittamiseksi_ennen_luvan_lainvoimaa
           :vakuusasiakirja
           :selvitys_tieyhteyksista_oikeuksista
@@ -425,7 +423,30 @@
           :muu
           :paatos
           :paatosote
-          :keskustelu]])
+          :keskustelu
+          :natura-arvioinnin-tarveharkinta
+          :asemapiirros_prosessien_paastolahteiden_sijainti
+          :kiinteiston-omistajan-suostumus-luvan-hakemiseen
+          :sopimus
+          :haittapaivakirja
+          :valokuva
+          :rakennekuva
+          :selvitys-jatteen-haitta-ainepitoisuuksista
+          :selvitys-poikkeuksellisista-saaoloista
+          :tiedot-levitettavasta-lannasta
+          :ote_alueen_peruskartasta_sijainti_paastolahteet_olennaiset_kohteet
+          :prosessikaavio_yksikkoprosessit_paastolahteet
+          :selvitys_suuronnettomuuden_vaaran_arvioimiseksi]
+   :hakija [:valtakirja
+            :ottamisalueen_omistus_hallintaoikeus]
+   :laitosalue_sen_ymparisto [:kaavamaaraysote
+                              :tiedot_kiinteistoista
+                              :tiedot_toiminnan_sijaintipaikasta
+                              :kaavaote
+                              :selvitys_pohjavesialueesta
+                              :selvitys_rajanaapureista
+                              :ote_asemakaavasta
+                              :ote_yleiskaavasta]])
 
 (def Kiinteistotoimitus
   [:hakija [:valtakirja
@@ -450,84 +471,21 @@
           :paatosote
           :keskustelu]])
 
-(def MuutYmparistoluvat-extra
-  [:muistomerkin-rauhoittaminen [:kirjallinen-aineisto
-                                 :lainhuutotodistus
-                                 :kauppakirja
-                                 :valokuva-kohteesta
-                                 :kohdekuvaus
-                                 :selvitys-omistusoikeudesta]
-   :jatteen_kerays [:vastaanottopaikan_tiedot]
-   :kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan [:sailion-tarkastuspoytakirja
-                                                                      :kiinteiston-omistajien-suostumus]
-   :ottamisalue [:luettelo-naapureista-ja-asianosaisista]
-   :koeluontoinen_toiminta [:kuvaus_toiminnasta
-                            :raaka-aineet
-                            :paasto_arviot
-                            :selvitys_ymparistonsuojelutoimista]
-   :laitosalue_sen_ymparisto [:kaavamaaraysote]
-   :ilmoitus-poikkeuksellisesta-tilanteesta [:kayttoturvallisuustiedote]
-   :yleiset-alueet [:suunnitelmakartta]
-   :rakennuspaikka [:karttaote :ote_kiinteistorekisteristerista]
-   :paapiirustus [:leikkauspiirros]
-   :kartat [:yleiskartta
-            :lantapatterin-sijainti
-            :luonnonmuistomerkin-sijainti-kartalla
-            :sailion-ja-rakenteiden-sijainti-kartalla
-            :jatteen-sijainti
-            :ottamispaikan-sijainti
-            :sijaintikartta]
-   :maastoliikennelaki-kilpailut-ja-harjoitukset [:asemapiirros-kilpailu-tai-harjoitusalueesta]
-   :muut [:natura-arvioinnin-tarveharkinta
-          :vakuus_ottamisen_aloittamiseksi_ennen_luvan_lainvoimaa
-          :vakuusasiakirja
-          :selvitys_tieyhteyksista_oikeuksista
-          :pohjavesitutkimus
-          :asemapiirros_prosessien_paastolahteiden_sijainti
-          :kiinteiston-omistajan-suostumus-luvan-hakemiseen
-          :muu
-          :paatos
-          :paatosote
-          :keskustelu]])
-
-;; MuuYmpäristö luvat contains yhteiskäsittely-maa-aines-ja-ymparistoluvalle operation that should have the all
-;; attachemet types from maa-aines and ympärstolupa and some extra types
-(def MuutYmparistoluvat
-  (merge-attachment-listings
-    MuutYmparistoluvat-extra
-    Ymparistolupa
-    Maa-ainesluvat))
-
-(def VesihuoltoVapautushakemukset                           ; VVVL - Vesihuoltolain mukaiset vapautushakemukset
-  [:vapautushakemukset [:analyysitulos-kaivovedesta
-                        :asemapiirros
-                        :varallisuusselvitys
-                        :jatevesiselvitys]
-   :muut [:muu
-          :paatos
-          :paatosote
-          :keskustelu]])
-
 ;; NOTE: These are duplicated in Lupapiste attachment-multi-select.js,
 ;;       so if you edit these also edit that. Or refactor the duplication away!
 (def types-not-transmitted-to-backing-system
   {:muut #{:paatos :paatosote :sopimus}
    :paatoksenteko #{:paatoksen_liite}})
 
-;; At some point all types should replace permit type specifie listing
-(def all-attachment-types
-  (merge-attachment-listings
-    Allu
-    Kiinteistotoimitus
-    Maa-ainesluvat
-    MuutYmparistoluvat-extra
-    Rakennusluvat-v2
-    YleistenAlueidenLuvat-v2
-    Ymparistoilmoitukset
-    Ymparistolupa
-    VesihuoltoVapautushakemukset))
-
 (def types-marked-being-construction-time-attachments-by-permit-type
   {:R (merge (-> (apply hash-map Rakennusluvat-v2)
                  (select-keys [:erityissuunnitelmat]))
              {:suunnitelmat [:piha_tai_istutussuunnitelma]})})
+
+(def all-attachment-types
+  (merge-attachment-listings
+    Allu
+    Kiinteistotoimitus
+    Rakennusluvat-v2
+    YleistenAlueidenLuvat-v2
+    Ymparisto-types))
