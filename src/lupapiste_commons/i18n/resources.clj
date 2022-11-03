@@ -1,15 +1,16 @@
 (ns lupapiste-commons.i18n.resources
-  (:require [clojure.java.io :as io]
+  (:require [clojure.edn :as edn]
+            [clojure.java.io :as io]
             [clojure.string :as s]
-            [flatland.ordered.map :refer [ordered-map]]
-            [ontodev.excel :as xls]
-            [clojure.edn :as edn])
-  (:import [org.apache.poi.xssf.usermodel XSSFWorkbook XSSFSheet XSSFCell]
-           [org.apache.poi.ss.usermodel Font]
-           [java.io PushbackReader StringReader File FileOutputStream]
-           [java.util Date]
+            [dk.ative.docjure.spreadsheet :as xls]
+            [flatland.ordered.map :refer [ordered-map]])
+  (:import [java.io PushbackReader StringReader File FileOutputStream]
+           [java.net URL]
            [java.text SimpleDateFormat]
-           [java.net URL]))
+           [java.util Date]
+           [org.apache.poi.xssf.usermodel XSSFWorkbook XSSFSheet XSSFCell]))
+
+(set! *warn-on-reflection* true)
 
 (defn source-changed? [sym]
   (:source-changed (meta sym)))
@@ -35,41 +36,33 @@
        (cons (write-key key))))
 
 (defn sheet->map [^XSSFSheet excel-sheet]
-  (let [languages (->> excel-sheet
-                       first
-                       xls/read-row
+  (let [kw-or-nil #(when-not (s/blank? %)
+                     (keyword %))
+        read-row  #(map (comp s/trim str xls/read-cell)
+                        (xls/cell-seq %))
+        [x & xs]  (xls/row-seq excel-sheet)
+        languages (->> (read-row x)
                        rest
-                       (remove s/blank?)
-                       (map (comp keyword s/trim)))
-        rows (->> (map xls/read-row excel-sheet)
-                  rest
-                  (map #(map s/trim %)))]
-    {:languages (vec languages)
-     :translations (reduce (fn [acc [key & values]]
-                             (assoc acc (read-key key) (zipmap languages values)))
-                           (ordered-map)
-                           (filter #(not (empty? (first %))) rows))}))
+                       (keep kw-or-nil ))
+        rows      (keep  (fn [x]
+                           (let [[r :as row ] (read-row x)]
+                             (when-not (s/blank? r)
+                               row)))
+                         xs)]
+    {:languages    languages
+     :translations (->> rows
+                        (map (fn [[k & vs]]
+                               [(read-key k) (zipmap languages vs)]))
+                        (into (ordered-map)))}))
 
 (defn excel->map [excel-file]
-  (with-open [in (io/input-stream excel-file)]
-    (let [workbook (xls/load-workbook in)
-          sheets (seq workbook)
-          languages (->> sheets
-                         ffirst
-                         xls/read-row
-                         rest
-                         (remove s/blank?)
-                         (map (comp keyword s/trim)))
-          rows (->> sheets
-                    (map (fn [x] (map xls/read-row x)))
-                    (apply concat)
-                    rest
-                    (map #(map s/trim %)))]
-      {:languages (vec languages)
-       :translations (reduce (fn [acc [key & values]]
-                               (assoc acc (read-key key) (zipmap languages values)))
-                             (ordered-map)
-                             (filter #(not (empty? (first %))) rows))})))
+  (let [workbook   (xls/load-workbook excel-file)
+        sheet-maps (map sheet->map (xls/sheet-seq workbook))]
+    (assert (or (= (count sheet-maps) 1)
+                (->> sheet-maps (map (comp set :languages)) (apply =)))
+            "Sheet languages mismatch.")
+    {:languages    (-> sheet-maps first :languages)
+     :translations (->> sheet-maps (map :translations) (apply merge))}))
 
 (defn- txt-line [key lang text]
   (str (pr-str (write-key key)) " " (pr-str (name lang)) " " (pr-str (nil->empty-str text)) "\n"))
@@ -138,7 +131,7 @@
 (defn bold-font-cell [^XSSFWorkbook wb ^XSSFCell cell]
   (let [style (.createCellStyle wb)
         font (.createFont wb)]
-    (.setBoldweight font Font/BOLDWEIGHT_BOLD)
+    (.setBold font true)
     (.setFont style font)
     (.setCellStyle cell style)))
 

@@ -1,31 +1,25 @@
 (ns lupapiste-commons.i18n.resources-test
-  (:require [lupapiste-commons.i18n.resources :refer :all]
-            [clojure.test :refer :all])
+  (:require [clojure.test :refer :all]
+            [dk.ative.docjure.spreadsheet :as xls]
+            [lupapiste-commons.i18n.resources :refer :all])
   (:import [java.io File]))
 
 (def translations
-  {:languages [:fi :sv]
-   :translations {'label {:fi "Hyvää huomenta" :sv "Gud morgon"}
+  {:languages    [:fi :sv]
+   :translations {'label            {:fi "Hyvää huomenta" :sv "Gud morgon"}
                   '^:source-changed button {:fi "Ok" :sv "Jättebra"}}})
-
-(defn- source-name-equals [source-name]
-  (fn [key]
-    (= (:source-name (meta key))
-       source-name)))
 
 (deftest roundtrip
   (testing "What is put into a pipe comes out of it staying the same, where pipe is: map -> txt -> map -> excel -> map"
-    (let [txt-file (doto (File/createTempFile "translations" ".txt"))
-          excel-file (doto (File/createTempFile "translations" ".xlsx"))]
-      (let [_ (write-txt translations txt-file)
-            from-txt (txt->map txt-file)
-            _ (write-excel from-txt excel-file)
-            from-excel (excel->map excel-file)]
-        (is (= (every? (source-name-equals (.getName txt-file)) (keys from-txt))))
-        (is (= (every? (source-name-equals (.getName excel-file)) (keys from-excel))))
-        (.delete txt-file)
-        (.delete excel-file)
-        (is (= translations from-excel))))))
+    (let [txt-file   (File/createTempFile "translations" ".txt")
+          excel-file (File/createTempFile "translations" ".xlsx")
+          _          (write-txt translations txt-file)
+          from-txt   (txt->map txt-file)
+          _          (write-excel from-txt excel-file)
+          from-excel (excel->map excel-file)]
+      (.delete txt-file)
+      (.delete excel-file)
+      (is (= translations from-txt from-excel)))))
 
 (deftest find-missing-translations
   (let [no-texts {:languages [:fi :sv]
@@ -81,3 +75,34 @@
                     {'moi {:fi "Moro!"
                            :sv "Hej!"}}))))
     (.delete file-with-empty-lines)))
+
+(defn make-excel [& sheet-infos]
+  (let [wb   (apply xls/create-workbook sheet-infos)
+        file (File/createTempFile (str (gensym "testexcel")) ".xlsx")]
+    (xls/save-workbook! (.getPath file) wb)
+    file))
+
+(deftest multiple-sheets
+  (testing "OK"
+    (let [file (make-excel "One" [["foo" "a" "b"]
+                                  ["k1" "hello" "world"]
+                                  ["k3" "road" "kill"]]
+                           "Two" [["bar" "a" "b"]
+                                  ["k2" "another" "time"]
+                                  ["k3" "over" "ridden"]]
+                           "eerhT" [[ "oppo" "b" "a"]
+                                    [" k4 " "  Banana " " Acai "]])
+          m    (excel->map file)]
+      (.delete file)
+      (is (= m {:languages    [:a :b]
+                :translations {'k1 {:a "hello" :b "world"}
+                               'k2 {:a "another" :b "time"}
+                               'k3 {:a "over" :b "ridden"}
+                               'k4 {:a "Acai" :b "Banana"}}}))))
+  (testing "Sheet mismmatch"
+    (let [file (make-excel "One" [["foo" "a" "b"]
+                                  ["k1" "hello" "world"]]
+                           "Two" [["bar" "a" "c"]
+                                  ["k2" "another" "time"]])]
+      (is (thrown? AssertionError (excel->map file)))
+      (.delete file))))

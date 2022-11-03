@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "3.1.6"
+(defproject lupapiste/commons "3.1.7"
   :description "Common domain code and resources for lupapiste applications"
   :url "https://www.lupapiste.fi"
   :license {:name "Eclipse Public License"
@@ -8,8 +8,7 @@
   :dependencies [[org.clojure/clojure "1.10.3"]
                  [org.clojure/tools.nrepl "0.2.13"]
                  [org.clojure/core.memoize "1.0.253"]
-                 [ontodev/excel "0.2.4" :exclusions [xml-apis org.apache.poi/poi-ooxml]]
-                 [org.apache.poi/poi-ooxml "3.16"]
+                 [dk.ative/docjure "1.18.0"]
                  [org.flatland/ordered "1.15.10"]
                  [com.taoensso/timbre "5.1.2"]
                  [prismatic/schema "1.2.0"]
