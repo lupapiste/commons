@@ -3871,7 +3871,7 @@
 "navigation" "sv" "Projekt"
 "navigation.dashboard" "en" "Dashboard"
 "navigation.dashboard" "fi" "Työpöytä"
-"navigation.dashboard" "sv" "Aleirbetsbord"
+"navigation.dashboard" "sv" "Arbetsbord"
 "neuvontapyyntö" "en" "Advice request"
 "neuvontapyyntö" "fi" "Neuvontapyyntö"
 "neuvontapyyntö" "sv" "Begäran om rådgivning"
