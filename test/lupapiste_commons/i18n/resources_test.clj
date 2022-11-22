@@ -1,7 +1,8 @@
 (ns lupapiste-commons.i18n.resources-test
   (:require [clojure.test :refer :all]
             [dk.ative.docjure.spreadsheet :as xls]
-            [lupapiste-commons.i18n.resources :refer :all])
+            [lupapiste-commons.i18n.resources :as resources]
+            [lupapiste-commons.i18n.txt-resources :as txt-resources])
   (:import [java.io File]))
 
 (def translations
@@ -13,10 +14,10 @@
   (testing "What is put into a pipe comes out of it staying the same, where pipe is: map -> txt -> map -> excel -> map"
     (let [txt-file   (File/createTempFile "translations" ".txt")
           excel-file (File/createTempFile "translations" ".xlsx")
-          _          (write-txt translations txt-file)
-          from-txt   (txt->map txt-file)
-          _          (write-excel from-txt excel-file)
-          from-excel (excel->map excel-file)]
+          _          (txt-resources/write-txt translations txt-file)
+          from-txt   (txt-resources/txt->map txt-file)
+          _          (resources/write-excel from-txt excel-file)
+          from-excel (resources/excel->map excel-file)]
       (.delete txt-file)
       (.delete excel-file)
       (is (= translations from-txt from-excel)))))
@@ -30,13 +31,13 @@
                             :translations {'label {:fi "Heippa" :sv ""}}}
         source-text-changed {:languages [:fi :sv]
                              :translations {'^:source-changed label {:fi "Punainen" :sv "Blå"}}}]
-    (is (= (ffirst (:translations (missing-translations no-texts)))
+    (is (= (ffirst (:translations (txt-resources/missing-translations no-texts)))
            'label))
-    (is (= (ffirst (:translations (missing-translations empty-default-text)))
+    (is (= (ffirst (:translations (txt-resources/missing-translations empty-default-text)))
            'label))
-    (is (= (ffirst (:translations (missing-translations empty-swedish-text)))
+    (is (= (ffirst (:translations (txt-resources/missing-translations empty-swedish-text)))
            'label))
-    (is (= (ffirst (:translations (missing-translations source-text-changed)))
+    (is (= (ffirst (:translations (txt-resources/missing-translations source-text-changed)))
            'label))))
 
 (deftest missing-translations-with-lang
@@ -44,32 +45,32 @@
                        :translations {'label {:fi "Heippa" :sv "Hej" :en ""}}}
         missing-english {:languages [:fi :sv]
                          :translations {'label {:fi "Heippa" :sv "Hej"}}}]
-    (is (= (ffirst (:translations (missing-translations empty-english)))
+    (is (= (ffirst (:translations (txt-resources/missing-translations empty-english)))
            'label))
-    (is (nil? (ffirst (:translations (missing-translations empty-english :sv)))) "English check is discarded")
-    (is (= (ffirst (:translations (missing-translations empty-english :en)))
+    (is (nil? (ffirst (:translations (txt-resources/missing-translations empty-english :sv)))) "English check is discarded")
+    (is (= (ffirst (:translations (txt-resources/missing-translations empty-english :en)))
            'label))
-    (is (= (ffirst (:translations (missing-translations missing-english :en)))
+    (is (= (ffirst (:translations (txt-resources/missing-translations missing-english :en)))
            'label))
-    (is (= (:languages (missing-translations empty-english :en))
+    (is (= (:languages (txt-resources/missing-translations empty-english :en))
            [:fi :en]) "Fi and selected language returned in languages")))
 
 (deftest write-key-test
   (let [loc-key (symbol "application/rtf")]
-    (is (= (write-key loc-key) "application/rtf") "'Namespace' should not be stripped off")
-    (is (= (write-key (with-meta loc-key {:source-changed true}))
+    (is (= (txt-resources/write-key loc-key) "application/rtf") "'Namespace' should not be stripped off")
+    (is (= (txt-resources/write-key (with-meta loc-key {:source-changed true}))
            "application/rtf!")
         "When source is changed, '!' is added to key")))
 
 (deftest empty-lines-test
   (let [file-with-empty-lines (File/createTempFile "translations" ".txt")]
-    (write-txt translations file-with-empty-lines)
+    (txt-resources/write-txt translations file-with-empty-lines)
     (spit file-with-empty-lines
           (str  "\n\n"
-                (#'lupapiste-commons.i18n.resources/txt-line "moi" "fi" "Moro!")
-                (#'lupapiste-commons.i18n.resources/txt-line "moi" "sv" "Hej!"))
+                (#'lupapiste-commons.i18n.txt-resources/txt-line "moi" "fi" "Moro!")
+                (#'lupapiste-commons.i18n.txt-resources/txt-line "moi" "sv" "Hej!"))
           :append true)
-    (let [from-txt (txt->map file-with-empty-lines)]
+    (let [from-txt (txt-resources/txt->map file-with-empty-lines)]
       (is (= (:translations from-txt)
              (merge (:translations translations)
                     {'moi {:fi "Moro!"
@@ -92,7 +93,7 @@
                                   ["k3" "over" "ridden"]]
                            "eerhT" [[ "oppo" "b" "a"]
                                     [" k4 " "  Banana " " Acai "]])
-          m    (excel->map file)]
+          m    (resources/excel->map file)]
       (.delete file)
       (is (= m {:languages    [:a :b]
                 :translations {'k1 {:a "hello" :b "world"}
@@ -104,5 +105,5 @@
                                   ["k1" "hello" "world"]]
                            "Two" [["bar" "a" "c"]
                                   ["k2" "another" "time"]])]
-      (is (thrown? AssertionError (excel->map file)))
+      (is (thrown? AssertionError (resources/excel->map file)))
       (.delete file))))
