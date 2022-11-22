@@ -1,39 +1,21 @@
 (ns lupapiste-commons.i18n.resources
-  (:require [clojure.edn :as edn]
-            [clojure.java.io :as io]
+  (:require [clojure.java.io :as io]
             [clojure.string :as s]
             [dk.ative.docjure.spreadsheet :as xls]
-            [flatland.ordered.map :refer [ordered-map]])
-  (:import [java.io PushbackReader StringReader File FileOutputStream]
-           [java.net URL]
+            [flatland.ordered.map :refer [ordered-map]]
+            [lupapiste-commons.i18n.txt-resources :as txt-resources])
+  (:import [java.io FileOutputStream]
            [java.text SimpleDateFormat]
            [java.util Date]
-           [org.apache.poi.xssf.usermodel XSSFWorkbook XSSFSheet XSSFCell]))
+           [org.apache.poi.xssf.usermodel XSSFCell XSSFSheet XSSFWorkbook]))
 
 (set! *warn-on-reflection* true)
-
-(defn source-changed? [sym]
-  (:source-changed (meta sym)))
-
-(defn write-key [sym]
-  (cond-> (str sym)
-    (source-changed? sym) (str "!")))
-
-(defn read-key [^String string]
-  (if (.endsWith string "!")
-    (-> (s/replace string #"!$" "")
-        symbol
-        (with-meta {:source-changed true}))
-    (symbol string)))
-
-(defn nil->empty-str [x]
-  (if (nil? x) "" x))
 
 (defn make-row-strings [key languages strings]
   (->> (for [lang languages]
          (get strings lang))
-       (map nil->empty-str)
-       (cons (write-key key))))
+       (map txt-resources/nil->empty-str)
+       (cons (txt-resources/write-key key))))
 
 (defn sheet->map [^XSSFSheet excel-sheet]
   (let [kw-or-nil #(when-not (s/blank? %)
@@ -52,7 +34,7 @@
     {:languages    languages
      :translations (->> rows
                         (map (fn [[k & vs]]
-                               [(read-key k) (zipmap languages vs)]))
+                               [(txt-resources/read-key k) (zipmap languages vs)]))
                         (into (ordered-map)))}))
 
 (defn excel->map [excel-file]
@@ -63,61 +45,6 @@
             "Sheet languages mismatch.")
     {:languages    (-> sheet-maps first :languages)
      :translations (->> sheet-maps (map :translations) (apply merge))}))
-
-(defn- txt-line [key lang text]
-  (str (pr-str (write-key key)) " " (pr-str (name lang)) " " (pr-str (nil->empty-str text)) "\n"))
-
-(defn write-txt [{:keys [translations]} txt-file]
-  (spit txt-file "") ;; truncate txt-file
-  (doseq [[key strings] translations]
-    (doseq [[lang text] strings]
-      (spit txt-file (txt-line key lang text) :append true))))
-
-(defn- read-entry [line]
-  (let [in (-> line StringReader. PushbackReader.)
-        key (read-key (edn/read in))
-        lang (edn/read in)
-        text (edn/read in)]
-    {:key key :lang lang :text text}))
-
-(def ^:private empty-line? s/blank?)
-
-(defn- filename [input]
-  (cond (string? input) input
-        (instance? File input) (.getName ^File input)
-        (instance? URL input) (-> (.getFile ^URL input)
-                                  (s/split #"/")
-                                  last)
-        :else nil))
-
-(defn- merge-entry [acc {:keys [key lang text]} source-name]
-  (let [[key current-translations] (or (find acc key)
-                                       [key (ordered-map)])]
-    (assoc acc
-           (with-meta key
-             (merge (meta key)
-                    {:source-name source-name}))
-           (assoc current-translations
-                  (keyword lang)
-                  text))))
-
-(defn txt->map [input]
-  (with-open [reader (io/reader input)]
-    (let [source-name (filename input)
-          translations
-          (loop [acc (ordered-map)
-                 lines (line-seq reader)]
-            (if-let [line (first lines)]
-              (if (empty-line? line)
-                (recur acc
-                       (rest lines))
-                (recur (merge-entry acc
-                                    (read-entry line)
-                                    source-name)
-                       (rest lines)))
-              acc))]
-      {:languages (-> translations first val keys vec)
-       :translations translations})))
 
 (defn create-row [^XSSFSheet sheet row-strings row-index & {:keys [cell-fn] :or {cell-fn nil}}]
   (let [row (.createRow sheet ^long row-index)]
@@ -149,24 +76,6 @@
     (with-open [out (FileOutputStream. (io/file excel-file))]
       (.write wb out))))
 
-(defn missing-translations
-  "Returns missing translations. If selected-lang is given, only that and :fi is regarded."
-  [{:keys [translations languages]} & [selected-lang]]
-  {:languages (if selected-lang
-                [:fi (keyword selected-lang)]
-                languages)
-   :translations
-   (reduce (fn [acc [key {:keys [fi] :as strings}]]
-             (cond-> acc
-               (empty? (dissoc strings :fi))               (assoc key {:fi fi})
-               (empty? fi)                                 (assoc key {:fi ""})
-               (source-changed? key)                       (assoc key {:fi fi})
-               (if selected-lang
-                 (s/blank?    (get strings (keyword selected-lang)))
-                 (some empty? (vals strings)))             (assoc key {:fi fi})))
-           (ordered-map)
-           translations)})
-
 (defn missing-localizations-excel
   "Writes missing shared localizations to excel file.
    If excel file is not provided, will create the file to user home dir."
@@ -181,5 +90,5 @@
    (missing-localizations-excel file "resources/shared_translations.txt"))
   ([target-file translations-file]
    (write-excel
-     (missing-translations (txt->map translations-file))
+     (txt-resources/missing-translations (txt-resources/txt->map translations-file))
      target-file)))

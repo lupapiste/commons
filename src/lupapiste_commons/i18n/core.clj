@@ -2,7 +2,7 @@
   (:require [clojure.java.io :as io]
             [clojure.set :refer [union]]
             [flatland.ordered.map :refer [ordered-map]]
-            [lupapiste-commons.i18n.resources :as resources]))
+            [lupapiste-commons.i18n.txt-resources :as txt-resources]))
 
 (def default-lang :fi)
 
@@ -24,8 +24,8 @@
   ([] (read-translations (io/resource "translations.txt")))
   ([input & {:keys [fallback-to-default-lang]}]
    (if fallback-to-default-lang
-     (update-in (resources/txt->map input) [:translations] replace-missing-texts default-lang)
-     (resources/txt->map input))))
+     (update-in (txt-resources/txt->map input) [:translations] replace-missing-texts default-lang)
+     (txt-resources/txt->map input))))
 
 (defn combine-vec-or-map [left right]
   (if (every? vector? [left right])
