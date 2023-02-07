@@ -25,7 +25,7 @@
 
 (def document-and-attachment-types (->> [attachment-types/Rakennusluvat-v2
                                          attachment-types/YleistenAlueidenLuvat-v2
-                                         attachment-types/Ymparisto-types]
+                                         attachment-types/Ymparisto-types-v2]
                                         (mapcat groups->dotted-keywords)
                                         (distinct)
                                         (concat document-types)))

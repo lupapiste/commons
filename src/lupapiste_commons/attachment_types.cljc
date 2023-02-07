@@ -448,6 +448,121 @@
                               :ote_asemakaavasta
                               :ote_yleiskaavasta]])
 
+(def Ymparisto-types-v2
+  "V2 of attachment types for YM, YI, YL, VVVL and MAL.
+  Note! Order of group types is significant, see `ymparisto-type-group->ordinal`."
+  [:hakija [:kauppakirja
+            :selvitys-omistus-tai-hallintaoikeudesta
+            :valtakirja]
+   :hakemukset-ja-ilmoitukset [:elainsuojelutaulukot
+                               :hakemus
+                               :ilmoituslomake
+                               :kuuleminen
+                               :lausunto
+                               :liite-vahimmaisetaisyydesta-poikkeamisesta
+                               :liitelomake
+                               :mielipide
+                               :muistutus
+                               :rekisterointi-ilmoitus
+                               :suostumus
+                               :vastine]
+   :kartat-ja-piirustukset [:asemapiirros
+                            :kartta-melun-ja-tarinan-leviamisesta
+                            :karttaote
+                            :leikkauskuvat
+                            :maankaatopaikan-tayttosuunnitelma
+                            :ote-asemakaavasta
+                            :ote-maakuntakaavasta
+                            :ote-peruskartasta
+                            :ote-yleiskaavasta
+                            :pohjapiirustus
+                            :prosessikaavio-yksikkoprosessit-ja-paastolahteet
+                            :rakennekuva
+                            :sijaintikartta]
+   :vahinkoarvio_estavat_toimenpiteet [:korvausestiys_vesistoon_kohdistuvista_vahingoista
+                                       :toimenpiteet_muiden_kuin_vesistovahinkojen_ehkaisemiseksi
+                                       :toimenpiteet_vesistoon_kohdistuvien_vahinkojen_ehkaisemiseksi]
+   :muut-luvat-tai-sopimukset [:muut-paatokset-ja-sopimukset
+                               :tiedot-ymparistovahinkovakuutuksesta
+                               :voimassa-oleva-ymparistolupa-tai-vesilupa]
+   :ymparistokuormitus [:hajumittaus-tai-mallinnus
+                        :jatteen_hyodyntamista_kasittelya_koskevan_toiminnan_lisatiedot
+                        :luontoselvitys
+                        :maankaatopaikkaa-koskevan-lupahakemuksen-lisatiedot
+                        :melumittaus-tai-mallinnus
+                        :melupaastot_tarina
+                        :paastot_ilmaan
+                        :paastot_maaperaan_pohjaveteen
+                        :paastot_vesistoon_viemariin
+                        :polymittaus-tai-mallinnus
+                        :selvitys_jatteiden_maaran_haitallisuuden_vahentamiseksi
+                        :selvitys_paastojen_vahentamisesta_puhdistamisesta
+                        :selvitys_vakavaraisuudesta_vakuudesta
+                        :syntyvat_jatteet
+                        :tiedot_pilaantuneesta_maaperasta]
+   :vaikutukset_ymparistoon [:arvio_ilmaan_joutuvien_paastojen_vaikutuksista
+                             :arvio_melun_tarinan_vaikutuksista
+                             :arvio_vaikutuksista_luontoon_luonnonsuojeluarvoihin_rakennettuun_ymparistoon
+                             :arvio_vaikutuksista_maaperaan_pohjaveteen
+                             :arvio_vaikutuksista_vesistoon_sen_kayttoon
+                             :arvio_vaikutuksista_yleiseen_viihtyvyyteen_ihmisten_terveyteen
+                             :arvio_ymparistovaikutuksista]
+   :paras-tekniikka-ja-paras-kaytanto [:arvio-tekniikan-ja-kaytannon-soveltamisesta]
+   :laitoksen_toiminta [:arvio_ymparistoriskeista
+                        :energiansaastosopimus
+                        :kayttoturvallisuustiedote
+                        :kemikaaliluettelo
+                        :liikenne_liikennejarjestelyt
+                        :selvitys_tuotannosta
+                        :selvitys_ymparistoasioiden_hallintajarjestelmasta
+                        :tiedot_energian
+                        :tiedot_raaka-aineista
+                        :tiedot_toiminnan_suunnitellusta
+                        :vedenhankinta_viemarointi
+                        :yleiskuvaus_toiminnasta
+                        :yleisolle_tarkoitettu_tiivistelma]
+   :laitosalue_sen_ymparisto [:selvitys_pohjavesialueesta
+                              :selvitys_rajanaapureista
+                              :tiedot_kiinteistoista
+                              :tiedot_toiminnan_sijaintipaikasta]
+   :jatteen_kerays [:vastaanottopaikan_tiedot]
+   :kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan [:sailion-tarkastuspoytakirja]
+   :koeluontoinen_toiminta [:kuvaus_toiminnasta
+                            :paasto_arviot
+                            :raaka-aineet
+                            :selvitys_ymparistonsuojelutoimista]
+   :vapautus-ja-poikkeushakemusten-liitteet [:analyysitulokset-kaivovedesta
+                                             :selvitys-elamantilanteesta
+                                             :selvitys-jatevesien-vahaisyydesta
+                                             :selvitys-jatevesijarjestelmasta
+                                             :selvitys-liittamisesta-viemariverkkoon
+                                             :selvitys-maaperan-soveltuvuudesta-imeytykseen
+                                             :selvitys-varallisuudesta]
+   :erityissuunnitelmat [:kaivannaisjatteen_jatehuoltosuunnitelma
+                         :kivenmurskaamo
+                         :luonnonsuojelulain-mukainen-natura-arviointi
+                         :luonto-ja-maisemaselvitys
+                         :ottamissuunnitelma
+                         :pohjavesiselvitys
+                         :selvitys-suuronnettomuuden-vaaran-arvioimiseksi
+                         :selvitys-tieyhteyksista-ja-oikeuksista
+                         :selvitys_jalkihoitotoimenpiteista
+                         :yvalain_mukainen_arviointiselostus]
+   :tarkkailu_raportointi [:kayttotarkkailu
+                           :mittausmenetelmat_laitteet_laskentamenetelmat_laadunvarmistus
+                           :paastotarkkailu
+                           :raportointi_tarkkailuohjelmat
+                           :vaikutustarkkailu]
+   :muut [:keskustelu
+          :muu
+          :paatos
+          :valokuva]])
+
+(def ymparisto-type-group->ordinal (->> Ymparisto-types-v2
+                                        (partition 2)
+                                        (map-indexed (fn [idx [group _types]] [group idx]))
+                                        (into {})))
+
 (def Kiinteistotoimitus
   [:hakija [:valtakirja
             :virkatodistus
@@ -488,4 +603,4 @@
     Kiinteistotoimitus
     Rakennusluvat-v2
     YleistenAlueidenLuvat-v2
-    Ymparisto-types))
+    Ymparisto-types-v2))
