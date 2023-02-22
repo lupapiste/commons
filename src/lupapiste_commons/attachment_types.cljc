@@ -603,4 +603,5 @@
     Kiinteistotoimitus
     Rakennusluvat-v2
     YleistenAlueidenLuvat-v2
+    Ymparisto-types ; For backward compatibility
     Ymparisto-types-v2))
