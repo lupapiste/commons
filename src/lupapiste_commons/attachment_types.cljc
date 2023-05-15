@@ -454,17 +454,25 @@
   [:hakija [:kauppakirja
             :selvitys-omistus-tai-hallintaoikeudesta
             :valtakirja]
-   :hakemukset-ja-ilmoitukset [:elainsuojelutaulukot
+   :hakemukset-ja-ilmoitukset [:asianosaisen-kuuleminen
+                               :elainsuojelutaulukot
                                :hakemus
                                :ilmoituslomake
                                :kuuleminen
+                               :kuulutus
                                :lausunto
+                               :lausuntopyynto
                                :liite-vahimmaisetaisyydesta-poikkeamisesta
                                :liitelomake
                                :mielipide
+                               :muistio
                                :muistutus
+                               :poytakirjaote
                                :rekisterointi-ilmoitus
+                               :selvitys
+                               :selvityspyynto
                                :suostumus
+                               :taydennyspyynto
                                :vastine]
    :kartat-ja-piirustukset [:asemapiirros
                             :kartta-melun-ja-tarinan-leviamisesta
@@ -552,10 +560,13 @@
                            :mittausmenetelmat_laitteet_laskentamenetelmat_laadunvarmistus
                            :paastotarkkailu
                            :raportointi_tarkkailuohjelmat
+                           :raportti
                            :vaikutustarkkailu]
-   :muut [:keskustelu
+   :muut [:jakelu
+          :keskustelu
           :muu
           :paatos
+          :tarkastuspoytakirja
           :valokuva]])
 
 (def ymparisto-type-group->ordinal (->> Ymparisto-types-v2
