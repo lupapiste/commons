@@ -1,20 +1,16 @@
 (ns lupapiste-commons.ring.session-timeout
-  (:import [java.util.concurrent TimeUnit]))
+  (:import [java.util Date]))
 
-(defn get-session-timeout [request]
-  (get-in request [:session :user :session-timeout] (.toMillis TimeUnit/HOURS 4)))
+(defn session-expired? [request]
+  (let [now     (.getTime (Date.))
+        expires (get-in request [:session :expires] now)]
+    (< expires now)))
 
-(defn increment-timeout [request now]
-  (+ now (get-session-timeout request)))
-
-(defn wrap-session-timeout [handler]
-  (fn [request]
-    (let [now (.getTime (java.util.Date.))
-          expires (get-in request [:session :expires] now)
-          expired? (< expires now)
-          response (handler request)]
-      (if expired?
-        (assoc response :session (assoc-in (or (:session response) (:session request))
-                                           [:expires]
-                                           (increment-timeout request now)))
-        response))))
+(defn wrap-session-timeout
+  ([handler]
+   (wrap-session-timeout handler {:status 401}))
+  ([handler response-on-expired]
+   (fn [request]
+     (if (session-expired? request)
+       response-on-expired
+       (handler request)))))
