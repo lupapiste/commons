@@ -2,9 +2,9 @@
   (:require [clojure.java.io :as io]
             [clojure.set :refer [difference]]
             [flatland.ordered.map :refer [ordered-map]]
-            [lupapiste-commons.i18n.resources :as commons-resources]
-            [lupapiste-commons.i18n.core :as commons-core])
-  (:import [java.io PushbackReader File]))
+            [lupapiste-commons.i18n.core :as commons-core]
+            [lupapiste-commons.i18n.txt-resources :as txt-resources])
+  (:import [java.io File PushbackReader]))
 
 (defn simple-translation-call? [tr-sym form]
   (and (list? form)
@@ -23,8 +23,8 @@
 (defn extract-strings [translation-function-name]
   (let [tr-sym (symbol translation-function-name)
         translations-file "resources/translations.txt"
-        {:keys [translations languages] :as my-translations} (commons-resources/txt->map translations-file)
-        all-translations (commons-core/merge-translations (commons-resources/txt->map (io/resource "shared_translations.txt"))
+        {:keys [translations languages] :as my-translations} (txt-resources/txt->map translations-file)
+        all-translations (commons-core/merge-translations (txt-resources/txt->map (io/resource "shared_translations.txt"))
                                                           my-translations)
         current-keys (map symbol (distinct (mapcat (fn [file] (strings-from file tr-sym))
                                                    (filter #(re-find #"\.clj.$" (.getName ^File %))
@@ -33,10 +33,10 @@
     (println "Adding following keys to:" translations-file)
     (doseq [k missing-keys]
       (println (str (pr-str k))))
-    (commons-resources/write-txt {:languages languages
-                                  :translations (loop [acc translations
-                                                       rest-keys missing-keys]
-                                                  (if-let [k (first rest-keys)]
-                                                    (recur (assoc acc k (assoc (get acc k (ordered-map)) :fi (name k) :sv "")) (rest rest-keys))
-                                                    acc))} translations-file)
+    (txt-resources/write-txt {:languages    languages
+                              :translations (loop [acc       translations
+                                                   rest-keys missing-keys]
+                                              (if-let [k (first rest-keys)]
+                                                (recur (assoc acc k (assoc (get acc k (ordered-map)) :fi (name k) :sv "")) (rest rest-keys))
+                                                acc))} translations-file)
     (println "Done")))
