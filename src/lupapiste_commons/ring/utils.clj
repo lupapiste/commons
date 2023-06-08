@@ -30,3 +30,13 @@
       (if (-> request :headers ^String (get "x-requested-with" "") (.contains "XMLHttpRequest"))
         (assoc-in response [:headers "Expires"] "0")
         response))))
+
+(defn wrap-csp-header [handler policies]
+  (let [csp-header (->> policies
+                        (map (fn [[k v]]
+                               (str (name k) " " v)))
+                        (s/join "; ")
+                        (array-map "Content-Security-Policy"))]
+    (fn [request]
+      (-> (handler request)
+          (update :headers merge csp-header)))))
