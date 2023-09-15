@@ -17,6 +17,7 @@
    :kerrostalo-rivitalo
    :kerrostalo-rt-laaj
    :konversio
+   :konversio-rakennus
    :kortteli-yht-alue-muutos
    :laajentaminen
    :linjasaneeraus
