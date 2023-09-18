@@ -4,13 +4,16 @@
 
 (defonce index-response (atom nil))
 
-(defn process-index-response [{:keys [git-commit]}]
+(defn process-index-response [build-info]
   (if @index-response
     @index-response
     (with-open [is (-> (io/resource "public/index.html")
                        (io/input-stream))]
       (let [content       (slurp is)
-            version       (if git-commit (subs git-commit 0 7) "dev")
+            version       (if-let [git-commit (or (get build-info "git-commit")
+                                                  (get build-info :git-commit))]
+                            (subs git-commit 0 7)
+                            "dev")
             replaced-html (-> (string/replace content ".css" (str ".css?v=" version))
                               (string/replace ".js" (str ".js?v=" version)))
             response      {:status  200
