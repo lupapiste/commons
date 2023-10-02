@@ -123,7 +123,8 @@
    :yl-puiden-kaataminen
    :ymparistoluvan-selventaminen
    :leirintaalueilmoitus
-   :kirjallinen-vireillepano])
+   :kirjallinen-vireillepano
+   :aloituslupa])
 
 (def deprecated-ya-operations
   "Add retired YA operations here to keep them valid in archiving. Leave translations available."
