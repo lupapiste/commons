@@ -4943,7 +4943,7 @@
 "operations.tree.lannan-varastointi" "fi" "Ilmoitus lannan varastointitilavuudesta poikkeamisesta (aumausilmoitus)"
 "operations.tree.lannan-varastointi" "sv" "Anmälan om undantag från gödslets lagringsvolym (lagring av gödsel i stackar)"
 "operations.tree.lannan-varastointi-v2" "en" "Notice of a deviation to manure storage volume (9 §)"
-"operations.tree.lannan-varastointi-v2" "fi" "Ilmoitus lannan varastointitilavuudesta poikkeamisesta (aumausilmoitus) (9 §)"
+"operations.tree.lannan-varastointi-v2" "fi" "Ilmoitus lannan tai lannoitevalmisteen poikkeuksellisesta varastoinnista (aumausilmoitus) (9 §)"
 "operations.tree.lannan-varastointi-v2" "sv" "Anmälan om undantag från gödsellagringsvolym (anmälan av lagring i stack) (9 §)"
 "operations.tree.leikkipaikan-tai-koiratarhan-sijoittaminen" "en" "Placement of a playground or dog park"
 "operations.tree.leikkipaikan-tai-koiratarhan-sijoittaminen" "fi" "Leikkipaikan tai koiratarhan sijoittaminen"
