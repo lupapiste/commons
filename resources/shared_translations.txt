@@ -4295,7 +4295,7 @@
 "operations.koeluontoinen-toiminta.desc" "sv" "<p>Verksamhet av försöksnatur bör anmälas till vederbörande myndighet senast 30 dygn innan verksamheten inleds. Ifall risk föreligger för olägenhet inom  lagen för grannelagsförhållanden, förstörelse av vattendrag eller det är frågan om ledning av avloppsvatten vilket kan medföra förstörelse av dike, källa eller  ström bör miljötillstånd för verksamheten sökas. Verksamhet av försöksnatur kan ansluta till förberedande av miljöskyddsinvesteringar eller förverkligande av tekniska försök.</p><p>Verksamhet av försöksnatur kan vara byte av bränsle, test av ersättande kemikalier eller utnyttjande av avfall som råvara (miljövårdslagen § 31 och 119).  Miljötillstånd behövs inte för sådan kortvarig verksamhet av försöksnatur vars syfte är att testa ny teknik, råvaror eller bränslen, tillverknings- eller förbränningsmetoder eller en reningsanordning eller att i en anläggning eller yrkesmässigt behandla avfall, om detta sker i syfte att klarlägga verksamhetens konsekvenser, användbarhet eller någon annan jämförbar omständighet.</p>"
 "operations.konversio" "en" "Construction-related application (conversion)"
 "operations.konversio" "fi" "Rakennusvalvonta-asia (konversio)"
-"operations.konversio" "sv" "Byggnadstillsynsärende (konverterad)
+"operations.konversio" "sv" "Byggnadstillsynsärende (konverterad)"
 "operations.konversio-rakennus" "en" "Construction permit (conversion)"
 "operations.konversio-rakennus" "fi" "Rakentamisen lupa (konversio)"
 "operations.konversio-rakennus" "sv" "Bygglov (konverterad)"
