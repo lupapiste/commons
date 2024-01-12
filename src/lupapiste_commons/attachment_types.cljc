@@ -300,8 +300,8 @@
                     :valokuva
                     :valtakirja]
    :osapuolet [:patevyystodistus]
-   ;; This is needed for statement attachments to work.
-   :katselmukset_ja_tarkastukset [:katselmuksen_tai_tarkastuksen_poytakirja]
+   :katselmukset_ja_tarkastukset [:katselmuksen_tai_tarkastuksen_poytakirja
+                                  :loppukatselmuksen_poytakirja]
    :ennakkoluvat_ja_lausunnot [:lausunto]
    :muut [:muu
           :paatos
@@ -316,8 +316,8 @@
                     :valokuva
                     :valtakirja]
    :osapuolet [:patevyystodistus]
-   ;; This is needed for statement attachments to work.
-   :katselmukset_ja_tarkastukset [:katselmuksen_tai_tarkastuksen_poytakirja]
+   :katselmukset_ja_tarkastukset [:katselmuksen_tai_tarkastuksen_poytakirja
+                                  :loppukatselmuksen_poytakirja]
    :ennakkoluvat_ja_lausunnot [:lausunto]
    :muut [:muu
           :paatos
