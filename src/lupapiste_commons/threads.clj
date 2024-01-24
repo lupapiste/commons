@@ -11,7 +11,7 @@
                        (.getThreadGroup (Thread/currentThread)))]
     (reify
       ThreadFactory
-      (newThread [this runnable]
+      (newThread [_this runnable]
         (doto (Thread. thread-group runnable worker-name)
           (.setDaemon true)
           (.setPriority Thread/NORM_PRIORITY))))))

@@ -27,7 +27,7 @@
       (string? enum-val-type) (str v)
       (nil? v) v
       :else
-      (do (throw (Exception. (str "Coercion from " (type v) " to " (type enum-val-type) " is not supported.")))))))
+      (throw (Exception. (str "Coercion from " (type v) " to " (type enum-val-type) " is not supported."))))))
 
 (defn- parse-value [schema v]
   (cond
