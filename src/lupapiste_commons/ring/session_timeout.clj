@@ -1,6 +1,8 @@
 (ns lupapiste-commons.ring.session-timeout
   (:import [java.util Date]))
 
+(set! *warn-on-reflection* true)
+
 (defn session-expired? [request]
   (let [now     (.getTime (Date.))
         expires (get-in request [:session :expires] now)]

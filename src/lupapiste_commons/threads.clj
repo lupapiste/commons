@@ -2,6 +2,8 @@
   (:import [java.util.concurrent Executors ThreadFactory Future ExecutorService]
            [clojure.lang IPending]))
 
+(set! *warn-on-reflection* true)
+
 (defn thread-factory ^ThreadFactory [worker-name]
   (let [security-manager (System/getSecurityManager)
         thread-group (if security-manager

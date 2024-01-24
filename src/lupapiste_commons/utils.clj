@@ -3,6 +3,8 @@
            [java.net URL]
            [java.io InputStream]))
 
+(set! *warn-on-reflection* true)
+
 (defn get-build-info [jar-name]
   (or (when-first [^URL url (filter #(.contains (.toExternalForm ^URL %) jar-name)
                                     (enumeration-seq (.. (Thread/currentThread)

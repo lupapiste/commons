@@ -2,6 +2,8 @@
   (:require [clojure.string :as s]
             [taoensso.timbre :as timbre]))
 
+(set! *warn-on-reflection* true)
+
 (defn wrap-exception-logging [handler]
   (fn [request]
     (try

@@ -3,6 +3,8 @@
   (:import (schema.core EnumSchema)
            (java.text SimpleDateFormat ParseException)))
 
+(set! *warn-on-reflection* true)
+
 (defn- get-in-metadata-map [map ks]
   (let [k (first ks)
         value (get map k (get map (s/optional-key k)))]

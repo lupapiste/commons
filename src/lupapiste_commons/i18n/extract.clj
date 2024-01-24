@@ -6,6 +6,8 @@
             [lupapiste-commons.i18n.txt-resources :as txt-resources])
   (:import [java.io File PushbackReader]))
 
+(set! *warn-on-reflection* true)
+
 (defn simple-translation-call? [tr-sym form]
   (and (list? form)
        (= tr-sym (first form))
