@@ -19,4 +19,5 @@ commons.iml
 *.orig
 *.log
 .DS_Store
-
+.clj-kondo/.cache
+.lsp/.cache

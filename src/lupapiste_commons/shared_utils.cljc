@@ -11,7 +11,7 @@
 
 (defn dissoc-in
   "Taken from core.incubator, added support for vectors, keeps empty maps/vectors (https://github.com/clojure/core.incubator/blob/master/src/main/clojure/clojure/core/incubator.clj#L62)"
-  [m [k & ks :as keys]]
+  [m [k & ks :as _keys]]
   (if ks
     (if-let [nextmap (get m k)]
       (let [newmap (dissoc-in nextmap ks)]

@@ -3,6 +3,8 @@
             [ring.middleware.session.store :as st])
   (:import [java.io FileInputStream]))
 
+(set! *warn-on-reflection* true)
+
 (defn read-key [^String session-key-path]
   (with-open [is (FileInputStream. session-key-path)]
     (let [bytes (byte-array 16)]

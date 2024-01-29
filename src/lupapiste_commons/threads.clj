@@ -2,6 +2,8 @@
   (:import [java.util.concurrent Executors ThreadFactory Future ExecutorService]
            [clojure.lang IPending]))
 
+(set! *warn-on-reflection* true)
+
 (defn thread-factory ^ThreadFactory [worker-name]
   (let [security-manager (System/getSecurityManager)
         thread-group (if security-manager
@@ -9,7 +11,7 @@
                        (.getThreadGroup (Thread/currentThread)))]
     (reify
       ThreadFactory
-      (newThread [this runnable]
+      (newThread [_this runnable]
         (doto (Thread. thread-group runnable worker-name)
           (.setDaemon true)
           (.setPriority Thread/NORM_PRIORITY))))))

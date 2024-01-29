@@ -3,6 +3,8 @@
   (:import (schema.core EnumSchema)
            (java.text SimpleDateFormat ParseException)))
 
+(set! *warn-on-reflection* true)
+
 (defn- get-in-metadata-map [map ks]
   (let [k (first ks)
         value (get map k (get map (s/optional-key k)))]
@@ -25,7 +27,7 @@
       (string? enum-val-type) (str v)
       (nil? v) v
       :else
-      (do (throw (Exception. (str "Coercion from " (type v) " to " (type enum-val-type) " is not supported.")))))))
+      (throw (Exception. (str "Coercion from " (type v) " to " (type enum-val-type) " is not supported."))))))
 
 (defn- parse-value [schema v]
   (cond
