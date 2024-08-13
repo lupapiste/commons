@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "5.2.16"
+(defproject lupapiste/commons "5.3.0"
   :description "Common domain code and resources for lupapiste applications"
   :url "https://www.lupapiste.fi"
   :license {:name         "Eclipse Public License"
@@ -16,5 +16,5 @@
                         :injections   [(require 'flare.clojure-test)
                                        (flare.clojure-test/install!)]}
              :provided {:dependencies [[ring/ring-core "1.10.0"]
-                                       [com.taoensso/timbre "5.1.2"]]}}
+                                       [com.taoensso/timbre "6.5.0"]]}}
   :cljsbuild {:builds {:dev {:source-paths ["src"]}}})
