@@ -410,7 +410,7 @@
 "attachmentType.hakemukset-ja-ilmoitukset._group_label" "sv" "Ansökningar och anmälningar"
 "attachmentType.hakemukset-ja-ilmoitukset.asianosaisen-kuuleminen" "fi" "Asianosaisen kuuleminen"
 "attachmentType.hakemukset-ja-ilmoitukset.asianosaisen-kuuleminen" "sv" "Hörsel den berörda parten"
-"attachmentType.hakemukset-ja-ilmoitukset.elainsuojelutaulukot" "fi" "Eläinsuojelutaulukot"
+"attachmentType.hakemukset-ja-ilmoitukset.elainsuojelutaulukot" "fi" "Eläinsuojataulukot"
 "attachmentType.hakemukset-ja-ilmoitukset.elainsuojelutaulukot" "sv" "Tabeller för djurskydd"
 "attachmentType.hakemukset-ja-ilmoitukset.hakemus" "fi" "Hakemus"
 "attachmentType.hakemukset-ja-ilmoitukset.hakemus" "sv" "Ansökan"
