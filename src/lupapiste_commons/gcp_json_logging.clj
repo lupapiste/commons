@@ -34,12 +34,17 @@
     (update data :vargs produce-message)))
 
 (defn string-stack-trace-mw
-  "Adds a `stack_trace` field when logging errors for GCP.
+  "Adds `stack_trace` for logging errors for GCP and removes the `?err` key containing the exception.
 
-  The `timbre-json-appender` already creates a nested map from the
-  error with `Throwable->map`, but it seems error reporting in GCP
-  does not recognize that format."
+  `timbre-json-appender` would create a nested map from the error with `Throwable->map`, but that is not useful
+  for error reporting in GCP which does not recognize that format.
+
+  Additionally, `timbre-json-appender` can fail to log JSON if the Throwable data is not serializable or if
+  the serialization causes an error in itself (e.g. with a component system map in the exception resulting
+  in a stack overflow). It falls back to the basic text appender in that situation, polluting logs. To avoid this,
+  the `?err` key is removed completely from the log data."
   [{:keys [^Throwable ?err] :as data}]
   (if (some? ?err)
-    (update data :context assoc :stack_trace (with-out-str (cs/print-stack-trace ?err)))
+    (-> (assoc-in data [:context :stack_trace] (with-out-str (cs/print-cause-trace ?err)))
+        (dissoc :?err))
     data))
