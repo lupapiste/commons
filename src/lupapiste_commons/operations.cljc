@@ -38,8 +38,8 @@
    :pientalo-laaj
    :purkaminen
    :puun-kaataminen
-   :rakennustietojen-korjaus
    :rak-valm-tyo
+   :rakennustietojen-korjaus
    :raktyo-aloit-loppuunsaat
    :rasite-tai-yhteisjarjestely
    :sisatila-muutos
