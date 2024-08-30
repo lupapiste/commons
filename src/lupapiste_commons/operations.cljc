@@ -7,6 +7,7 @@
    :aloitusoikeus
    :asuinrakennus
    :auto-katos
+   :erityista-toimintaa-alue
    :jakaminen-tai-yhdistaminen
    :jatevesi
    :jatkoaika
@@ -38,8 +39,8 @@
    :pientalo-laaj
    :purkaminen
    :puun-kaataminen
-   :rakennustietojen-korjaus
    :rak-valm-tyo
+   :rakennustietojen-korjaus
    :raktyo-aloit-loppuunsaat
    :rasite-tai-yhteisjarjestely
    :sisatila-muutos
