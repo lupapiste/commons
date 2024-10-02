@@ -42,6 +42,7 @@
    :rak-valm-tyo
    :raktyo-aloit-loppuunsaat
    :rasite-tai-yhteisjarjestely
+   :sijoittaminen
    :sisatila-muutos
    :suunnittelijan-nimeaminen
    :takka-tai-hormi
