@@ -43,6 +43,7 @@
    :rakennustietojen-korjaus
    :raktyo-aloit-loppuunsaat
    :rasite-tai-yhteisjarjestely
+   :sijoittaminen
    :sisatila-muutos
    :suunnittelijan-nimeaminen
    :takka-tai-hormi
