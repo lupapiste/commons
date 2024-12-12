@@ -7,6 +7,7 @@
    :aloitusoikeus
    :asuinrakennus
    :auto-katos
+   :energiakaivo
    :erityista-toimintaa-alue
    :jakaminen-tai-yhdistaminen
    :jatevesi
