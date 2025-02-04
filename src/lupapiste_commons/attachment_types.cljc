@@ -262,6 +262,7 @@
           :suorituskyvyttomyysvakuusasiakirja
           :tutkimus
           :vakuusasiakirja
+          :kuulutusasiakirja
           :valokuva
           :muu]])
 
@@ -566,6 +567,7 @@
           :keskustelu
           :muu
           :paatos
+          :kuulutusasiakirja
           :tarkastuspoytakirja
           :valokuva]])
 
