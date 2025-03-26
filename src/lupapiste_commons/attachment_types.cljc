@@ -570,7 +570,10 @@
           :paatoksen_tiedoksianto
           :kuulutusasiakirja
           :tarkastuspoytakirja
-          :valokuva]])
+          :valokuva
+          :lausunto_valituksesta
+          :tuomioistuimen_lausuntopyynto
+          :tuomioistuimen_paatos]])
 
 (def ymparisto-type-group->ordinal (->> Ymparisto-types-v2
                                         (partition 2)
