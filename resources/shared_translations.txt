@@ -898,6 +898,8 @@
 "attachmentType.muut.ote_alueen_peruskartasta_sijainti_paastolahteet_olennaiset_kohteet" "en" "Excerpt from the basic map of the site (location, emission sources, essential items)"
 "attachmentType.muut.ote_alueen_peruskartasta_sijainti_paastolahteet_olennaiset_kohteet" "fi" "Ote alueen peruskartasta (sijainti, päästölähteet, olennaiset kohteet)"
 "attachmentType.muut.ote_alueen_peruskartasta_sijainti_paastolahteet_olennaiset_kohteet" "sv" "Utdrag ur områdets grundkarta (placering, utsläppskällor, väsentliga objekt)"
+"attachmentType.muut.paatoksen_tiedoksianto" "fi" "Päätöksen tiedoksianto"
+"attachmentType.muut.paatoksen_tiedoksianto" "sv" "Delgivning av beslut"
 "attachmentType.muut.paatos" "en" "Decision"
 "attachmentType.muut.paatos" "fi" "Päätös"
 "attachmentType.muut.paatos" "sv" "Beslut"

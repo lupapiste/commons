@@ -567,6 +567,7 @@
           :keskustelu
           :muu
           :paatos
+          :paatoksen_tiedoksianto
           :kuulutusasiakirja
           :tarkastuspoytakirja
           :valokuva]])
