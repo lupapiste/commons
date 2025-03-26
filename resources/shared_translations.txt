@@ -448,6 +448,8 @@
 "attachmentType.hakemukset-ja-ilmoitukset.taydennyspyynto" "sv" "Begärän om tillägg"
 "attachmentType.hakemukset-ja-ilmoitukset.vastine" "fi" "Vastine"
 "attachmentType.hakemukset-ja-ilmoitukset.vastine" "sv" "Genmäle"
+"attachmentType.hakemukset-ja-ilmoitukset.vastinepyynto" "fi" "Vastinepyyntö"
+"attachmentType.hakemukset-ja-ilmoitukset.vastinepyynto" "sv" "Begäran om svar"
 "attachmentType.hakemus" "en" "Lupapiste application"
 "attachmentType.hakemus" "fi" "Lupapisteen hakemus"
 "attachmentType.hakemus" "sv" "Ansökan i Lupapiste"

@@ -474,7 +474,8 @@
                                :selvityspyynto
                                :suostumus
                                :taydennyspyynto
-                               :vastine]
+                               :vastine
+                               :vastinepyynto]
    :kartat-ja-piirustukset [:asemapiirros
                             :kartta-melun-ja-tarinan-leviamisesta
                             :karttaote
