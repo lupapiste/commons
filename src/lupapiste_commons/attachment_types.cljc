@@ -474,7 +474,8 @@
                                :selvityspyynto
                                :suostumus
                                :taydennyspyynto
-                               :vastine]
+                               :vastine
+                               :vastinepyynto]
    :kartat-ja-piirustukset [:asemapiirros
                             :kartta-melun-ja-tarinan-leviamisesta
                             :karttaote
@@ -567,9 +568,13 @@
           :keskustelu
           :muu
           :paatos
+          :paatoksen_tiedoksianto
           :kuulutusasiakirja
           :tarkastuspoytakirja
-          :valokuva]])
+          :valokuva
+          :lausunto_valituksesta
+          :tuomioistuimen_lausuntopyynto
+          :tuomioistuimen_paatos]])
 
 (def ymparisto-type-group->ordinal (->> Ymparisto-types-v2
                                         (partition 2)
