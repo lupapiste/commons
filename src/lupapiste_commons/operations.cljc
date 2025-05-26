@@ -45,6 +45,7 @@
    :raktyo-aloit-loppuunsaat
    :rasite-tai-yhteisjarjestely
    :sijoittamislupa
+   :sijoittamislupa-v2
    :sisatila-muutos
    :suunnittelijan-nimeaminen
    :takka-tai-hormi
