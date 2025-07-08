@@ -189,6 +189,14 @@
         :inUse [:closed :onHold :extinct]
         :onHold [:closed :constructionStarted :inUse :extinct])))
 
+(def notice-state-graph
+  "States for purkamisilmoitus and other similar notice applications."
+  {:draft     [:open :submitted :canceled]
+   :open      [:submitted :canceled]
+   :submitted [:ready :draft :canceled]
+   :ready     [:canceled]
+   :canceled  []})
+
 (def all-transitions-graph
   (merge-with (comp vec distinct concat)
               full-application-state-graph
@@ -199,11 +207,13 @@
               selventaminen-application-state-graph
               tonttijako-application-state-graph
               default-inforequest-state-graph
-              allu-state-graph))
+              allu-state-graph
+              notice-state-graph))
 
 (def r-and-tj-transitions
   (merge-with (comp vec distinct concat)
               full-application-state-graph
               default-inforequest-state-graph
               tj-ilmoitus-state-graph
-              tj-hakemus-state-graph))
+              tj-hakemus-state-graph
+              notice-state-graph))

@@ -39,6 +39,7 @@
    :pientalo
    :pientalo-laaj
    :purkaminen
+   :purkamisilmoitus
    :puun-kaataminen
    :rak-valm-tyo
    :rakennustietojen-korjaus
