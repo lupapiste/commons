@@ -252,7 +252,15 @@
                                   :tarkastusasiakirja
                                   :tarkastusasiakirjan_yhteeveto]
    :tietomallit [:rakennuksen_tietomalli_BIM
-                 :ympariston_tietomalli_BIM]
+                 :ympariston_tietomalli_BIM
+                :arkkitehtimalli_BIM
+                 :rakennemalli_BIM
+                 :talotekniikkamalli_BIM
+                 :rakennuspaikkamalli_BIM]
+   :tietomallien_liitteet [:tarkastustulos
+                           :tarkastustulos_bcf
+                           :tarkastusraportti
+                           :muu_tietomallin_liite]
    :muut [:erityismenettelyasiakirja
           :keskustelu
           :kuvaus

@@ -116,6 +116,9 @@
                       :myyntipalvelu (:schema Myyntipalvelu)
                       :nakyvyys (apply s/enum (:values Nakyvyys))}))
 
+(def TietomalliMetaDataMap
+  AsiakirjaMetaDataMap)
+
 (defn valid-dependencies? [{{:keys [arkistointi pituus laskentaperuste]} :sailytysaika
                             :keys [julkisuusluokka salassapitoaika salassapitoperuste turvallisuusluokka suojaustaso kayttajaryhma kayttajaryhmakuvaus]}]
   (cond-> true
@@ -131,6 +134,11 @@
 
 (def TojAsiakirjaMetaDataMap
   (-> (assoc AsiakirjaMetaDataMap :tila (apply s/enum (:values TojTila)))
+      (s/constrained valid-dependencies? "All required keys present in metadata")))
+
+;; Use the same metadata fields for BIM models as we use for the documents
+(def TojTietomalliMetaDataMap
+  (-> (assoc TietomalliMetaDataMap :tila (apply s/enum (:values TojTila)))
       (s/constrained valid-dependencies? "All required keys present in metadata")))
 
 (def default-metadata
