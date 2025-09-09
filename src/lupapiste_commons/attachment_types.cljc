@@ -19,7 +19,8 @@
   [:cv
    :patevyystodistus
    :suunnittelijan_tiedot
-   :tutkintotodistus])
+   :tutkintotodistus
+   :suostumus])
 
 (def Rakennusluvat
   [:hakija [:osakeyhtion_perustamiskirja
