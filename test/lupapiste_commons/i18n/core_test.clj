@@ -1,6 +1,5 @@
 (ns lupapiste-commons.i18n.core-test
-  (:require [clojure.java.io :as io]
-            [clojure.string :as s]
+  (:require [clojure.string :as s]
             [clojure.test :refer :all]
             [lupapiste-commons.i18n.core :refer :all]))
 
