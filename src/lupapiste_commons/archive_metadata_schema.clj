@@ -117,6 +117,7 @@
      (s/optional-key :demolished)                   s/Bool
      (s/optional-key :demolished-date)              s/Inst
 
+     (s/optional-key :model-phase)                  (apply s/enum attachment-types/model-phases)
      (s/optional-key :parent-id)                    tms/NonEmptyStr}
     tms/AsiakirjaMetaDataMap))
 

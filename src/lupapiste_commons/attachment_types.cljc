@@ -632,3 +632,9 @@
     YleistenAlueidenLuvat-v2
     Ymparisto-types ; For backward compatibility
     Ymparisto-types-v2))
+
+(def model-phases
+  "Phase of application that a BIM model is tied to; basically the model of the building
+  before (submitted plan), during (amended plan) or after (actually completed plan) construction.
+  The list is in chronological order when considering a single model."
+  [:submission-time :construction-time :completion-time])
