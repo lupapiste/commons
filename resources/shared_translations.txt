@@ -4188,7 +4188,7 @@
 "operations.Varasto, sauna, autotalli tai muu talousrakennus" "sv" "Byggande av lager, garage eller annan ekonomibyggnad"
 "operations.aiemmalla-luvalla-hakeminen" "en" "Construction permit (fetched)"
 "operations.aiemmalla-luvalla-hakeminen" "fi" "Rakentamisen lupa (noudettu)"
-"operations.aiemmalla-luvalla-hakeminen" "sv" "Bygglov (hämtad)"
+"operations.aiemmalla-luvalla-hakeminen" "sv" "Bygglov (hämtat)"
 "operations.aiemmalla-luvalla-hakeminen.desc" "en" "You can transfer a previously received permit, applied for on paper, to Lupapiste. Enter the relevant information underneath."
 "operations.aiemmalla-luvalla-hakeminen.desc" "fi" "Voit siirtää aikaisemman, paperilla haetun lupasi Lupapisteeseen. Syötä alle siihen liittyvät tiedot."
 "operations.aiemmalla-luvalla-hakeminen.desc" "sv" "Du kan flytta ditt tidigare tillstånd som du ansökt om med pappersdokument till Lupapiste.  Ange nedan uppgifter som gäller det."
