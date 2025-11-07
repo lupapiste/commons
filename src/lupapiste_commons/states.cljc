@@ -187,12 +187,7 @@
         :verdictGiven [:constructionStarted :inUse :onHold :appealed :closed :extinct :canceled]
         :constructionStarted [:inUse :onHold :closed :extinct]
         :inUse [:closed :onHold :extinct]
-        :onHold [:closed :constructionStarted :inUse :extinct]
-        :changesNeeded [:sent :changesDone :canceled :draft]
-        :changesDone [:sent :changesNeeded :canceled :draft]
-        :complementDone [:sent :complementNeeded :canceled])
-      (update :submitted conj :changesNeeded)
-      (update :complementNeeded conj :complementDone)))
+        :onHold [:closed :constructionStarted :inUse :extinct])))
 
 (def notice-state-graph
   "States for purkamisilmoitus and other similar notice applications."
