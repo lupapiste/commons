@@ -38,6 +38,7 @@
    :perus-tai-kant-rak-muutos
    :pientalo
    :pientalo-laaj
+   :puhtaan-siirtyman-sijoittamislupa
    :purkaminen
    :purkamisilmoitus
    :puun-kaataminen
@@ -47,6 +48,7 @@
    :rasite-tai-yhteisjarjestely
    :sijoittamislupa
    :sijoittamislupa-v2
+   :sijoittamislupa-v3
    :sisatila-muutos
    :suunnittelijan-nimeaminen
    :takka-tai-hormi
