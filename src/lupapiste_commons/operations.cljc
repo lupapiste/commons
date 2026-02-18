@@ -108,6 +108,7 @@
    :jatteiden-hyodyntaminen-maarakentamisessa
    :rekisterointi-ilmoitus
    :lannan-varastointi
+   :lannan-varastointi-v3
    :lannan-levittamisesta-poikkeustilanteessa
    :pima
    :kaytostapoistetun-oljy-tai-kemikaalisailion-jattaminen-maaperaan
