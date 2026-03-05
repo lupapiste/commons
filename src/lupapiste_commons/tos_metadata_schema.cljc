@@ -13,6 +13,32 @@
 (def Salassapitoperuste {:type :salassapitoperuste
                          :schema NonEmptyStr})
 
+;; Code list for JulkL 621/1999 24.1 § sections
+(def salassapitoperuste-kohdat
+  [:julkl-24-1-7-kohta :julkl-24-1-8-kohta :julkl-24-1-10-kohta
+   :julkl-24-1-14-kohta :julkl-24-1-17-kohta :julkl-24-1-20-kohta
+   :julkl-24-1-23-kohta :julkl-24-1-25-kohta :julkl-24-1-31-kohta
+   :julkl-24-1-32-kohta])
+
+;; Mapping of sections to confidentiality period in years
+(def salassapitoperuste-kesto-mapping
+  {:julkl-24-1-7-kohta 25
+   :julkl-24-1-8-kohta 25
+   :julkl-24-1-10-kohta 25
+   :julkl-24-1-14-kohta 25
+   :julkl-24-1-17-kohta 25
+   :julkl-24-1-20-kohta 25
+   :julkl-24-1-23-kohta 25
+   :julkl-24-1-25-kohta 50
+   :julkl-24-1-31-kohta 50
+   :julkl-24-1-32-kohta 50})
+
+(def SalassapitoperusteKohta {:type :salassapitoperuste-kohta
+                               :values salassapitoperuste-kohdat})
+
+(def SalassapidettavatOsat {:type :salassapidettavat-osat
+                             :schema s/Str})
+
 (def Turvallisuusluokka {:type :turvallisuusluokka
                          :values [:ei-turvallisuusluokkaluokiteltu
                                   :turvallisuusluokka4
@@ -33,11 +59,15 @@
                                      :schema s/Inst
                                      :calculated true})
 
-(def Salassapitotiedot [Salassapitoaika SalassapidonPaattymisajankohta Salassapitoperuste Suojaustaso Turvallisuusluokka Kayttajaryhma Kayttajaryhmakuvaus])
+;; Base confidentiality fields for both osittain-salassapidettava and salainen
+(def Salassapitotiedot [Salassapitoaika SalassapidonPaattymisajankohta SalassapitoperusteKohta Salassapitoperuste Suojaustaso Turvallisuusluokka Kayttajaryhma Kayttajaryhmakuvaus])
+
+;; Extended confidentiality fields for osittain-salassapidettava (includes SalassapidettavatOsat)
+(def OsittainSalassapidettavaTiedot (cons SalassapidettavatOsat Salassapitotiedot))
 
 (def Julkisuusluokka {:type :julkisuusluokka
                       :values [:julkinen :osittain-salassapidettava :salainen]
-                      :dependencies {:osittain-salassapidettava Salassapitotiedot
+                      :dependencies {:osittain-salassapidettava OsittainSalassapidettavaTiedot
                                      :salainen Salassapitotiedot}})
 
 (def arkistointi [:ei :ikuisesti :määräajan :toistaiseksi])
@@ -102,7 +132,9 @@
   {:julkisuusluokka (apply s/enum (:values Julkisuusluokka))
    (s/optional-key :salassapitoaika) (:schema Salassapitoaika)
    (s/optional-key :security-period-end) (:schema SalassapidonPaattymisajankohta)
+   (s/optional-key :salassapitoperuste-kohta) (apply s/enum (:values SalassapitoperusteKohta))
    (s/optional-key :salassapitoperuste) (:schema Salassapitoperuste)
+   (s/optional-key :salassapidettavat-osat) (:schema SalassapidettavatOsat)
    (s/optional-key :turvallisuusluokka) (apply s/enum (:values Turvallisuusluokka))
    (s/optional-key :suojaustaso) (apply s/enum (:values Suojaustaso))
    (s/optional-key :kayttajaryhma) (apply s/enum (:values Kayttajaryhma))
@@ -170,7 +202,8 @@
           (not= (:arkistointi sailytysaika) :toistaiseksi) (dissoc-in [:sailytysaika :laskentaperuste])
           (false? permit-expired)                          (dissoc :permit-expired-date)
           (false? demolished)                              (dissoc :demolished-date)
-          (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :turvallisuusluokka :suojaustaso :kayttajaryhma :kayttajaryhmakuvaus :security-period-end)))
+          (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste-kohta :salassapitoperuste :salassapidettavat-osat :turvallisuusluokka :suojaustaso :kayttajaryhma :kayttajaryhmakuvaus :security-period-end)
+          (= julkisuusluokka :salainen)                    (dissoc :salassapidettavat-osat)))
 
 (defn sanitize-metadata [metadata]
   (let [schema (if (:tila metadata) ConstrainedAsiakirjaMetadataMap ConstrainedMetadataMap)]
