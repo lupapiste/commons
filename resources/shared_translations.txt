@@ -6008,51 +6008,39 @@
 "yes" "en" "Yes"
 "yes" "fi" "Kyllä"
 "yes" "sv" "Ja"
-
 "salassapidettavat-osat" "en" "Confidential parts of the document"
 "salassapidettavat-osat" "fi" "Salassa pidettävät asiakirjan osat"
 "salassapidettavat-osat" "sv" "Konfidentiella delar av dokumentet"
-
 "salassapitoperuste-kohta" "en" "Legal basis for confidentiality"
 "salassapitoperuste-kohta" "fi" "Salassapidon peruste"
 "salassapitoperuste-kohta" "sv" "Rättslig grund för sekretess"
-
 "julkl-24-1-7-kohta" "en" "JulkL (621/1999) 24.1 § section 7"
 "julkl-24-1-7-kohta" "fi" "JulkL (621/1999) 24.1 § 7 kohta"
 "julkl-24-1-7-kohta" "sv" "JulkL (621/1999) 24.1 § punkt 7"
-
 "julkl-24-1-8-kohta" "en" "JulkL (621/1999) 24.1 § section 8"
 "julkl-24-1-8-kohta" "fi" "JulkL (621/1999) 24.1 § 8 kohta"
 "julkl-24-1-8-kohta" "sv" "JulkL (621/1999) 24.1 § punkt 8"
-
 "julkl-24-1-10-kohta" "en" "JulkL (621/1999) 24.1 § section 10"
 "julkl-24-1-10-kohta" "fi" "JulkL (621/1999) 24.1 § 10 kohta"
 "julkl-24-1-10-kohta" "sv" "JulkL (621/1999) 24.1 § punkt 10"
-
 "julkl-24-1-14-kohta" "en" "JulkL (621/1999) 24.1 § section 14"
 "julkl-24-1-14-kohta" "fi" "JulkL (621/1999) 24.1 § 14 kohta"
 "julkl-24-1-14-kohta" "sv" "JulkL (621/1999) 24.1 § punkt 14"
-
 "julkl-24-1-17-kohta" "en" "JulkL (621/1999) 24.1 § section 17"
 "julkl-24-1-17-kohta" "fi" "JulkL (621/1999) 24.1 § 17 kohta"
 "julkl-24-1-17-kohta" "sv" "JulkL (621/1999) 24.1 § punkt 17"
-
 "julkl-24-1-20-kohta" "en" "JulkL (621/1999) 24.1 § section 20"
 "julkl-24-1-20-kohta" "fi" "JulkL (621/1999) 24.1 § 20 kohta"
 "julkl-24-1-20-kohta" "sv" "JulkL (621/1999) 24.1 § punkt 20"
-
 "julkl-24-1-23-kohta" "en" "JulkL (621/1999) 24.1 § section 23"
 "julkl-24-1-23-kohta" "fi" "JulkL (621/1999) 24.1 § 23 kohta"
 "julkl-24-1-23-kohta" "sv" "JulkL (621/1999) 24.1 § punkt 23"
-
 "julkl-24-1-25-kohta" "en" "JulkL (621/1999) 24.1 § section 25"
 "julkl-24-1-25-kohta" "fi" "JulkL (621/1999) 24.1 § 25 kohta"
 "julkl-24-1-25-kohta" "sv" "JulkL (621/1999) 24.1 § punkt 25"
-
 "julkl-24-1-31-kohta" "en" "JulkL (621/1999) 24.1 § section 31"
 "julkl-24-1-31-kohta" "fi" "JulkL (621/1999) 24.1 § 31 kohta"
 "julkl-24-1-31-kohta" "sv" "JulkL (621/1999) 24.1 § punkt 31"
-
 "julkl-24-1-32-kohta" "en" "JulkL (621/1999) 24.1 § section 32"
 "julkl-24-1-32-kohta" "fi" "JulkL (621/1999) 24.1 § 32 kohta"
 "julkl-24-1-32-kohta" "sv" "JulkL (621/1999) 24.1 § punkt 32"
