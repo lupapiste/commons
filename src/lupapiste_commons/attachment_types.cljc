@@ -20,7 +20,8 @@
    :patevyystodistus
    :suunnittelijan_tiedot
    :tutkintotodistus
-   :suostumus])
+   :suostumus
+   :tyonjohtajaluettelo])
 
 (def Rakennusluvat
   [:hakija [:osakeyhtion_perustamiskirja
