@@ -274,7 +274,8 @@
           :vakuusasiakirja
           :kuulutusasiakirja
           :valokuva
-          :muu]])
+          :muu
+          :paatoksen_aikaiset_hankkeen_tiedot]])
 
 (def YleistenAlueidenLuvat
   [:yleiset-alueet [:aiemmin-hankittu-sijoituspaatos
