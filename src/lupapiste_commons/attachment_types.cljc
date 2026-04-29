@@ -20,7 +20,8 @@
    :patevyystodistus
    :suunnittelijan_tiedot
    :tutkintotodistus
-   :suostumus])
+   :suostumus
+   :tyonjohtajaluettelo])
 
 (def Rakennusluvat
   [:hakija [:osakeyhtion_perustamiskirja
@@ -273,7 +274,8 @@
           :vakuusasiakirja
           :kuulutusasiakirja
           :valokuva
-          :muu]])
+          :muu
+          :paatoksen_aikaiset_hankkeen_tiedot]])
 
 (def YleistenAlueidenLuvat
   [:yleiset-alueet [:aiemmin-hankittu-sijoituspaatos
