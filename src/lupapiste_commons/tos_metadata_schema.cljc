@@ -33,8 +33,8 @@
    :julkl-24-1-31-kohta 50
    :julkl-24-1-32-kohta 50})
 
-;; UI-only field definition for the dropdown that pre-populates salassapitoperuste.
-;; Not stored in metadata - used only to render the UI component.
+;; Dropdown field for selecting the legal basis (JulkL 621/1999 24.1 § section).
+;; When selected, auto-populates salassapitoperuste (text) and salassapitoaika (duration).
 (def SalassapitoperusteKohta {:type :salassapitoperuste-kohta
                               :values salassapitoperuste-kohdat})
 
@@ -62,7 +62,6 @@
                                      :calculated true})
 
 ;; Base confidentiality fields for both osittain-salassapidettava and salainen
-;; Note: SalassapitoperusteKohta is included for UI rendering but is NOT stored in metadata (not in MetaDataMap)
 (def Salassapitotiedot [Salassapitoaika SalassapidonPaattymisajankohta SalassapitoperusteKohta Salassapitoperuste Suojaustaso Turvallisuusluokka Kayttajaryhma Kayttajaryhmakuvaus])
 
 ;; Extended confidentiality fields for osittain-salassapidettava (includes SalassapidettavatOsat)
@@ -136,6 +135,7 @@
    (s/optional-key :salassapitoaika) (:schema Salassapitoaika)
    (s/optional-key :security-period-end) (:schema SalassapidonPaattymisajankohta)
    (s/optional-key :salassapitoperuste) (:schema Salassapitoperuste)
+   (s/optional-key :salassapitoperuste-kohta) (apply s/enum salassapitoperuste-kohdat)
    (s/optional-key :salassapidettavat-osat) (:schema SalassapidettavatOsat)
    (s/optional-key :turvallisuusluokka) (apply s/enum (:values Turvallisuusluokka))
    (s/optional-key :suojaustaso) (apply s/enum (:values Suojaustaso))
@@ -204,7 +204,7 @@
           (not= (:arkistointi sailytysaika) :toistaiseksi) (dissoc-in [:sailytysaika :laskentaperuste])
           (false? permit-expired)                          (dissoc :permit-expired-date)
           (false? demolished)                              (dissoc :demolished-date)
-          (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :salassapidettavat-osat :turvallisuusluokka :suojaustaso :kayttajaryhma :kayttajaryhmakuvaus :security-period-end)
+          (= julkisuusluokka :julkinen)                    (dissoc :salassapitoaika :salassapitoperuste :salassapitoperuste-kohta :salassapidettavat-osat :turvallisuusluokka :suojaustaso :kayttajaryhma :kayttajaryhmakuvaus :security-period-end)
           (= julkisuusluokka :salainen)                    (dissoc :salassapidettavat-osat)))
 
 (defn sanitize-metadata [metadata]
