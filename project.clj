@@ -1,4 +1,4 @@
-(defproject lupapiste/commons "5.3.30"
+(defproject lupapiste/commons "5.3.31"
   :description "Common domain code and resources for lupapiste applications"
   :url "https://www.lupapiste.fi"
   :license {:name         "Eclipse Public License"
@@ -10,6 +10,7 @@
                  [dk.ative/docjure "1.18.0"]
                  [org.flatland/ordered "1.15.12"]
                  [prismatic/schema "1.4.1"]
+                 [metosin/schema-tools "0.13.1"]
                  [clj-http "3.12.3"]]
   :plugins [[com.jakemccrary/lein-test-refresh "0.26.0"]]
   :profiles {:dev      {:dependencies [[flare "0.2.9"]]
