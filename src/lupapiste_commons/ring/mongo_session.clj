@@ -89,7 +89,7 @@
    id :- sc/Str]
   (-remove-session! adapter id))
 
-(defrecord MongoSessionStore [adapter read-only?] store/SessionStore
+(defrecord MongoSessionStore [adapter read-only? store-session-data?] store/SessionStore
   (read-session [_ key]
     (when key
       (some-> (get-session adapter (session-id->db-id key) [:data])
@@ -97,8 +97,8 @@
               (update :user with-org-auth))))
 
   (write-session [_ key data]
-    (if read-only?
-      key
+    (if (and (not read-only?)
+             (store-session-data? data))
       (let [now     (now-date)
             new-key (or key (new-session-key))]
         (if (nil? key)
@@ -113,7 +113,8 @@
                            {:data       data
                             :user-id    (get-in data [:user :id])
                             :updated-at now}))
-        new-key)))
+        new-key)
+      key))
 
   (delete-session [_ key]
     (when (and (not read-only?) key)
@@ -123,6 +124,11 @@
 (defn make-store
   "Create Ring SessionStore backed by MongoDB.
   `adapter`    – an implementation of MongoAdapter.
-  `read-only?` – when true, write-session and delete-session are no-ops. Defaults to false"
-  ([adapter & {:keys [read-only?]}]
-   (->MongoSessionStore adapter (boolean read-only?))))
+  `read-only?` – when true, write-session and delete-session are no-ops. Defaults to false
+  `store-session-data?` - a function from session data to bool that can, based on the session
+                          data, be used to determine whether the session document should be
+                          written to database at all. For example, if the data contains no
+                          meaningful data, storing the mongo session document can be
+                          prevented by returning false."
+  ([adapter & {:keys [read-only? store-session-data?]}]
+   (->MongoSessionStore adapter (boolean read-only?) (or store-session-data? (constantly true)))))
