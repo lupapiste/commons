@@ -68,3 +68,22 @@
                                                         full-archival-schema-sample)]
     (is (= :arkistoitu (:tila coerced)))
     (is (= [25.0 63.0] (:location-wgs84 coerced)))))
+
+(deftest remove-blank-keys-removes-whitespace-only-strings
+  (is (= {:text "  keep me \t"
+          :number 0
+          :boolean false
+          :nested {:text "value"}
+          :values ["value" " padded "]}
+         (schema-utils/remove-blank-keys
+           {:empty ""
+            :spaces "   "
+            :whitespace "\t\n\r "
+            :nil nil
+            :empty-map {}
+            :text "  keep me \t"
+            :number 0
+            :boolean false
+            :nested {:blank "\t " :text "value"}
+            :blank-map {:blank "\n "}
+            :values ["" " " "\t\n" nil "value" " padded "]}))))
