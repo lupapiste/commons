@@ -1,5 +1,6 @@
 (ns lupapiste-commons.schema-utils
-  (:require [schema.core :as s])
+  (:require [clojure.string :as str]
+            [schema.core :as s])
   (:import (schema.core EnumSchema)
            (java.text SimpleDateFormat ParseException)))
 
@@ -68,7 +69,8 @@
   (if (sequential? value)
     (->> (map remove-empty-value value)
          (remove nil?))
-    (when-not (and (or (map? value) (string? value)) (empty? value))
+    (when-not (or (and (map? value) (empty? value))
+                  (and (string? value) (str/blank? value)))
       value)))
 
 (defn remove-blank-keys [metadata]
